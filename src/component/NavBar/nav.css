@@ -1,0 +1,17 @@
+.navbar-text {
+    color: rgba(248, 24, 8, 0.863);
+    font-size: 20px;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.navbar-text:hover,
+.navbar-text active {
+    color: rgb(238, 238, 48);
+}
+
+
+.transparent-input {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
