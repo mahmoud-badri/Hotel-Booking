@@ -33,6 +33,11 @@ function MyNavbar() {
                                 Link
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" to="Register">
+                                Register
+                            </Link>
+                        </li>
                         <li className="nav-item dropdown">
                             <a
                                 className="nav-link dropdown-toggle"
