@@ -1,18 +1,24 @@
 import React from 'react'
 import './CardListHotel.css'
-import { useDispatch } from 'react-redux';
-import { getHotelById, addToWishlist } from '../../Redux/HotelAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { getHotelById, addToWishlist, removeFromWishlist } from '../../Redux/HotelAction';
+
+
 const CardListHotel = (props) => {
     const dispatch = useDispatch();
+    const wishlistItems = useSelector((state) => state.combinHotel.wishlist);
+    
+    // Check if the current hotel is in the wishlist
+    const isAlreadyInWishlist = wishlistItems.some((item) => item.id === props.id);
 
     const handleHeartIconClick = (hotel) => {
-        dispatch(getHotelById(hotel.id));
-        dispatch(addToWishlist(hotel));
+        if (isAlreadyInWishlist) {
+            dispatch(removeFromWishlist(hotel));
+        } else {
+            dispatch(getHotelById(hotel.id));
+            dispatch(addToWishlist(hotel));
+        }
     };
-    
-
-
-
     return (
         //=======================================================================================================
 
@@ -23,8 +29,8 @@ const CardListHotel = (props) => {
                         <div className="col-sm-4 px-0">
 
                         <button className='btn-icon' onClick={() => handleHeartIconClick(props)}>
-                        <i className="fa-regular fa-heart fa-lg"></i>
-                    </button>
+                                <i className={`fa-solid fa-heart fa-lg ${isAlreadyInWishlist ? 'red-heart' : ''}`} style={{ color: isAlreadyInWishlist ? '#dc0909' : '' }}></i>
+                            </button>
                     
 
                             <img className="image" src={props.image} alt="Card" />

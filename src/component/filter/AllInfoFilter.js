@@ -2,10 +2,7 @@ import React from 'react'
 import Filter from './Filter';
 import './filter.css';
 const AllInfoFilter = () => {
-    const priceFilterOptions = [
-        { label: 'Less than 2000', defaultChecked: true },
 
-    ];
     const filterSections = [
         {
             title: 'PRICE',
@@ -62,11 +59,17 @@ const AllInfoFilter = () => {
 
 
     return (
-        <div>
+        <div className="filter-container">
             {filterSections.map((section, index) => (
                 <Filter key={index} title={section.title} options={section.options} />
-            ))}
-        </div>
+    ))}
+
+        
+
+
+
+
+</div>
     );
 }
 

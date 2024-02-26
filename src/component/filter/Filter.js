@@ -1,4 +1,3 @@
-// FilterNew.js
 import React from 'react';
 import './filter.css'
 
@@ -7,7 +6,7 @@ const Filter = (props) => {
 
     return (
         <div id="filter" className="p-2 bg-light ms-md-4 ms-sm-2 border">
-            <div className="border-bottom h5 text-uppercase">{title}</div>
+            <div className="border-bottom h5 text-uppercase fw-bold">{title}</div>
             <div className="box border-bottom">
                 <div className="box-label text-uppercase d-flex align-items-center">
                     {title}
