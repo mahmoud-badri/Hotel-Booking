@@ -14,7 +14,7 @@ function MyNavbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <Link to="/Home" className="navbar-brand" href="#">
+        <Link to="/" className="navbar-brand" href="#">
         <h3> Tic <sub>Tac</sub> </h3> 
         </Link>
         <button
