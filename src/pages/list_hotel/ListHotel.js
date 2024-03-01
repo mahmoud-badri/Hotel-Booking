@@ -4,14 +4,15 @@ import React, { useEffect } from 'react';
 import './ListHotel.css';
 import CardListHotel from '../../component/card_list_hotel/CardListHotel';
 import { useSelector, useDispatch } from 'react-redux';
-import { gethotel } from '../../Redux/HotelAction';
+import { gethotel } from '../../Redux/HotelAction'; 
 
 const ListHotel = () => {
     const dispatch = useDispatch();
+     // Update the selector 
     const hotels = useSelector((state) => state.combinHotel.hotels);
 
     useEffect(() => {
-        dispatch(gethotel());
+        dispatch(gethotel()); 
     }, [dispatch]);
 
     return (
@@ -31,6 +32,7 @@ const ListHotel = () => {
                     />
                 </div>
             ))}
+            
         </div>
     );
 }

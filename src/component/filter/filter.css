@@ -1,0 +1,33 @@
+.filter-container {
+    width: 20%;
+    margin-top: 50px;
+    position: relative;
+    left: 200px;
+}
+.tick {
+
+    cursor: pointer;
+}
+
+.tick input[type="checkbox"] {
+    display: none;
+}
+
+.check {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    transition: all 0.2s ease-in-out;
+}
+
+.tick input[type="checkbox"]:checked + .check {
+    background-color: #1642ba;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.2657 1.73425L6.29289 5.70711L1.32008 1.73425C0.904523 1.31869 0.315789 1.31869 0.904523 1.73425C1.49325 2.1498 1.49325 2.73853 0.904523 3.15409L5.12132 7.37089C5.53688 7.78645 6.12561 7.78645 6.54117 7.37089L11.758 3.15409C12.1736 2.73853 12.1736 2.1498 11.5848 1.73425C11.1693 1.31869 10.5805 1 10.2657 0.685754Z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: 100% 100%;
+}
