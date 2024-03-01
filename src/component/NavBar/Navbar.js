@@ -10,13 +10,21 @@ import {
 } from "react-bootstrap";
 import "./nav.css";
 
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
+
+
 function MyNavbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand" href="#">
+
+    
+
+        <Link to="/home" className="navbar-brand">
         <h3> Tic <sub>Tac</sub> </h3> 
         </Link>
+
         <button
           className="navbar-toggler"
           type="button"
@@ -98,6 +106,14 @@ function MyNavbar() {
               Search
             </button>
           </form>
+
+          <div className="d-flex m-2">
+            <Link to="/userprofile">
+              <AccountCircleIcon fontSize="large"></AccountCircleIcon>
+            </Link>
+          </div>
+
+
         </div>
       </div>
     </nav>
