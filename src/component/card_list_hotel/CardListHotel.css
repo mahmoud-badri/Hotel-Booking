@@ -1,42 +1,22 @@
-body {
-    color: #000;
-    overflow-x: hidden;
-    height: 100%;
-    background-repeat: no-repeat;
-    text-align: left;
-
-}
-.image{
-    width: 400px;
-}
 
 
-.card {
-    width: 800px;
+.hotel-card {
     border-radius: 10px;
-    box-shadow: 0px 4px 8px 0px #AA00FF;
+    width: 70% !important; 
+    box-shadow: 0px 4px 8px 0px #ba8a8a;
     margin-top: 2px;
     margin-bottom: 2px;
 }
 .title,.details,.address,.suite,.price,.taxes{
     text-align: left;
 
-    
-
-
 
 }
-.rating{
-    width: 50px;
-    height: 30px;
-    text-align: center;
-}
-
 
 
 .set-p {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .image {
@@ -53,6 +33,9 @@ body {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    width: 50px;
+    height: 30px;
+    text-align: center;
 }
 
 .grade {

@@ -10,6 +10,7 @@ import UserProfilePage from "./pages/user_profile/user_profile";
 import Home from "./pages/Homepage/home_page";
 import ParticlesComponent from "./component/particles/particles";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ListHotel from "./pages/list_hotel/ListHotel";
 
 function App() {
   return (
@@ -20,12 +21,12 @@ function App() {
         <MyNavbar />
         <ParticlesComponent id="particles" />
         <Switch>
+          <Route exact path={"/"} component={Home} />
             <Route exact path={"/ListHotel"} component={ListHotel}/>
             <Route exact path={"/HotelsFilter"} component={HotelsFilter}/>
             <Route exact path={"/Wishlist"} component={Wishlist} />
             <Route exact path={"/Register"} component={Register} />
             <Route exact path={"/Login"} component={Login} />
-            <Route exact path={"/"} component={Home} />
             <Route exact path={"/userprofile"} component={UserProfilePage} />
 
           
