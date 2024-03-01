@@ -11,28 +11,25 @@ import Home from "./pages/Homepage/home_page";
 import ParticlesComponent from "./component/particles/particles";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ListHotel from "./pages/list_hotel/ListHotel";
+import HotelDashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-
-
         <MyNavbar />
         <ParticlesComponent id="particles" />
         <Switch>
           <Route exact path={"/"} component={Home} />
-            <Route exact path={"/ListHotel"} component={ListHotel}/>
-            <Route exact path={"/HotelsFilter"} component={HotelsFilter}/>
-            <Route exact path={"/Wishlist"} component={Wishlist} />
-            <Route exact path={"/Register"} component={Register} />
-            <Route exact path={"/Login"} component={Login} />
-            <Route exact path={"/userprofile"} component={UserProfilePage} />
-
-          
+          <Route exact path={"/ListHotel"} component={ListHotel} />
+          <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
+          <Route exact path={"/Wishlist"} component={Wishlist} />
+          <Route exact path={"/Register"} component={Register} />
+          <Route exact path={"/Login"} component={Login} />
+          <Route exact path={"/userprofile"} component={UserProfilePage} />
+          <Route exact path={"/Dashboard"} component={HotelDashboard} />
         </Switch>
       </BrowserRouter>
-
     </div>
   );
 }
