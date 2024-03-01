@@ -3,6 +3,7 @@
 const INITIAL_VALUES = {
     hotels: [],
     wishlist: [],
+    hotelReviews:[],
     currentHotel: null,
 };
 
@@ -24,6 +25,27 @@ export default function HotelReducer(state = INITIAL_VALUES, action) {
             return {
                 ...state,
                 wishlist: [...state.wishlist, action.payload],
+            };
+
+        case 'GET_HOTEL_REVIEWS':
+            return {
+                ...state,
+                hotelReviews: action.payload,
+            };
+        case 'POST_HOTEL_REVIEWS':
+            return {
+                ...state,
+                
+            };
+        case 'PUT_HOTEL_REVIEWS':
+            return {
+                ...state,
+                
+            };
+        case 'DELETE_HOTEL_REVIEWS':
+            return {
+                ...state,
+                
             };
 
         default:

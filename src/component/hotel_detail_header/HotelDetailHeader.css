@@ -1,0 +1,49 @@
+
+header{
+    background: url(./hotel_img.jpg) no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 50vh;
+}
+
+.con{
+    transform: translate(-50%);
+    left: 50%;
+}
+.d-head-span{
+    font-size: 52px;
+}
+.sup{
+    font-size: 30px !important;
+}
+.color-i{
+    color: goldenrod;
+}
+.d-head-span{
+    color:rgb(51, 204, 255) ;
+}
+body{
+  color:   rgb(249, 249, 249);
+}
+.modal.show{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+.modal.show .modal-dialog {
+    width: 30vw;
+
+}
+.cc{
+    height: 25vh;
+    background-color: rgba(227, 241, 241, 0.7) ;
+}
+.icon-d{
+    color: black;
+}
+.sp-d{
+    color: red;
+}
+.phone-icon-d{
+    color:rgb(0, 132, 148) ;
+}
