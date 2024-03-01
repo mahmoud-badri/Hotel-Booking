@@ -7,6 +7,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import HotelsFilter from "./pages/HotelsFilter";
 import UserProfilePage from "./pages/user_profile/user_profile";
 
+// import HotelsFilter from "./pages/HotelsFilter";
+import Home from "./pages/Homepage/home_page";
+import ParticlesComponent from "./component/particles/particles";
 
 function App() {
   return (
@@ -14,11 +17,15 @@ function App() {
       <BrowserRouter>
         <MyNavbar />
         <Switch>
+          <Route exact path={"/"} component={Home} />
           <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
           <Route exact path={"/Wishlist"} component={Wishlist} />
           <Route exact path={"/userprofile"} component={UserProfilePage} />
+
+          <ParticlesComponent id="particles" />
         </Switch>
       </BrowserRouter>
+  
     </div>
   );
 }
