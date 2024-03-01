@@ -1,3 +1,4 @@
+ 
 .App {
   text-align: center;
 }
@@ -11,6 +12,12 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+#particles canvas {
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }
 
 .App-header {
@@ -36,3 +43,4 @@
     transform: rotate(360deg);
   }
 }
+ 

@@ -1,8 +1,17 @@
+ 
 import React from 'react';
 import { connect } from 'react-redux';
 import CardListHotel from '../../component/card_list_hotel/CardListHotel';
 
-const Wishlist = ({ wishlistItems }) => {
+import { useSelector, useDispatch } from 'react-redux';
+
+
+const Wishlist = () => {
+
+    const dispatch = useDispatch();
+    
+    const wishlistItems = useSelector((state) => state.combinHotel.wishlist);  
+
     return (
         <div>
             <h2>Wishlist</h2>
@@ -27,8 +36,5 @@ const Wishlist = ({ wishlistItems }) => {
     );
 };
 
-const mapStateToProps = (state) => ({
-    wishlistItems: state.combinHotel.wishlist,
-});
 
-export default connect(mapStateToProps)(Wishlist);
+export default (Wishlist);
