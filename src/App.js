@@ -4,10 +4,6 @@ import "./App.css";
 import React from "react";
 import Wishlist from "./pages/wishlist/Wishlist";
 import MyNavbar from "./component/NavBar/Navbar";
-
-import ListHotel from "./pages/list_hotel/ListHotel";
-import Register from "./pages/Authorization/Register";
-import Login from "./pages/Authorization/Login";
 import HotelDetails from "./pages/hotel-details/HotelDetails";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Register from "./pages/Authorization/Register";
