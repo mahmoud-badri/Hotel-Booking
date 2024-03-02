@@ -23,13 +23,14 @@ function MyNavbar() {
     
    }
  
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
 
     
 
-        <Link to="/home" className="navbar-brand">
+        <Link to="/" className="navbar-brand">
         <h3> Tic <sub>Tac</sub> </h3> 
         </Link>
 
@@ -61,6 +62,7 @@ function MyNavbar() {
               </Link>
             </li>
             
+
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
@@ -114,6 +116,11 @@ function MyNavbar() {
             <button className="btn btn-outline-success" type="submit">
               Search
             </button>
+            <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" to="Register">
+                                Register
+                            </Link>
+                        </li>
           </form>
 
           <div className="d-flex m-2">

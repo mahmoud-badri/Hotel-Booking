@@ -2,6 +2,7 @@ import React from 'react'
 import './CardListHotel.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { getHotelById, addToWishlist, removeFromWishlist } from '../../Redux/HotelAction';
+import hotel from "../media/hotel2.jpg"
 
 
 const CardListHotel = (props) => {
@@ -24,7 +25,7 @@ const CardListHotel = (props) => {
 
         <div className="container-fluid px-4 py-5 mx-auto ">
             <div className="row d-flex justify-content-center ">
-                <div className="card border-0 ">
+                <div className="hotel-card card border-0 ">
                     <div className="row set-p justify-content-center">
                         <div className="col-sm-4 px-0">
 
@@ -33,7 +34,7 @@ const CardListHotel = (props) => {
                             </button>
                     
 
-                            <img className="image" src={props.image} alt="Card" />
+                            <img className="image" src={hotel} alt="Card" />
 
                         </div>
 
@@ -47,7 +48,7 @@ const CardListHotel = (props) => {
                                 </div>
                             </div>
                             <div className="row px-3">
-                                <h3 className="font-weight-bold title">{props.name}</h3>
+                                <h3 className="font-weight-bold title">Steigenberger Hotel El Tahrir Cairo </h3>
                             </div>
                             <div className="row px-3 mb-2 mt-2">
                                 <div className="d-flex align-items-center">

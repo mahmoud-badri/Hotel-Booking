@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import CardListHotel from '../../component/card_list_hotel/CardListHotel';
 
 import { useSelector, useDispatch } from 'react-redux';
-
+import './wishlist.css'
 
 const Wishlist = () => {
 
@@ -13,8 +13,10 @@ const Wishlist = () => {
 
     return (
         <div>
-            <h2>Wishlist</h2>
             <div className='container'>
+            <div className="social mb-5">
+                <p>About Your Favourite Hotel </p>
+            </div>
                 {wishlistItems.map((hotel) => (
                     <div key={hotel.id}>
                         <CardListHotel
