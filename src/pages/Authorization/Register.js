@@ -1,6 +1,7 @@
 import { useState } from "react";
 // import 'bootstrap/dist/css/bootstrap.css';
 import './Athorization.css'
+
 import Input from "../../component/Input/Input";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useHistory } from 'react-router-dom';

@@ -1,7 +1,7 @@
 
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "react-fontawesome";
 function Input(props){
     return(
     <div className="form-group">
@@ -15,7 +15,7 @@ function Input(props){
                     </div>
     )
 }
-export default Input
+export default Input;
 
 // showPassword ? faEyeSlash : faEye
 //handleTogglePassword

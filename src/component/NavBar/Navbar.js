@@ -21,8 +21,7 @@ function MyNavbar() {
     localStorage.removeItem("loginUser")
     setContextLoggenIn("")
     
-   }
- 
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -51,7 +50,7 @@ function MyNavbar() {
               <Link
                 className="nav-link active"
                 aria-current="page"
-                to="ListHotel"
+                to="HotelsFilter"
               >
                 List Hotels
               </Link>

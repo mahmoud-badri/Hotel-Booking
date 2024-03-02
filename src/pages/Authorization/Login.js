@@ -79,8 +79,8 @@ function Login() {
       });
     }
   };
- const {contextLoggedIn, setContextLoggenIn} = useContext(LoggedInContext)
- let err = false
+const {contextLoggedIn, setContextLoggenIn} = useContext(LoggedInContext)
+let err = false
 
   const submitData = (e) => {
     e.preventDefault();
@@ -109,7 +109,7 @@ function Login() {
 
   
 
- 
+
   return (
     <div className="tabbar col-12 " style={{"margin":"auto"}}>
       <div className="row">
@@ -145,7 +145,7 @@ function Login() {
                     <br />
                 <button id ="reg" type="submit" className=" btn btn-default form-control" style={{"backgroundColor":"#FF5A5F"}}>Login</button>
                  {/* <!-- 2 column grid layout --> */}
-                 <div className=" mb-4 d-flex justify-content-between">
+                <div className=" mb-4 d-flex justify-content-between">
                 <div className="checkBox">
                   {/* <!-- Checkbox --> */}
                   <div className="form-check mb-3 mb-md-0">
@@ -182,7 +182,7 @@ function Login() {
             <div className="col-8 col-sm-4">
             </div>
     </div> 
-           
+          
           </div>
         
     

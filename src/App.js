@@ -6,8 +6,6 @@ import MyNavbar from "./component/NavBar/Navbar";
 import Register from "./pages/Authorization/Register";
 import Login from "./pages/Authorization/Login";
 
-
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import HotelsFilter from "./pages/HotelsFilter";
@@ -16,7 +14,6 @@ import Home from "./pages/Homepage/home_page";
 import ParticlesComponent from "./component/particles/particles";
 
 import Appointment from "./pages/Appointment/Appointment";
-import ListHotel from "./pages/list_hotel/ListHotel";
 import { LoggedInContext } from './Context/loggedUser.js';
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -35,7 +32,6 @@ function App() {
         <Switch>        
 
           <Route exact path={"/"} component={Home} />
-          <Route exact path={"/ListHotel"} component={ListHotel} />
           <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
           <Route exact path={"/Wishlist"} component={Wishlist} />
           <Route exact path={"/Register"} component={Register} />
