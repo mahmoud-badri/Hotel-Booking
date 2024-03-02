@@ -1,5 +1,5 @@
- 
-import React from "react";
+  
+ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   Navbar,
@@ -12,13 +12,21 @@ import {
 import "./nav.css";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { LoggedInContext } from "../../Context/loggedUser";
 
 
 
 function MyNavbar() {
-  
+   
 
-
+   const {contextLoggedIn, setContextLoggenIn} = useContext(LoggedInContext)
+  const logOut=()=>{
+    localStorage.removeItem("loginUser")
+    setContextLoggenIn("")
+    
+   }
+ 
+ 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -46,7 +54,7 @@ function MyNavbar() {
               <Link
                 className="nav-link active"
                 aria-current="page"
-                to="HotelsFilter"
+                to="ListHotel"
               >
                 List Hotels
               </Link>
@@ -66,6 +74,7 @@ function MyNavbar() {
                 WishList
               </Link>
             </li>
+            
 
             <li className="nav-item dropdown">
               <a
@@ -120,12 +129,34 @@ function MyNavbar() {
             <button className="btn btn-outline-success" type="submit">
               Search
             </button>
-            <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="Register">
-                                Register
-                            </Link>
-                        </li>
+            
           </form>
+
+          <div className="d-flex m-2">
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                to="Register"
+              >
+                {`${!contextLoggedIn ? "Register" :"" }`}
+              </Link>
+              </div>
+
+          <div className="d-flex m-2">
+              
+             {`${contextLoggedIn ? 'Hello ' + contextLoggedIn.username : "" }`}  
+              </div>
+
+              <div className="d-flex m-2">
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                to="/"
+                onClick={logOut}
+              >
+                {`${contextLoggedIn ? "Log out" : ""    }`}
+              </Link>
+              </div>
 
           <div className="d-flex m-2">
             <Link to="/userprofile">
