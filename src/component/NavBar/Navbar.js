@@ -56,6 +56,11 @@ function MyNavbar() {
                             </Link>
                         </li>
             <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" to="HotelDetails">
+                                HotelDetails
+                            </Link>
+                        </li>           
+            <li className="nav-item">
               <Link className="nav-link" to="Wishlist">
                 WishList
               </Link>

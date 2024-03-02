@@ -4,6 +4,7 @@ import { GET_HOTEL_LIST_SUCCESS, GET_HOTEL_BY_ID, ADD_TO_WISHLIST, REMOVE_FROM_W
 const INITIAL_VALUES = {
     hotels: [],
     wishlist: [],
+    hotelReviews:[],
     currentHotel: null,
 };
 
@@ -29,9 +30,37 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
                 ...state,
                 wishlist: state.wishlist.filter((item) => item.id !== action.payload),
             };
-        default:
-            return state;
-    }
+        
+        
+            
+            case 'GET_HOTEL_REVIEWS':
+                return {
+                    ...state,
+                    hotelReviews: action.payload,
+                };
+            case 'POST_HOTEL_REVIEWS':
+                return {
+                    ...state,
+                    
+                };
+            case 'PUT_HOTEL_REVIEWS':
+                return {
+                    ...state,
+                    
+                };
+            case 'DELETE_HOTEL_REVIEWS':
+                return {
+                    ...state,
+                    
+                };
+    
+            default:
+                return state;
+        }    
+
+    
+
+
 };
 
 export default hotelReducer;
