@@ -24,6 +24,7 @@ import { LoggedInContext } from './Context/loggedUser.js';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import HotelDashboard from "./pages/Dashboard/Dashboard";
+import Footer from "./component/Footer/Footer.js";
 
 function App() {
   const [contextLoggedIn, setContextLoggenIn] = useState("")
@@ -50,6 +51,7 @@ function App() {
           <Route exact path={"/Dashboard"} component={HotelDashboard} />
           <Route exact path={"/Appointment"} component={Appointment} />
         </Switch>
+        <Footer />
        </BrowserRouter>
       </LoggedInContext.Provider>
     </div>

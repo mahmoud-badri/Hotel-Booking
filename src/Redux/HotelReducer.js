@@ -33,28 +33,28 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
         
         
             
-            case 'GET_HOTEL_REVIEWS':
+        case 'GET_HOTEL_REVIEWS':
                 return {
                     ...state,
                     hotelReviews: action.payload,
                 };
-            case 'POST_HOTEL_REVIEWS':
+        case 'POST_HOTEL_REVIEWS':
                 return {
                     ...state,
                     
                 };
-            case 'PUT_HOTEL_REVIEWS':
+        case 'PUT_HOTEL_REVIEWS':
                 return {
                     ...state,
                     
                 };
-            case 'DELETE_HOTEL_REVIEWS':
+        case 'DELETE_HOTEL_REVIEWS':
                 return {
                     ...state,
                     
                 };
     
-            default:
+        default:
                 return state;
         }    
 
