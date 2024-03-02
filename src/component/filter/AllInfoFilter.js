@@ -1,3 +1,4 @@
+ 
 import React from 'react'
 import Filter from './Filter';
 import './filter.css';
@@ -73,4 +74,4 @@ const AllInfoFilter = () => {
     );
 }
 
-export default AllInfoFilter;
+ export default AllInfoFilter;
