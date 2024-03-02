@@ -1,3 +1,4 @@
+ 
 import React from 'react'
 import './CardListHotel.css'
 import { useDispatch, useSelector } from 'react-redux';
@@ -87,4 +88,4 @@ const CardListHotel = (props) => {
     )
 }
 
-export default CardListHotel
+ export default CardListHotel

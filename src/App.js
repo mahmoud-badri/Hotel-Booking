@@ -1,8 +1,11 @@
+ 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import React, { useState } from "react";
 import Wishlist from "./pages/wishlist/Wishlist";
 import MyNavbar from "./component/NavBar/Navbar";
+import HotelDetails from "./pages/hotel-details/HotelDetails";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Register from "./pages/Authorization/Register";
 import Login from "./pages/Authorization/Login";
 
@@ -32,10 +35,13 @@ function App() {
       <BrowserRouter>
         <MyNavbar />
         <ParticlesComponent id="particles" />
+ 
         <Switch>        
 
           <Route exact path={"/"} component={Home} />
           <Route exact path={"/ListHotel"} component={ListHotel} />
+          <Route exact path={"/HotelDetails"} component={HotelDetails} />
+
           <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
           <Route exact path={"/Wishlist"} component={Wishlist} />
           <Route exact path={"/Register"} component={Register} />
@@ -44,10 +50,11 @@ function App() {
           <Route exact path={"/Dashboard"} component={HotelDashboard} />
           <Route exact path={"/Appointment"} component={Appointment} />
         </Switch>
-      </BrowserRouter>
+       </BrowserRouter>
       </LoggedInContext.Provider>
     </div>
   );
 }
 
 export default App;
+ 

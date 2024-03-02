@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+  
+ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   Navbar,
@@ -16,14 +17,16 @@ import { LoggedInContext } from "../../Context/loggedUser";
 
 
 function MyNavbar() {
-  const {contextLoggedIn, setContextLoggenIn} = useContext(LoggedInContext)
+   
+
+   const {contextLoggedIn, setContextLoggenIn} = useContext(LoggedInContext)
   const logOut=()=>{
     localStorage.removeItem("loginUser")
     setContextLoggenIn("")
     
    }
  
-
+ 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -56,6 +59,16 @@ function MyNavbar() {
                 List Hotels
               </Link>
             </li>
+            <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" to="Register">
+                                Register
+                            </Link>
+                        </li>
+            <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" to="HotelDetails">
+                                HotelDetails
+                            </Link>
+                        </li>           
             <li className="nav-item">
               <Link className="nav-link" to="Wishlist">
                 WishList
@@ -160,3 +173,4 @@ function MyNavbar() {
 }
 
 export default MyNavbar;
+ 

@@ -1,3 +1,4 @@
+ 
 // ListHotel.js
 
 import React, { useEffect } from 'react';
@@ -38,3 +39,4 @@ const ListHotel = () => {
 }
 
 export default ListHotel;
+ 

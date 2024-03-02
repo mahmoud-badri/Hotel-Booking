@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+
+body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-repeat: no-repeat;
+    text-align: left;
+
+}
+.image{
+    width: 400px;
+}
+=======
+>>>>>>> main
 
 
 .hotel-card {
@@ -82,4 +97,4 @@
         border-bottom-left-radius: 0px;
         border-top-right-radius: 10px;
     }
-}
+ }
