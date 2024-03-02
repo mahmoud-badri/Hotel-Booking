@@ -40,6 +40,8 @@ function App() {
 
           <Route exact path={"/"} component={Home} />
           <Route exact path={"/ListHotel"} component={ListHotel} />
+          <Route exact path={"/HotelDetails"} component={HotelDetails} />
+
           <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
           <Route exact path={"/Wishlist"} component={Wishlist} />
           <Route exact path={"/Register"} component={Register} />
