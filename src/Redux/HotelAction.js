@@ -64,12 +64,12 @@ export const removeFromWishlist = (hotel) => (dispatch) => {
     });
 };
 
+ 
 
+export const getHotelReviews = () => (dispatch) => {
+    console.log(`Fetching hotel data `);
 
-export const getHotelReviews = (hotel) => (dispatch) => {
-    console.log(`Fetching hotel data for ID: ${hotel}`);
-
-    return axios.get(`https://api-generator.retool.com/qCCCiu/data?name=${hotel}`)
+    return axios.get(`https://api-generator.retool.com/qCCCiu/data`)
         .then((res) => {
             console.log("Data received:", res.data);
             dispatch({

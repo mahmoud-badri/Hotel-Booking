@@ -6,12 +6,12 @@ export function Rating(props){
     return(
     <>
         
-        {
+        {/* {
             [...Array(props.star).keys()].map((el)=> <i className={`fa-solid fa-${props.icon} ${props.color1}`}></i>).concat(
                 [...Array(5-props.star).keys()].map((el)=> <i className={`fa-regular fa-${props.icon} ${props.color2}`}></i>)
             )
         
-        }
+        } */}
 
     </>
     )
@@ -36,7 +36,7 @@ export default function HotelDetailHeader() {
         <div className="col-md-6 d-flex  position-relative   flex-column">
             <div className='me-auto '>
                 
-           <Rating star={3} icon={"star"} color1={"color-i"} color2={"text-light"} />
+           {/* <Rating star={3} icon={"star"} color1={"color-i"} color2={"text-light"} /> */}
            
             </div>
         <h1 className='me-auto text-light'>

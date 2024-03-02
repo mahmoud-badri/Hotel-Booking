@@ -216,10 +216,12 @@ function Review(props){
 function Reviews(props){
     const dispatch = useDispatch();
     const reviews = useSelector((state) => state.combinHotel.hotelReviews);
+    
     let register=useFormik({
         initialValues:{
           name:'',
           rate:'',
+          description:'',
        
         },
         onSubmit:(values)=>{
@@ -229,10 +231,10 @@ function Reviews(props){
       })
     useEffect(() => {
          
-        dispatch(getHotelReviews("Scarlett Whisker"));
+        dispatch(getHotelReviews())
        
     }, [dispatch]);
-    const Revs=reviews.map((el)=> <Review name={el.name} img={el.images} description={el.descripen} rate={el.rate} />)
+    // const Revs=reviews.map((el)=> <Review name={el.name} img={el.images} description={el.descripen} rate={el.rate} />)
 
     return(
         <>
@@ -262,7 +264,7 @@ function Reviews(props){
         <input  value={register.values.rate} onChange={register.handleChange} type="number" name='rate' id='rate' className='form-control mb-3' placeholder='rate' />
          <label for="textarea" class="col-4 col-form-label">Description</label> 
                 <div class="col-12">
-                <textarea id="textarea" name="textarea" cols="40" rows="5" class="form-control" placeholder='Description'></textarea>
+                <textarea id="textarea" value={register.values.description} onChange={register.handleChange} name="description" cols="40" rows="5" class="form-control" placeholder='Description'></textarea>
                 </div>
         <div className="modal-footer">
              
@@ -281,7 +283,18 @@ function Reviews(props){
 
             <div className="col-md-9 text-start py-4 " >
                 
-                {Revs}
+            {reviews.map(
+                (el)=> (
+                <div key={el.id}>
+                <Review 
+                name={el.name}
+                img={el.images} 
+                description={el.description} 
+                rate={el.rate} />
+                </div>
+                ))
+                }
+
             </div>
         </div>
    
