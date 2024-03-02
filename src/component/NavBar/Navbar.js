@@ -116,11 +116,7 @@ function MyNavbar() {
             <button className="btn btn-outline-success" type="submit">
               Search
             </button>
-            <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="Register">
-                                Register
-                            </Link>
-                        </li>
+            
           </form>
 
           <div className="d-flex m-2">

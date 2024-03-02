@@ -20,7 +20,6 @@ import ListHotel from "./pages/list_hotel/ListHotel";
 import { LoggedInContext } from './Context/loggedUser.js';
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import ListHotel from "./pages/list_hotel/ListHotel";
 import HotelDashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
