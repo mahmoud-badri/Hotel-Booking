@@ -3,16 +3,28 @@ import { useState } from "react";
 import './Athorization.css'
 import Input from "../../component/Input/Input";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from 'react-router-dom';
+import { faEye, faEyeSlash  } from '@fortawesome/free-solid-svg-icons';
 function Register() {
+  const history = useHistory();
+  
   const [userRegister, setUserRegister] = useState({
     email: "",
     password: "",
     username: "",
+    type:"",
     confirmpass: "",
   });
   //for show password
-  const [showPasswordRegister, setShowPasswordRegister] = useState(false);
-  //  this field is required
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordR, setShowPasswordR] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const handleTogglePasswordR = () => {
+    setShowPasswordR(!showPasswordR);
+  };
   // please enter a valid email
   //messages
   const [errosRegister, setErrorsRegister] = useState({
@@ -47,11 +59,19 @@ function Register() {
         emailError:
           e.target.value.length == 0
             ? "This Field Is Required"
-            : !validRegister.email && "please enter a valid email",
+            : !validRegister.email ? "please enter a valid email"
+            : !(localStorage.getItem(userRegister.email)) && "This email is already sign up before",
       });
-    } else if (e.target.name === "password") {
+
+    } else if(e.target.name === "type"){
+      setUserRegister({
+        ...userRegister,
+        typr: e.target.value,
+      });
+    } 
+    else if (e.target.name === "password") {
       const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/; 
-      setShowPasswordRegister((prev) => !prev);
+      // setShowPasswordRegister((prev) => !prev);
       setValidRegister({
         ...validRegister,
         password: passRegex.test(e.target.value),
@@ -111,20 +131,19 @@ function Register() {
       !errosRegister.confirmpassError
     ) {
       e.preventDefault();
+      localStorage.setItem(userRegister.email, JSON.stringify(userRegister))
+      history.push('/Login');
     }
   };
 
   return (
     <div classNameName="tabbar col-6">
       
-         
-
-
-          <div className="row">
+          <div className="row ">
             <div className="col-5 col-sm-4">
             </div>
-            <div className="col-5 col-sm-4">
-            <form className="form-horizontal" onSubmit={(e) => submitRegister(e)}>
+            <div className="col-5 col-sm-4 bg-light my-5">
+            <form className="form-horizontal " onSubmit={(e) => submitRegister(e)}>
                 <div className="form-group text-center">
                     <label id="reg"><h1>Register</h1></label>
                     <hr />
@@ -132,6 +151,7 @@ function Register() {
                     <Input 
                     text="Email"
                     label="email"
+                    type="email"
                     onChange={(e) => chageUserRegister(e)}
                     error={errosRegister.emailError}
                     />
@@ -139,6 +159,7 @@ function Register() {
                     <Input 
                     text="Username"
                     label="username"
+                    type="text"
                     onChange={(e) => chageUserRegister(e)}
                     error={errosRegister.usernameError}
                     />
@@ -146,9 +167,9 @@ function Register() {
                     <div className="form-group mb-3">
                         <label for="password" className="d-flex justify-content-start">Who are you:</label>
                         {/* <input type="text" className="form-control" id="password" /> */}
-                        <select className="form-select" aria-label="Default select example"> 
-                            <option value={1}>User</option>
-                            <option value={2}>Company</option>
+                        <select className="form-select" aria-label="Default select example" > 
+                            <option value="Customer" name="type">Customer</option>
+                            <option value="Company"  name="type">Company</option>
 
                         </select>
                     </div>
@@ -156,19 +177,26 @@ function Register() {
                     <Input 
                     text="Password"
                     label="password"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Password"
                     onChange={(e) => chageUserRegister(e)}
+                    icon={showPassword ? faEyeSlash : faEye}
+                    onClick={handleTogglePassword}
                     error={errosRegister.passwordError}
                     />
-
+                    
                     <Input 
                     text="Repeat password"
                     label="confirmpassword"
+                    type={showPasswordR ? 'text' : 'password'}
                     onChange={(e) => chageUserRegister(e)}
+                    icon={showPasswordR ? faEyeSlash : faEye}
+                    onClick={handleTogglePasswordR}
                     error={errosRegister.confirmpassError}
                     />
                     
                     <br />
-                <button id ="reg" type="submit" className="submitRegister btn btn-default form-control">Register</button>
+                <button id ="reg" type="submit" className=" btn form-control" style={{"backgroundColor":"#FF5A5F"}}>Register</button>
                 <div className="d-flex justify-content-start">
                   {/* <!-- Simple link --> */}
                   you have already an account?

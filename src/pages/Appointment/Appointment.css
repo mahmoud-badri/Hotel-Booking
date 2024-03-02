@@ -1,0 +1,39 @@
+.searchTabsHold {
+    left: 14rem !important;
+    top: 5rem !important;
+    position: relative;
+}
+
+.tab3MainHold {
+    background-color: white;
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
+    width: 26rem !important;
+    height: fit-content;
+    border-radius: 20px !important;
+    margin: auto;
+    /* top: -2rem !important; */
+    /* left: 2rem !important; */
+
+}
+
+.fss {
+    font-size: 30px;
+}
+
+.btnControlsPlus {
+    top: -48rem !important;
+    left: 17rem !important;
+    gap: 4.5rem;
+    cursor: pointer;
+    width: 1.5rem;
+}
+
+.btnControlMinus {
+    top: -62.7rem;
+    left: 22rem;
+    gap: 4.5rem;
+    cursor: pointer !important;
+
+}
+
+

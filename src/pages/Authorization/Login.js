@@ -1,17 +1,25 @@
 import "./Athorization.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Input from "../../component/Input/Input";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { LoggedInContext } from "../../Context/loggedUser";
+import { useHistory } from 'react-router-dom';
+import { faEye, faEyeSlash  } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
+  const history = useHistory();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
   //for show password
-  const [showPassword, setShowPassword] = useState(false);
   //  this field is required
   // please enter a valid email
   //messages
@@ -52,7 +60,7 @@ function Login() {
     } else if (e.target.name === "password") {
       const passRegex =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/; ///[\D]*.{8,}/;
-      setShowPassword((prev) => !prev);
+      
       setValid({
         ...valid,
         password: passRegex.test(e.target.value),
@@ -71,13 +79,33 @@ function Login() {
       });
     }
   };
+ const {contextLoggedIn, setContextLoggenIn} = useContext(LoggedInContext)
+ let err = false
+
   const submitData = (e) => {
     e.preventDefault();
+    const storedUser = localStorage.getItem(userData.email)
+      console.log(storedUser);
+      if(storedUser){
+        const user = JSON.parse(storedUser)
 
-    if ((!erros.emailError && !erros.usernameError) || !erros.passwordError) {
-      e.preventDefault();
-    }
-  };
+        if(!erros.emailError || !erros.passwordError){
+          e.preventDefault()
+          if(userData.email !== user.email || userData.password !== user.password){
+            err=true
+          }
+          else{
+            localStorage.setItem("loginUser", (storedUser))
+            setContextLoggenIn(JSON.parse(storedUser))
+            history.push('/');
+
+        }
+      } 
+  }
+  else{
+    err=true
+  }
+};
 
   
 
@@ -87,8 +115,11 @@ function Login() {
       <div className="row">
             <div className="col-8 col-sm-4">
             </div>
-            <div className="col-8 col-sm-4">
+            <div className="col-8 col-sm-4 bg-light my-5">
             <form className="form-horizontal" onSubmit={(e) => submitData(e)}>
+            <div className={` align-items-center mb-3 pb-1`}>
+                    <span className={` fw-bold mb-0 text-danger  ${err && (localStorage.getItem(userData.email)) ? "d-block" : "d-none" }`}> Error in email or incorrect password</span>
+                  </div>
                 <div className="form-group text-center">
                     <label id="reg"><h1>Login</h1></label>
                     <hr />
@@ -96,6 +127,7 @@ function Login() {
                     <Input 
                     text="Email or Username"
                     label="emailORusername"
+                    type="text"
                     onChange={(e) => chageUserData(e)}
                     error={erros.emailError}
                     />
@@ -103,12 +135,15 @@ function Login() {
                     <Input 
                     text="Password"
                     label="password"
+                    type={showPassword ? 'text' : 'password'}
+                    icon={showPassword ? faEyeSlash : faEye}
+                    onClick={handleTogglePassword}
                     onChange={(e) => chageUserData(e)}
                     error={erros.passwordError}
                     />
                     
                     <br />
-                <button id ="reg" type="submit" className="submitRegister btn btn-default form-control">Login</button>
+                <button id ="reg" type="submit" className=" btn btn-default form-control" style={{"backgroundColor":"#FF5A5F"}}>Login</button>
                  {/* <!-- 2 column grid layout --> */}
                  <div className=" mb-4 d-flex justify-content-between">
                 <div className="checkBox">
