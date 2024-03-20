@@ -15,7 +15,14 @@ const ListHotel = () => {
     useEffect(() => {
         dispatch(gethotel()); 
     }, [dispatch]);
-
+    // axios.get('http://127.0.0.1:8000/room/hotels/') 
+    // .then(response => {
+    //     setData(response.data.message);
+    //     console.log(data);
+    // })
+    // .catch(error => {
+    //     console.error('Error fetching data:', error);
+    // });
     return (
         <div className='container'>
             {hotels && hotels.map((hotel) => (

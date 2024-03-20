@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import 'bootstrap/dist/css/bootstrap.css';
 import './Athorization.css'
 import Input from "../../component/Input/Input";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useHistory } from 'react-router-dom';
 import { faEye, faEyeSlash  } from '@fortawesome/free-solid-svg-icons';
+import axios from "axios";
+import { AuthContext } from "../../Context/AuthContext";
+
 function Register() {
   const history = useHistory();
-  
+  const [signedUp, setSignedUp] = useState(false);
+
   const [userRegister, setUserRegister] = useState({
     email: "",
     password: "",
@@ -60,7 +64,7 @@ function Register() {
           e.target.value.length == 0
             ? "This Field Is Required"
             : !validRegister.email ? "please enter a valid email"
-            : !(localStorage.getItem(userRegister.email)) && "This email is already sign up before",
+            : (localStorage.getItem(userRegister.email)) && "This email is already sign up before",
       });
 
     } else if(e.target.name === "type"){
@@ -71,7 +75,6 @@ function Register() {
     } 
     else if (e.target.name === "password") {
       const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/; 
-      // setShowPasswordRegister((prev) => !prev);
       setValidRegister({
         ...validRegister,
         password: passRegex.test(e.target.value),
@@ -121,7 +124,7 @@ function Register() {
     }
   };
 
-  const submitRegister = (e) => {
+  const submitRegister = async (e) => {
     e.preventDefault();
 
     if (
@@ -131,10 +134,28 @@ function Register() {
       !errosRegister.confirmpassError
     ) {
       e.preventDefault();
-      localStorage.setItem(userRegister.email, JSON.stringify(userRegister))
-      history.push('/Login');
+      const newUser = {
+        name: userRegister.username,
+        email: userRegister.email,
+        password: userRegister.password,
+      };
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/register",
+        newUser
+      );
+      console.log(response);
+
+      if (response.status === 200) {
+        localStorage.setItem(userRegister.email, JSON.stringify(userRegister))
+        setSignedUp(true);
+      }
     }
   };
+  
+  useEffect(() => {
+    if (signedUp) {
+      history.push('/Login');    }
+  }, [signedUp,history]);
 
   return (
     <div classNameName="tabbar col-6">

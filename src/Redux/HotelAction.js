@@ -13,7 +13,7 @@ export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 export const gethotel = () => (dispatch) => {
     console.log("Fetching hotel data...");
     return axios
-        .get('https://retoolapi.dev/Ffu2bp/data')
+        .get('http://127.0.0.1:8000/api/hotels')
         .then((res) => {
             console.log("Data received:", res.data);
             dispatch({
