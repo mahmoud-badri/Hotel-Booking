@@ -1,7 +1,8 @@
 import { useState } from "react";
 // import 'bootstrap/dist/css/bootstrap.css';
 import './Athorization.css'
-import Input from "../../component/Input/Input";
+
+import Input from "../../component/input/Input";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useHistory } from 'react-router-dom';
 import { faEye, faEyeSlash  } from '@fortawesome/free-solid-svg-icons';

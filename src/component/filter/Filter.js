@@ -1,4 +1,4 @@
- 
+
 import React from 'react';
 import './filter.css'
 
@@ -39,4 +39,3 @@ const Filter = (props) => {
 }
 
 export default Filter;
- 

@@ -1,28 +1,35 @@
-   
- 
-// HotelAction.js
 import axios from "axios";
 
-// Action types
 export const GET_HOTEL_LIST_SUCCESS = 'GET_HOTEL_LIST_SUCCESS';
+export const ADD_HOTEL_SUCCESS = 'ADD_HOTEL_SUCCESS';
 export const GET_HOTEL_BY_ID = 'GET_HOTEL_BY_ID';
 export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
 export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 
-// Action creators
-export const gethotel = () => (dispatch) => {
-    console.log("Fetching hotel data...");
-    return axios
-        .get('https://retoolapi.dev/Ffu2bp/data')
-        .then((res) => {
-            console.log("Data received:", res.data);
-            dispatch({
-                type: GET_HOTEL_LIST_SUCCESS,
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log("Error fetching data:", err));
+export const gethotel = () => async dispatch => {
+    try {
+        const res = await axios.get('http://127.0.0.1:8000/hotel/');
+        dispatch({ type: GET_HOTEL_LIST_SUCCESS, payload: res.data });
+    } catch (error) {
+        console.log(error);
+    }
 };
+
+export const addHotel = (hotelData) => async dispatch => {
+    try {
+        const res = await axios.post('http://127.0.0.1:8000/hotel/', hotelData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        dispatch({ type: ADD_HOTEL_SUCCESS, payload: res.data });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+
 
 export const getHotelById = (id) => (dispatch) => {
     console.log(`Fetching hotel data for ID: ${id}`);
@@ -78,7 +85,6 @@ export const getHotelReviews = () => (dispatch) => {
             });
         })
         .catch((err) => console.log("Error fetching data:", err));
-   
 };
 
 
