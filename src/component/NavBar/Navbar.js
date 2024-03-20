@@ -1,5 +1,4 @@
-  
- import React, { useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   Navbar,
@@ -14,32 +13,19 @@ import "./nav.css";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { LoggedInContext } from "../../Context/loggedUser";
 
-
-
 function MyNavbar() {
-   
+  const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
 
-   const {contextLoggedIn, setContextLoggenIn} = useContext(LoggedInContext)
-  const logOut=()=>{
-    localStorage.removeItem("loginUser")
-    setContextLoggenIn("")
-    
-<<<<<<< HEAD
-  }
+  const logOut = () => {
+    localStorage.removeItem("loginUser");
+    setContextLoggenIn("");
+  };
 
-=======
-   }
- 
- 
->>>>>>> main
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-
-    
-
         <Link to="/" className="navbar-brand">
-        <h3> Tic <sub>Tac</sub> </h3> 
+          <h3> Tic <sub>Tac</sub> </h3>
         </Link>
 
         <button
@@ -64,11 +50,6 @@ function MyNavbar() {
                 List Hotels
               </Link>
             </li>
-            <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="Register">
-                                Register
-                            </Link>
-                        </li>
             <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to="HotelDetails">
                                 HotelDetails
@@ -149,7 +130,7 @@ function MyNavbar() {
 
           <div className="d-flex m-2">
               
-             {`${contextLoggedIn ? 'Hello ' + contextLoggedIn.username : "" }`}  
+            {`${contextLoggedIn ? 'Hello ' + contextLoggedIn.username : "" }`}  
               </div>
 
               <div className="d-flex m-2">
@@ -172,10 +153,10 @@ function MyNavbar() {
 
 
         </div>
-      </div>
-    </nav>
-  );
-}
-
+        </div>
+        </nav>
+      );
+    }
+    
 export default MyNavbar;
- 
+

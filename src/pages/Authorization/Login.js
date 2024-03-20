@@ -2,7 +2,7 @@ import "./Athorization.css";
 import { useContext, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import Input from "../../component/Input/Input";
+import Input from "../../component/input/Input";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { LoggedInContext } from "../../Context/loggedUser";
 import { useHistory } from 'react-router-dom';

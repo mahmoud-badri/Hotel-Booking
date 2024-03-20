@@ -1,4 +1,4 @@
- 
+
 import React from 'react'
 import './CardListHotel.css'
 import { useDispatch, useSelector } from 'react-redux';
@@ -35,7 +35,7 @@ const CardListHotel = (props) => {
                             </button>
                     
 
-                            <img className="image" src={hotel} alt="Card" />
+                            <img className="image" src={props.image} alt="Card" />
 
                         </div>
 
@@ -49,7 +49,7 @@ const CardListHotel = (props) => {
                                 </div>
                             </div>
                             <div className="row px-3">
-                                <h3 className="font-weight-bold title">Steigenberger Hotel El Tahrir Cairo </h3>
+                                <h3 className="font-weight-bold title">{props.name}</h3>
                             </div>
                             <div className="row px-3 mb-2 mt-2">
                                 <div className="d-flex align-items-center">

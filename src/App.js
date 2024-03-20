@@ -1,4 +1,4 @@
- 
+
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import React, { useState } from "react";
@@ -22,6 +22,7 @@ import { LoggedInContext } from './Context/loggedUser.js';
 import "bootstrap/dist/css/bootstrap.min.css";
 import HotelDashboard from "./pages/Dashboard/Dashboard";
 
+import AddHotelForm from "./component/add_hotel_form/AddHotelForm.js";
 function App() {
   const [contextLoggedIn, setContextLoggenIn] = useState("")
 
@@ -32,16 +33,14 @@ function App() {
       <BrowserRouter>
         <MyNavbar />
         <ParticlesComponent id="particles" />
- 
+
         <Switch>        
 
           <Route exact path={"/"} component={Home} />
-<<<<<<< HEAD
-=======
-          <Route exact path={"/ListHotel"} component={ListHotel} />
+
+
           <Route exact path={"/HotelDetails"} component={HotelDetails} />
 
->>>>>>> main
           <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
           <Route exact path={"/Wishlist"} component={Wishlist} />
           <Route exact path={"/Register"} component={Register} />
@@ -49,12 +48,14 @@ function App() {
           <Route exact path={"/userprofile"} component={UserProfilePage} />
           <Route exact path={"/Dashboard"} component={HotelDashboard} />
           <Route exact path={"/Appointment"} component={Appointment} />
+          
+          <Route exact path={"/AddHotelForm"} component={AddHotelForm} />
+          
         </Switch>
-       </BrowserRouter>
+      </BrowserRouter>
       </LoggedInContext.Provider>
     </div>
   );
 }
 
 export default App;
- 

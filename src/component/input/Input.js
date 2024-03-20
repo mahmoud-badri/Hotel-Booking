@@ -1,7 +1,7 @@
 
 
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FontAwesomeIcon } from "react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { FontAwesomeIcon } from "react-fontawesome";
 function Input(props){
     return(
     <div className="form-group">
