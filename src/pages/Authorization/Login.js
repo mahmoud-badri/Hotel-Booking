@@ -2,7 +2,7 @@ import "./Athorization.css";
 import { useContext, useEffect, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import Input from "../../component/Input/Input";
+import Input from "../../component/input/Input";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { LoggedInContext } from "../../Context/loggedUser";
 import { useHistory } from 'react-router-dom';
@@ -84,8 +84,8 @@ function Login() {
       });
     }
   };
- const {contextLoggedIn, setContextLoggenIn} = useContext(LoggedInContext)
- let err = false
+const {contextLoggedIn, setContextLoggenIn} = useContext(LoggedInContext)
+let err = false
 
 useEffect(() => {
     if (isLoggedIn) {
@@ -141,7 +141,7 @@ useEffect(() => {
 
   
 
- 
+
   return (
     <div className="tabbar col-12 " style={{"margin":"auto"}}>
       <div className="row">
@@ -177,7 +177,7 @@ useEffect(() => {
                     <br />
                 <button id ="reg" type="submit" className=" btn btn-default form-control" style={{"backgroundColor":"#FF5A5F"}}>Login</button>
                  {/* <!-- 2 column grid layout --> */}
-                 <div className=" mb-4 d-flex justify-content-between">
+                <div className=" mb-4 d-flex justify-content-between">
                 <div className="checkBox">
                   {/* <!-- Checkbox --> */}
                   <div className="form-check mb-3 mb-md-0">
@@ -214,7 +214,7 @@ useEffect(() => {
             <div className="col-8 col-sm-4">
             </div>
     </div> 
-           
+          
           </div>
         
     

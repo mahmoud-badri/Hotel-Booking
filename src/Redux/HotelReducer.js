@@ -1,10 +1,15 @@
- 
-import { GET_HOTEL_LIST_SUCCESS, GET_HOTEL_BY_ID, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from './HotelAction';
+import {
+    GET_HOTEL_LIST_SUCCESS,
+    ADD_HOTEL_SUCCESS,
+    GET_HOTEL_BY_ID,
+    ADD_TO_WISHLIST,
+    REMOVE_FROM_WISHLIST,
+} from './HotelAction';
 
 const INITIAL_VALUES = {
     hotels: [],
     wishlist: [],
-    hotelReviews:[],
+    hotelReviews: [],
     currentHotel: null,
 };
 
@@ -14,6 +19,11 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
             return {
                 ...state,
                 hotels: action.payload,
+            };
+        case ADD_HOTEL_SUCCESS:
+            return {
+                ...state,
+                hotels: [action.payload, ...state.hotels],
             };
         case GET_HOTEL_BY_ID:
             return {
@@ -30,37 +40,29 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
                 ...state,
                 wishlist: state.wishlist.filter((item) => item.id !== action.payload),
             };
-        
-        
-            
         case 'GET_HOTEL_REVIEWS':
-                return {
-                    ...state,
-                    hotelReviews: action.payload,
-                };
+            return {
+                ...state,
+                hotelReviews: action.payload,
+            };
         case 'POST_HOTEL_REVIEWS':
-                return {
-                    ...state,
-                    
-                };
+            return {
+                ...state,
+                
+            };
         case 'PUT_HOTEL_REVIEWS':
-                return {
-                    ...state,
-                    
-                };
+            return {
+                ...state,
+                
+            };
         case 'DELETE_HOTEL_REVIEWS':
-                return {
-                    ...state,
-                    
-                };
-    
+            return {
+                ...state,
+                
+            };
         default:
-                return state;
-        }    
-
-    
-
-
+            return state;
+    }
 };
 
 export default hotelReducer;
