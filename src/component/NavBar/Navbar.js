@@ -2,7 +2,6 @@
 
 // export default MyNavbar;
 import React, { useContext, useEffect } from "react";
-import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   Navbar,
@@ -36,7 +35,8 @@ setContextLoggenIn("");
 authContext.logout();
 };
   
-
+var user = localStorage.getItem("user")
+ user = JSON.parse(user)
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -97,19 +97,19 @@ authContext.logout();
 
 {!isLoggedIn ? (
     <>
-        <div className="d-flex m-2">
-        <Link className="nav-link active" aria-current="page" to="Register">
-        {`${!contextLoggedIn ? "Register" : ""}`}
-        </Link>
-        </div>
-
+       
+       <div className="d-flex m-2">
+            <Link className="nav-link active" aria-current="page" to="Register">
+             Register
+            </Link>
+          </div>
        
         
     </>
  ) :(
     <>
     <div className="d-flex m-2">
-    {`${contextLoggedIn ? "Hello " + contextLoggedIn.username : ""}`}
+    {`Hello  ${user.name}`}
     </div>
     
     <div className="nav-item">
@@ -145,11 +145,7 @@ Dashboard
             </button>
           </form>
 
-          <div className="d-flex m-2">
-            <Link className="nav-link active" aria-current="page" to="Register">
-              {`${!contextLoggedIn ? "Register" : ""}`}
-            </Link>
-          </div>
+          
 
           <div className="d-flex m-2">
             {`${contextLoggedIn ? "Hello " + contextLoggedIn.username : ""}`}

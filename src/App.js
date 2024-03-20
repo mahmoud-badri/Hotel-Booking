@@ -17,6 +17,7 @@ import HotelDashboard from "./pages/Dashboard/Dashboard";
 import Footer from "./component/Footer/Footer.js";
 import { AuthProvider } from "./Context/AuthContext.js";
 import AddHotelForm from "./component/add_hotel_form/AddHotelForm.js";
+import ListHotel from "./pages/list_hotel/ListHotel.js";
 
 function App() {
   const [contextLoggedIn, setContextLoggenIn] = useState("")
