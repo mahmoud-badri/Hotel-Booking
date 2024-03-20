@@ -47,7 +47,9 @@ function Register() {
 
   
   const chageUserRegister = (e) => {
+    
     if (e.target.name === "email") {
+      
       const emailRegex = /^[a-zA-Z0-9_]+@[a-zA-Z0-9]+[.][a-zA-Z]+$/;
       setValidRegister({
         ...validRegister,
@@ -67,10 +69,11 @@ function Register() {
             : (localStorage.getItem(userRegister.email)) && "This email is already sign up before",
       });
 
-    } else if(e.target.name === "type"){
+    } else if(e.target.id === "type"){
+      console.log(e.target);
       setUserRegister({
         ...userRegister,
-        typr: e.target.value,
+        type: "customer",
       });
     } 
     else if (e.target.name === "password") {
@@ -137,6 +140,7 @@ function Register() {
       const newUser = {
         name: userRegister.username,
         email: userRegister.email,
+        type: userRegister.type,
         password: userRegister.password,
       };
       const response = await axios.post(
@@ -144,7 +148,7 @@ function Register() {
         newUser
       );
       console.log(response);
-
+      console.log(userRegister.type);
       if (response.status === 200) {
         localStorage.setItem(userRegister.email, JSON.stringify(userRegister))
         setSignedUp(true);
@@ -188,9 +192,9 @@ function Register() {
                     <div className="form-group mb-3">
                         <label for="password" className="d-flex justify-content-start">Who are you:</label>
                         {/* <input type="text" className="form-control" id="password" /> */}
-                        <select className="form-select" aria-label="Default select example" > 
-                            <option value="Customer" name="type">Customer</option>
-                            <option value="Company"  name="type">Company</option>
+                        <select className="form-select" id="type" name="type" aria-label="Default select example" > 
+                            <option value="Customer">Customer</option>
+                            <option value="Company">Company</option>
 
                         </select>
                     </div>
