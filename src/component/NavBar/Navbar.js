@@ -15,7 +15,6 @@ import { LoggedInContext } from "../../Context/loggedUser";
 
 function MyNavbar() {
   const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
-
   const logOut = () => {
     localStorage.removeItem("loginUser");
     setContextLoggenIn("");
@@ -25,7 +24,10 @@ function MyNavbar() {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand">
-          <h3> Tic <sub>Tac</sub> </h3>
+          <h3>
+            {" "}
+            ITI <sub>bnb</sub>{" "}
+          </h3>
         </Link>
 
         <button
@@ -50,60 +52,23 @@ function MyNavbar() {
                 List Hotels
               </Link>
             </li>
+
             <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="HotelDetails">
-                                HotelDetails
-                            </Link>
-                        </li>           
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                to="HotelDetails"
+              >
+                HotelDetails
+              </Link>
+            </li>
             <li className="nav-item">
-              <Link className="nav-link" to="Wishlist">
+              <Link className="nav-link active" to="Wishlist">
                 WishList
               </Link>
             </li>
-            
 
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link disabled"
-                href="#"
-                tabIndex={-1}
-                aria-disabled="true"
-              >
-                Disabled
-              </a>
-            </li>
+
           </ul>
           <form className="d-flex">
             <input
@@ -112,51 +77,54 @@ function MyNavbar() {
               placeholder="Search"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success" type="submit">
+
+
+            <button className="btn custom-search-btn" type="submit">
               Search
             </button>
-            
           </form>
 
           <div className="d-flex m-2">
-              <Link
-                className="nav-link active"
-                aria-current="page"
-                to="Register"
-              >
-                {`${!contextLoggedIn ? "Register" :"" }`}
-              </Link>
-              </div>
+            <Link className="nav-link active" aria-current="page" to="Register">
+              {`${!contextLoggedIn ? "Register" : ""}`}
+            </Link>
+          </div>
 
           <div className="d-flex m-2">
-              
-            {`${contextLoggedIn ? 'Hello ' + contextLoggedIn.username : "" }`}  
-              </div>
+            {`${contextLoggedIn ? "Hello " + contextLoggedIn.username : ""}`}
+          </div>
 
-              <div className="d-flex m-2">
-              <Link
-                className="nav-link active"
-                aria-current="page"
-                to="/"
-                onClick={logOut}
-              >
-                {`${contextLoggedIn ? "Log out" : ""    }`}
+          {contextLoggedIn && (
+            <div className="nav-item">
+              <Link to="Dashboard" className="nav-link">
+                Dashboard
               </Link>
-              </div>
+            </div>
+          )}
+
+
+          <div className="d-flex m-2">
+            <Link
+              className="nav-link active"
+              aria-current="page"
+              to="/"
+              onClick={logOut}
+            >
+              {`${contextLoggedIn ? "Log out" : ""}`}
+            </Link>
+          </div>
+
 
           <div className="d-flex m-2">
             <Link to="/userprofile">
               <AccountCircleIcon fontSize="large"></AccountCircleIcon>
             </Link>
           </div>
-
-
-
         </div>
-        </div>
-        </nav>
-      );
-    }
-    
+      </div>
+    </nav>
+  );
+}
+
 export default MyNavbar;
 
