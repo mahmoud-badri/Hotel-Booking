@@ -6,7 +6,6 @@ export const GET_HOTEL_BY_ID = 'GET_HOTEL_BY_ID';
 export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
 export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 
-
 export const gethotel = async () => {
     try {
         const res = await axios.get('http://127.0.0.1:8000/hotel/');
@@ -16,16 +15,15 @@ export const gethotel = async () => {
     }
 };
 
-export const addHotel = async (hotelData) => {
 
+
+
+export const addHotel = async (hotelData) => {
     try {
         const res = await axios.post('http://127.0.0.1:8000/hotel/', hotelData, {
-
             headers: {
                 'Content-Type': 'multipart/form-data'
-
             }
-
         });
         return res.data
     } catch (error) {
