@@ -12,7 +12,10 @@ import { AuthContext } from "../../Context/AuthContext";
 function Register() {
   const history = useHistory();
   const [signedUp, setSignedUp] = useState(false);
-
+  const options = [
+    "user",
+    "hotel",
+  ];
   const [userRegister, setUserRegister] = useState({
     email: "",
     password: "",
@@ -70,11 +73,11 @@ function Register() {
             : (localStorage.getItem(userRegister.email)) && "This email is already sign up before",
       });
 
-    } else if(e.target.id === "type"){
+    } else if(e.target.name === "type"){
       console.log(e.target);
       setUserRegister({
         ...userRegister,
-        type: "customer",
+        type: e.target.value,
       });
     } 
     else if (e.target.name === "password") {
@@ -193,9 +196,11 @@ function Register() {
                     <div className="form-group mb-3">
                         <label for="password" className="d-flex justify-content-start">Who are you:</label>
                         {/* <input type="text" className="form-control" id="password" /> */}
-                        <select className="form-select" id="type" name="type" aria-label="Default select example" > 
-                            <option value="Customer">Customer</option>
-                            <option value="Company">Company</option>
+                        <select className="form-select" id="type" name="type" aria-label="Default select example" onChange={(e) => chageUserRegister(e)} > 
+                        <option value="default">Please Choose you are user or hotel admin</option>
+                        
+                            <option value="user">User</option>
+                            <option value="hotel">Hotel</option>
 
                         </select>
                     </div>
