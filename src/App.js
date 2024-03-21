@@ -12,23 +12,23 @@ import UserProfilePage from "./pages/user_profile/user_profile";
 import Home from "./pages/Homepage/home_page";
 import ParticlesComponent from "./component/particles/particles";
 import Appointment from "./pages/Appointment/Appointment";
-import { LoggedInContext } from "./Context/loggedUser.js";
+import { LoggedInContext } from './Context/loggedUser.js';
 import HotelDashboard from "./pages/Dashboard/Dashboard";
 import Footer from "./component/Footer/Footer.js";
 import AddHotelForm from "./component/add_hotel_form/AddHotelForm.js";
 
 function App() {
-  const [contextLoggedIn, setContextLoggenIn] = useState("");
+  const [contextLoggedIn, setContextLoggenIn] = useState("")
 
   return (
     <div className="App">
-      <LoggedInContext.Provider value={{ contextLoggedIn, setContextLoggenIn }}>
+      <LoggedInContext.Provider value={{contextLoggedIn, setContextLoggenIn}}>
         <BrowserRouter>
           <MyNavbar />
           <ParticlesComponent id="particles" />
-          <Switch>
+          <Switch>        
             <Route exact path={"/"} component={Home} />
-            <Route exact path={"/hotelDetails"} component={HotelDetails} />
+            <Route exact path={"/HotelDetails"} component={HotelDetails} />
             <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
             <Route exact path={"/Wishlist"} component={Wishlist} />
             <Route exact path={"/Register"} component={Register} />
