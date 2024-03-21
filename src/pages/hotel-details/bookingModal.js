@@ -28,7 +28,7 @@ function BookingModal({ showModal, handleClose }) {
 
     try {
       // Send formData to backend API
-      const response = await fetch("https://api-generator.retool.com/qCCCiu/data", {
+      const response = await fetch("http://127.0.0.1:8000/hotel/booking", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -39,8 +39,6 @@ function BookingModal({ showModal, handleClose }) {
       // Check response status
       if (response.ok) {
         // Handle success, maybe show a success message
-        console.log("Form data sent successfully");
-        console.log(response);
         console.log("Form data sent successfully");
       } else {
         // Handle errors, maybe show an error message
@@ -155,4 +153,3 @@ function BookingModal({ showModal, handleClose }) {
 }
 
 export default BookingModal;
-
