@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { list, list2 } from "../../assets/cards/cardslist";
 import Cards from "../../component/home_cards/cardindex";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { gethotel } from "../../Redux/HotelAction";
 
 function Home() {
-<<<<<<< HEAD
   const [data, setData] = useState([]);
   useEffect(() => {
     gethotel()?.then((res) => {
@@ -18,12 +18,5 @@ function Home() {
     </>
   );
 }
-=======
-  return(
-  <>
-    <Cards list={list} /> : <Cards list={list2} />
-  </>
-)}
->>>>>>> main
 
 export default Home;
