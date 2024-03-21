@@ -22,11 +22,11 @@ function Card({ card }) {
           navigation={true}
           modules={[Pagination, Navigation]}
           className="swiper-container">
-          {card.imgSrc.map((src, i) => (
-            <SwiperSlide key={i}>
-              <img src={src} className="card-img" />
-            </SwiperSlide>
-          ))}
+          {/* {card.image.map((src, i) => ( */}
+          <SwiperSlide >
+            <img src={card.image} className="card-img" />
+          </SwiperSlide>
+          {/* ))} */}
         </Swiper>
         <div className="card-info-flex">
           <h3 className="card-title">{card.name}</h3>

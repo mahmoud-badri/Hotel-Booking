@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addHotel } from '../../Redux/HotelAction';
 import './addHotelForm.css'
 const AddHotelForm = () => {
-    const dispatch = useDispatch();
+    
 
     const [formData, setFormData] = useState({
         name: '',
@@ -28,7 +28,7 @@ const AddHotelForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addHotel(formData));
+        addHotel(formData);
         window.location.reload();
     };
 

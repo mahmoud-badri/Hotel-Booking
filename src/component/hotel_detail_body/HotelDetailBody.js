@@ -335,7 +335,7 @@ function Reviews(props) {
 
 export default function HotelDetailBody({ data }) {
     const [show, setShow] = useState(false);
-
+    console.log(data)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const iconlist = [
