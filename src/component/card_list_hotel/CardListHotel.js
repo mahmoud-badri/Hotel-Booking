@@ -4,12 +4,13 @@ import './CardListHotel.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { getHotelById, addToWishlist, removeFromWishlist } from '../../Redux/HotelAction';
 import hotel from "../media/hotel2.jpg"
-
+import { Link } from "react-router-dom";
+import HotelDetails from '../../pages/hotel-details/HotelDetails';
 
 const CardListHotel = (props) => {
     const dispatch = useDispatch();
     const wishlistItems = useSelector((state) => state.combinHotel.wishlist);
-    
+
     // Check if the current hotel is in the wishlist
     const isAlreadyInWishlist = wishlistItems.some((item) => item.id === props.id);
 
@@ -30,10 +31,10 @@ const CardListHotel = (props) => {
                     <div className="row set-p justify-content-center">
                         <div className="col-sm-4 px-0">
 
-                        <button className='btn-icon' onClick={() => handleHeartIconClick(props)}>
+                            <button className='btn-icon' onClick={() => handleHeartIconClick(props)}>
                                 <i className={`fa-solid fa-heart fa-lg ${isAlreadyInWishlist ? 'red-heart' : ''}`} style={{ color: isAlreadyInWishlist ? '#dc0909' : '' }}></i>
                             </button>
-                    
+
 
                             <img className="image" src={props.image} alt="Card" />
 
@@ -75,17 +76,21 @@ const CardListHotel = (props) => {
                             <div className="row px-3 mb-3">
                                 <p className="text-muted mb-0 taxes">+ $14 taxes and charges</p>
                             </div>
-                            <button className='btn btn-success btn-regis me-2'>ENQUIRY</button>
+                            <Link to="/HotelDetails">
+                                <button className='btn btn-success btn-regis me-2'>ENQUIRY</button>
+                            </Link>
                             <button className='btn btn-danger btn-regis'>BOOK NOW</button>
                         </div>
                     </div>
                 </div>
             </div>
             {/*/=====================================================================================================*/}
+
             {/*///=======================================================================================================*/}
+
         </div>
 
     )
 }
 
- export default CardListHotel
+export default CardListHotel

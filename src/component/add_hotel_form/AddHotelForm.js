@@ -146,9 +146,44 @@ const AddHotelForm = () => {
                         onChange={handleImageChange}
                     />
                 </label>
+                <label>
+                    Single Room Price:
+                    <input
+                        type='number'
+                        name='single_room'
+                        value={formData.single_room}
+                        onChange={handleInputChange}
+                        min={0}
+                        step={0.01}
+                    />
+                </label>
                 <br />
-                <button 
-                    className='btn btn-danger w-50 fw-bold' 
+                <label>
+                    Suite Price:
+                    <input
+                        type='number'
+                        name='suite'
+                        value={formData.suite}
+                        onChange={handleInputChange}
+                        min={0}
+                        step={0.01}
+                    />
+                </label>
+                <br />
+                <label>
+                    Family Room Price:
+                    <input
+                        type='number'
+                        name='family_room'
+                        value={formData.family_room}
+                        onChange={handleInputChange}
+                        min={0}
+                        step={0.01}
+                    />
+                </label>
+                <br />
+                <button
+                    className='btn btn-danger w-50 fw-bold'
                     type='submit'
                     style={{ transition: 'background-color 0.3s, color 0.3s' }}
                     onMouseOver={(e) => e.target.classList.add('btn-hover')}
