@@ -149,7 +149,7 @@ const AddHotelForm = () => {
                 <br />
                 <button 
                     className='btn btn-danger w-50 fw-bold' 
-                    type='submit'
+                    type='button'
                     style={{ transition: 'background-color 0.3s, color 0.3s' }}
                     onMouseOver={(e) => e.target.classList.add('btn-hover')}
                     onMouseOut={(e) => e.target.classList.remove('btn-hover')}
