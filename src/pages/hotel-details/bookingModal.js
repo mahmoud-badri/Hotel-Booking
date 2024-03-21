@@ -40,6 +40,7 @@ function BookingModal({ showModal, handleClose }) {
       if (response.ok) {
         // Handle success, maybe show a success message
         console.log("Form data sent successfully");
+        console.log(response);
         console.log("Form data sent successfully");
       } else {
         // Handle errors, maybe show an error message

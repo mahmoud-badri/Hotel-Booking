@@ -15,14 +15,18 @@ export const gethotel = async()  => {
     }
 };
 
-export const addHotel = (hotelData) => async dispatch => {
+export const addHotel = async (hotelData) => {
     try {
         const res = await axios.post('http://127.0.0.1:8000/hotel/', hotelData, {
+        
             headers: {
                 'Content-Type': 'multipart/form-data'
+                  
             }
+           
         });
-        dispatch({ type: ADD_HOTEL_SUCCESS, payload: res.data });
+        return res.data 
+        // dispatch({ type: ADD_HOTEL_SUCCESS, payload: res.data });
     } catch (error) {
         console.log(error);
     }

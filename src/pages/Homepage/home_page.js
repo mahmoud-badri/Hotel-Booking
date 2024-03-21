@@ -14,7 +14,7 @@ function Home() {
   }, []);
   return (
     <>
-      <Cards list={data} /> : <Cards list={list2} />
+      <Cards list={data} /> 
     </>
   );
 }

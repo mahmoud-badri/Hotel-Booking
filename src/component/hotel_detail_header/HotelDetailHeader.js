@@ -33,7 +33,7 @@ export default function HotelDetailHeader({ data }) {
               <div className="me-auto ">
                 {/* <Rating star={3} icon={"star"} color1={"color-i"} color2={"text-light"} /> */}
               </div>
-              <h1 className="me-auto text-light">Hotel</h1>
+              <h1 className="me-auto text-light"> { "data.name" }</h1>
               <p className="text-light me-auto  ">
                 Champ de Mars, 5 Avenue Anatole, 75007 Paris.
               </p>

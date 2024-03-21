@@ -9,8 +9,9 @@ import { Pagination, Navigation } from "swiper/modules";
 import { NavLink } from "react-router-dom";
 
 function Card({ card }) {
+  console.log(card);
   return (
-    <NavLink to={"/hotelDetails"} state={card}>
+    <NavLink to={"/hotelDetails"} >
       <div className="card-box">
         <Swiper
           slidesPerView={1}
@@ -22,11 +23,11 @@ function Card({ card }) {
           navigation={true}
           modules={[Pagination, Navigation]}
           className="swiper-container">
-          {card.imgSrc.map((src, i) => (
-            <SwiperSlide key={i}>
-              <img src={src} className="card-img" />
+          {/* {card.image.map((src, i) => ( */}
+            <SwiperSlide >
+              <img src={card.image} className="card-img" />
             </SwiperSlide>
-          ))}
+          {/* ))} */}
         </Swiper>
         <div className="card-info-flex">
           <h3 className="card-title">{card.name}</h3>
