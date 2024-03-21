@@ -155,3 +155,4 @@ function BookingModal({ showModal, handleClose }) {
 }
 
 export default BookingModal;
+
