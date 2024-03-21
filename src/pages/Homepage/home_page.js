@@ -8,7 +8,6 @@ function Home() {
   const [data, setData] = useState([]);
   useEffect(() => {
     gethotel()?.then((res) => {
-      console.log(res)
       setData(res);
     });
   }, []);
