@@ -1,23 +1,29 @@
 // ListHotel.js
 
-import React, { useEffect } from 'react';
+import React, { useEffect , useState } from 'react';
 import './ListHotel.css';
 import CardListHotel from '../../component/card_list_hotel/CardListHotel';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import { gethotel } from '../../Redux/HotelAction'; 
 
 const ListHotel = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
      // Update the selector 
-    const hotels = useSelector((state) => state.combinHotel.hotels);
-
+    // const hotels = useSelector((state) => state.combinHotel.hotels);
+    const [hotel, setHotel] = useState([]);
     useEffect(() => {
-        dispatch(gethotel()); 
-    }, [dispatch]);
+      gethotel()?.then((res) => {
+        console.log(res)
+        setHotel(res);
+      });
+    }, []);
+    // useEffect(() => {
+    //     dispatch(gethotel()); 
+    // }, [dispatch]);
 
     return (
         <div className='container'>
-            {hotels && hotels.map((hotel) => (
+            {hotel && hotel.map((hotel) => (
                 <div key={hotel.id}>
                     <CardListHotel
                         id={hotel.id}
