@@ -6,13 +6,13 @@ export const GET_HOTEL_BY_ID = 'GET_HOTEL_BY_ID';
 export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
 export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 
-export const gethotel = () => async dispatch => {
-    try {
-        const res = await axios.get('http://127.0.0.1:8000/hotel/');
-        dispatch({ type: GET_HOTEL_LIST_SUCCESS, payload: res.data });
-    } catch (error) {
-        console.log(error);
-    }
+export const gethotel = async()  => {
+  try {
+      const res = await axios.get('http://127.0.0.1:8000/hotel/');
+      return res?.data
+  } catch (error) {
+      console.log(error);
+  }
 };
 
 export const addHotel = async (hotelData) => {
