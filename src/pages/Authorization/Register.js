@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import 'bootstrap/dist/css/bootstrap.css';
 import './Athorization.css'
 
@@ -6,9 +6,16 @@ import Input from "../../component/input/Input";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useHistory } from 'react-router-dom';
 import { faEye, faEyeSlash  } from '@fortawesome/free-solid-svg-icons';
+import axios from "axios";
+import { AuthContext } from "../../Context/AuthContext";
+
 function Register() {
   const history = useHistory();
-  
+  const [signedUp, setSignedUp] = useState(false);
+  const options = [
+    "user",
+    "hotel",
+  ];
   const [userRegister, setUserRegister] = useState({
     email: "",
     password: "",
@@ -44,7 +51,9 @@ function Register() {
 
   
   const chageUserRegister = (e) => {
+    
     if (e.target.name === "email") {
+      
       const emailRegex = /^[a-zA-Z0-9_]+@[a-zA-Z0-9]+[.][a-zA-Z]+$/;
       setValidRegister({
         ...validRegister,
@@ -61,18 +70,18 @@ function Register() {
           e.target.value.length == 0
             ? "This Field Is Required"
             : !validRegister.email ? "please enter a valid email"
-            : !(localStorage.getItem(userRegister.email)) && "This email is already sign up before",
+            : (localStorage.getItem(userRegister.email)) && "This email is already sign up before",
       });
 
     } else if(e.target.name === "type"){
+      console.log(e.target);
       setUserRegister({
         ...userRegister,
-        typr: e.target.value,
+        type: e.target.value,
       });
     } 
     else if (e.target.name === "password") {
       const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/; 
-      // setShowPasswordRegister((prev) => !prev);
       setValidRegister({
         ...validRegister,
         password: passRegex.test(e.target.value),
@@ -122,7 +131,7 @@ function Register() {
     }
   };
 
-  const submitRegister = (e) => {
+  const submitRegister = async (e) => {
     e.preventDefault();
 
     if (
@@ -132,10 +141,29 @@ function Register() {
       !errosRegister.confirmpassError
     ) {
       e.preventDefault();
-      localStorage.setItem(userRegister.email, JSON.stringify(userRegister))
-      history.push('/Login');
+      const newUser = {
+        name: userRegister.username,
+        email: userRegister.email,
+        type: userRegister.type,
+        password: userRegister.password,
+      };
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/register",
+        newUser
+      );
+      console.log(response);
+      console.log(userRegister.type);
+      if (response.status === 200) {
+        localStorage.setItem(userRegister.email, JSON.stringify(userRegister))
+        setSignedUp(true);
+      }
     }
   };
+  
+  useEffect(() => {
+    if (signedUp) {
+      history.push('/Login');    }
+  }, [signedUp,history]);
 
   return (
     <div classNameName="tabbar col-6">
@@ -168,9 +196,11 @@ function Register() {
                     <div className="form-group mb-3">
                         <label for="password" className="d-flex justify-content-start">Who are you:</label>
                         {/* <input type="text" className="form-control" id="password" /> */}
-                        <select className="form-select" aria-label="Default select example" > 
-                            <option value="Customer" name="type">Customer</option>
-                            <option value="Company"  name="type">Company</option>
+                        <select className="form-select" id="type" name="type" aria-label="Default select example" onChange={(e) => chageUserRegister(e)} > 
+                        <option value="default">Please Choose you are user or hotel admin</option>
+                        
+                            <option value="user">User</option>
+                            <option value="hotel">Hotel</option>
 
                         </select>
                     </div>

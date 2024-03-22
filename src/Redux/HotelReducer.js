@@ -1,5 +1,4 @@
 import {
-    GET_HOTEL_LIST_SUCCESS,
     ADD_HOTEL_SUCCESS,
     GET_HOTEL_BY_ID,
     ADD_TO_WISHLIST,
@@ -15,11 +14,11 @@ const INITIAL_VALUES = {
 
 const hotelReducer = (state = INITIAL_VALUES, action) => {
     switch (action.type) {
-        case GET_HOTEL_LIST_SUCCESS:
-            return {
+        case 'GET_HOTELS_LIST':
+            return{
                 ...state,
-                hotels: action.payload,
-            };
+                hotels: action.payload
+            }
         case ADD_HOTEL_SUCCESS:
             return {
                 ...state,
@@ -66,3 +65,18 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
 };
 
 export default hotelReducer;
+// const INITIAL_VALUE = {
+//     hotels: []
+// }
+
+// export default function hotelReducer(state= INITIAL_VALUE, action){
+//     switch(action.type){
+//         case 'GET_HOTELS_LIST':
+//             return{
+//                 ...state,
+//                 hotels: action.payload
+//             }
+//         default: 
+//            return state
+//     }
+// }

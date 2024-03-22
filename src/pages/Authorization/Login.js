@@ -1,5 +1,5 @@
 import "./Athorization.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Input from "../../component/input/Input";
@@ -7,10 +7,15 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { LoggedInContext } from "../../Context/loggedUser";
 import { useHistory } from 'react-router-dom';
 import { faEye, faEyeSlash  } from '@fortawesome/free-solid-svg-icons';
+import { AuthContext, AuthProvider } from "../../Context/AuthContext";
+import axios from "axios";
 
 function Login() {
+  const authContext = useContext(AuthContext);
+
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
+  const isLoggedIn = authContext.isLoggedIn;
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -82,7 +87,13 @@ function Login() {
 const {contextLoggedIn, setContextLoggenIn} = useContext(LoggedInContext)
 let err = false
 
-  const submitData = (e) => {
+useEffect(() => {
+    if (isLoggedIn) {
+     history.push('/');
+    }
+  }, [history, isLoggedIn]);
+
+  const submitData = async (e) => {
     e.preventDefault();
     const storedUser = localStorage.getItem(userData.email)
       console.log(storedUser);
@@ -95,13 +106,35 @@ let err = false
             err=true
           }
           else{
-            localStorage.setItem("loginUser", (storedUser))
-            setContextLoggenIn(JSON.parse(storedUser))
-            history.push('/');
+            // localStorage.setItem("loginUser", (storedUser))
+            // setContextLoggenIn(JSON.parse(storedUser))
+            try {
+              const response = await axios.post(
+                "http://127.0.0.1:8000/api/login",
+                userData
+              );
+              console.log(response)
+              console.log(response);
+              console.log(localStorage.getItem('token'));
+              console.log(response.data.user);
+              console.log(response.status);
+              if (response.status === 200) {
+                authContext.login(response.data.jwt, response.data.user);
+                history.push('/');
+              } 
+            } catch (error) {
+              console.log(error)
+                // setErrors({
+                //   ...erros,
+                //   emailError: "Invalid Email",
+                //   passwordError: "Invalid Password",
+                // });
+            }
+          };
 
         }
       } 
-  }
+  
   else{
     err=true
   }

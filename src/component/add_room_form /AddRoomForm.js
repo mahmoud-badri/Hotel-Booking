@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addHotel } from '../../Redux/HotelAction';
-import './addHotelForm.css'
-const AddHotelForm = () => {
+import './addRoomForm.css'
+const AddRoomForm = () => {
     
 
     const [formData, setFormData] = useState({
@@ -141,4 +141,4 @@ const AddHotelForm = () => {
     );
 };
 
-export default AddHotelForm;
+export default AddRoomForm;
