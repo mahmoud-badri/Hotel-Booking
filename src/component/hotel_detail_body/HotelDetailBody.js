@@ -31,7 +31,7 @@ const images = [
   },
 ];
 
-function Description(props) {
+function Description({data}) {
   const list = [
     { icon: "check", text: "Lorem ipsum dolor sit amet" },
     { icon: "check", text: "No scripta electram necessitatibus sit" },
@@ -54,44 +54,15 @@ function Description(props) {
 
         <div className="col-md-9 ">
           <p>
-            Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno
-            legimus insolens ad. Sit cu detraxit constituam, an mel iudico
-            constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens
-            in pro. Mea liber ridens inermis ei, mei legendos vulputate an,
-            labitur tibique te qui.
+          {data}
           </p>
-          <h4 className="py-3">Hotel facilities</h4>
-          <p>
-            Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno
-            legimus insolens ad. Sit cu detraxit constituam, an mel iudico
-            constituto efficiendi.
-          </p>
-          <ItemList columns={2} itemlist={list} />
         </div>
       </div>
     </>
   );
 }
 
-function ItemList(props) {
-  const list = props.itemlist.map((el) => {
-    return (
-      <div className="d-flex align-items-start mb-2">
-        <i className={`fa-solid fa-${el.icon} text-muted`}></i>
-        <span className="ms-3 "> {el.text} </span>
-      </div>
-    );
-  });
-  return (
-    <div
-      style={{
-        columns: props.columns,
-        columnGap: "2vw",
-      }}>
-      {list}
-    </div>
-  );
-}
+
 
 function Icons(props) {
   const list = props.iconlist.map((el) => {
@@ -105,80 +76,8 @@ function Icons(props) {
   return <>{list}</>;
 }
 
-function RoomFeatures(props) {
-  const roomImages = [
-    "https://picsum.photos/id/1019/250/150/",
-    "https://picsum.photos/id/1019/250/150/",
-    "https://picsum.photos/id/1019/250/150/",
-    "https://picsum.photos/id/1019/250/150/",
-  ].map((el) => (
-    <div className="col-md-3">
-      <img src={el} className="w-100 m-0" />
-    </div>
-  ));
 
-  return (
-    <>
-      <div className="row">
-        <div className="col-md-6">
-          <ItemList columns={1} itemlist={props.roomIcons} />
-        </div>
-        <div className="col-md-6">
-          <ItemList columns={1} itemlist={props.roomItems} />
-        </div>
-      </div>
-      <div className="row my-3">{roomImages}</div>
-    </>
-  );
-}
 
-function RoomType(props) {
-  return (
-    <>
-      <h4>{props.title}</h4>
-      <p>
-        Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus
-        insolens ad. Sit cu detraxit constituam, an mel iudico constituto
-        efficiendi.
-      </p>
-      <RoomFeatures roomIcons={props.iconlist} roomItems={props.itemlist} />
-    </>
-  );
-}
-
-function RoomTypes(props) {
-  const roomIcons = [
-    { icon: "wifi", text: "Lorem ipsum dolor sit amet" },
-    { icon: "tv", text: "No scripta electram necessitatibus sit" },
-    { icon: "shield", text: "Quidam percipitur instructior an eum" },
-  ];
-
-  const roomItems = [
-    { icon: "check", text: "Lorem ipsum dolor sit amet" },
-    { icon: "check", text: "No scripta electram necessitatibus sit" },
-    { icon: "check", text: "Quidam percipitur instructior an eum" },
-  ];
-  return (
-    <div className="row text-dark my-3" style={{ textAlign: "start" }}>
-      <div className="col-md-3">
-        <h3>Rooms Types</h3>
-      </div>
-
-      <div className="col-md-9">
-        <RoomType
-          title={"Single Room"}
-          iconlist={roomIcons}
-          itemlist={roomItems}
-        />
-        <RoomType
-          title={"Double Room"}
-          iconlist={roomIcons}
-          itemlist={roomItems}
-        />
-      </div>
-    </div>
-  );
-}
 function Review(props) {
   return (
     <div className="border-bottom border-1 border-dark py-2">
@@ -213,7 +112,7 @@ function Review(props) {
 
 function Reviews(props) {
   const dispatch = useDispatch();
-  const reviews = useSelector((state) => state.combinHotel.hotelReviews);
+  // const reviews = useSelector((state) => state.combinHotel.hotelReviews);
 
   let register = useFormik({
     initialValues: {
@@ -316,7 +215,7 @@ function Reviews(props) {
           </div>
         </div>
 
-        <div className="col-md-9 text-start py-4 ">
+        {/* <div className="col-md-9 text-start py-4 ">
           {reviews.map((el) => (
             <div key={el.id}>
               <Review
@@ -327,7 +226,7 @@ function Reviews(props) {
               />
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </>
   );
@@ -335,39 +234,29 @@ function Reviews(props) {
 
 export default function HotelDetailBody({ data }) {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const iconlist = [
-    { iconsrc: "tv", icontext: "Plasma TV " },
-    { iconsrc: "wifi", icontext: "Free Wifi" },
-    { iconsrc: "person-swimming", icontext: "poll" },
-    { iconsrc: "mug-hot", icontext: "BreakFast" },
-    { iconsrc: "dog", icontext: "Pet allowed" },
-    { iconsrc: "wheelchair", icontext: "Accessibiliy" },
-    { iconsrc: "car", icontext: "Parking" },
-  ];
-
+console.log({data});
   return (
     <>
       <div className="container mt-5 ">
         <div className="row">
           {/* first col icons , carousel , rooms , reviews */}
           <div className="col-md-8">
-            <div className="col-md-12 px-4 py-2 d-flex justify-content-between border-bottom border-1 border-dark">
-              <Icons iconlist={iconlist} />
-            </div>
-
             <div className="col-md-12 pt-4">
-              <ImageGallery items={images} />
+              <ImageGallery items={[
+              {
+                original:data?.image,
+                thumbnail: data?.image,
+              },
+              ]} />
             </div>
 
             {/* 
         
         desc
         */}
-            <Description />
-            <RoomTypes />
+            <Description data={data?.description} />
             <Reviews />
           </div>
           {/* details */}

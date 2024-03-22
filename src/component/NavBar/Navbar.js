@@ -37,7 +37,8 @@ function MyNavbar() {
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -46,7 +47,8 @@ function MyNavbar() {
               <Link
                 className="nav-link active"
                 aria-current="page"
-                to="HotelsFilter">
+                to="HotelsFilter"
+              >
                 List Hotels
               </Link>
             </li>
@@ -57,18 +59,6 @@ function MyNavbar() {
               </Link>
             </li>
           </ul>
-          <form className="d-flex">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-
-            <button className="btn custom-search-btn" type="submit">
-              Search
-            </button>
-          </form>
 
           <div className="d-flex m-2">
             <Link className="nav-link active" aria-current="page" to="Register">
@@ -93,7 +83,8 @@ function MyNavbar() {
               className="nav-link active"
               aria-current="page"
               to="/"
-              onClick={logOut}>
+              onClick={logOut}
+            >
               {`${contextLoggedIn ? "Log out" : ""}`}
             </Link>
           </div>
@@ -110,4 +101,3 @@ function MyNavbar() {
 }
 
 export default MyNavbar;
-

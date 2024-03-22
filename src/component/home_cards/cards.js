@@ -6,12 +6,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Card({ card }) {
-  console.log(card);
   return (
-    <NavLink to={"/hotelDetails"} >
+    <Link to={{pathname: "/hotelDetails" ,state:card}} >
       <div className="card-box">
         <Swiper
           slidesPerView={1}
@@ -25,15 +24,15 @@ function Card({ card }) {
           className="swiper-container">
           {/* {card.image.map((src, i) => ( */}
             <SwiperSlide >
-              <img src={card.image} className="card-img" />
+              <img src={card?.image} className="card-img" />
             </SwiperSlide>
           {/* ))} */}
         </Swiper>
         <div className="card-info-flex">
-          <h3 className="card-title">{card.name}</h3>
+          <h3 className="card-title">{card?.name}</h3>
           <div className="card-rating">
             <StarRateRoundedIcon />
-            <p>{card.rating}</p>
+            <p>{card?.rating}</p>
           </div>
         </div>
         <p style={{ margin: 0, color: "var(--font-grey)" }}>
@@ -41,10 +40,10 @@ function Card({ card }) {
         </p>
         {/* <p style={{ margin: 0, color: "var(--font-grey)" }}>{card.date}</p> */}
         <p style={{ margin: "0.2rem", fontSize: "1rem", color: "var(--black" }}>
-          <span style={{ fontWeight: "600" }}>${card.prices}</span> night
+          <span style={{ fontWeight: "600" }}>${card?.prices}</span> night
         </p>
       </div>
-    </NavLink>
+    </Link>
   );
 }
 
