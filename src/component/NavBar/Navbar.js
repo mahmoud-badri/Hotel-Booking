@@ -54,8 +54,7 @@ var user = localStorage.getItem("user")
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+          aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -64,21 +63,11 @@ var user = localStorage.getItem("user")
               <Link
                 className="nav-link active"
                 aria-current="page"
-                to="HotelsFilter"
-              >
+                to="HotelsFilter">
                 List Hotels
               </Link>
             </li>
 
-            <li className="nav-item">
-              <Link
-                className="nav-link active"
-                aria-current="page"
-                to="HotelDetails"
-              >
-                HotelDetails
-              </Link>
-            </li>
             <li className="nav-item">
               <Link className="nav-link active" to="Wishlist">
                 WishList
@@ -148,6 +137,7 @@ Dashboard
 
 
 
+
             <button className="btn custom-search-btn" type="submit">
               Search
             </button>
@@ -169,16 +159,16 @@ Dashboard
 
 
           {/* <div className="d-flex m-2">
+
+          <div className="d-flex m-2">
             <Link
               className="nav-link active"
               aria-current="page"
               to="/"
-              onClick={logOut}
-            >
+              onClick={logOut}>
               {`${contextLoggedIn ? "Log out" : ""}`}
             </Link>
           </div> */}
-
 
           <div className="d-flex m-2">
             <Link to="/userprofile">
@@ -192,4 +182,3 @@ Dashboard
 }
 
 export default MyNavbar;
-

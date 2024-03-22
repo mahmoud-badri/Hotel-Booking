@@ -4,13 +4,10 @@ import React, { useEffect } from 'react';
 import './ListHotel.css';
 import CardListHotel from '../../component/card_list_hotel/CardListHotel';
 import { useSelector, useDispatch } from 'react-redux';
-import { gethotel } from '../../Redux/HotelAction'; 
-
+import { gethotel } from '../../Redux/HotelAction';
+import { useState } from 'react';
 const ListHotel = () => {
-    const dispatch = useDispatch();
-     // Update the selector 
-    const hotels = useSelector((state) => state.combinHotel.hotels);
-
+    const [hotels, setHotels] = useState([]);
     useEffect(() => {
         dispatch(gethotel()); 
     }, [dispatch]);
@@ -22,6 +19,13 @@ const ListHotel = () => {
     // .catch(error => {
     //     console.error('Error fetching data:', error);
     // });
+
+        gethotel()?.then((res) => {
+            console.log(res)
+            setHotels(res);
+        });
+         
+
     return (
         <div className='container'>
             {hotels && hotels.map((hotel) => (
@@ -39,12 +43,11 @@ const ListHotel = () => {
                     />
                 </div>
             ))}
-            
+
         </div>
     );
 }
 
 export default ListHotel;
-
 
 
