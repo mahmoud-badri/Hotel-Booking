@@ -88,11 +88,17 @@ function MyNavbar() {
               {`${contextLoggedIn ? "Log out" : ""}`}
             </Link>
           </div>
-
+          <div className="d-flex m-2">
+            <Link to="/HotelRequests">
+            <h5>Requests </h5>  
+            </Link>
           <div className="d-flex m-2">
             <Link to="/userprofile">
               <AccountCircleIcon fontSize="large"></AccountCircleIcon>
             </Link>
+          </div>
+
+          
           </div>
         </div>
       </div>

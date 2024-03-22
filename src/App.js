@@ -16,6 +16,7 @@ import { LoggedInContext } from './Context/loggedUser.js';
 import HotelDashboard from "./pages/Dashboard/Dashboard";
 import Footer from "./component/Footer/Footer.js";
 import AddHotelForm from "./component/add_hotel_form/AddHotelForm.js";
+import BookingTable from "./pages/Appointment/hotelrequests.js";
 
 function App() {
   const [contextLoggedIn, setContextLoggenIn] = useState("")
@@ -37,6 +38,7 @@ function App() {
             <Route exact path={"/Dashboard"} component={HotelDashboard} />
             <Route exact path={"/Appointment"} component={Appointment} />
             <Route exact path={"/AddHotelForm"} component={AddHotelForm} />
+            <Route exact path={"/HotelRequests"} component={BookingTable} />
           </Switch>
           <Footer />
         </BrowserRouter>
