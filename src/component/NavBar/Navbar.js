@@ -85,7 +85,15 @@ var user = localStorage.getItem("user")
               </Link>
             </li>
 
-
+            <li className="nav-item">
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                to="AddHotelForm"
+              >
+                Add Hotel
+              </Link>
+            </li>
           </ul>
           <form className="d-flex">
             <input
@@ -147,7 +155,7 @@ Dashboard
 
           
 
-          <div className="d-flex m-2">
+          {/* <div className="d-flex m-2">
             {`${contextLoggedIn ? "Hello " + contextLoggedIn.username : ""}`}
           </div>
 
@@ -157,10 +165,10 @@ Dashboard
                 Dashboard
               </Link>
             </div>
-          )}
+          )} */}
 
 
-          <div className="d-flex m-2">
+          {/* <div className="d-flex m-2">
             <Link
               className="nav-link active"
               aria-current="page"
@@ -169,7 +177,7 @@ Dashboard
             >
               {`${contextLoggedIn ? "Log out" : ""}`}
             </Link>
-          </div>
+          </div> */}
 
 
           <div className="d-flex m-2">

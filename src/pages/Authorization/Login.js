@@ -113,6 +113,7 @@ useEffect(() => {
                 "http://127.0.0.1:8000/api/login",
                 userData
               );
+              console.log(response)
               console.log(response);
               console.log(localStorage.getItem('token'));
               console.log(response.data.user);

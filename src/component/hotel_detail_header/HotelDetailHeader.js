@@ -1,5 +1,6 @@
 import React, { Children } from 'react'
 import "./HotelDetailHeader.css"
+import Appointment from '../../pages/Appointment/Appointment'
 
 export function Rating(props){
 
@@ -30,8 +31,8 @@ export default function HotelDetailHeader() {
   return (
     <>
       <header className='position-relative' >
-   <div className="container position-absolute con bottom-0">
-    <div className="row d-flex justify-content-between position-relative  ">
+      <div className="container position-absolute con bottom-0">
+      <div className="row d-flex justify-content-between position-relative  ">
  
         <div className="col-md-6 d-flex  position-relative   flex-column">
             <div className='me-auto '>
@@ -53,6 +54,7 @@ export default function HotelDetailHeader() {
             </p>
             </div>
     </div>
+
    </div>
             
       
