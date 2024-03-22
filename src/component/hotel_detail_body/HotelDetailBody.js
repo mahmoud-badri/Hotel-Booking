@@ -17,6 +17,8 @@ import Appointment from '../../pages/Appointment/Appointment';
 
 import { Button } from "react-bootstrap";
 import BookingModal from "../../pages/hotel-details/bookingModal";
+import axios from "axios";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 const images = [
     {
@@ -34,8 +36,13 @@ const images = [
 ];
 
 function Description(props) {
+    const hotelId = useParams();
+
+    const hotels = useSelector((state) => state.combinHotel.hotels)
+
+    const hotel = hotels[hotelId.id-1] 
     const list = [
-        { icon: "check", text: "Lorem ipsum dolor sit amet" },
+        { icon: "check", text: hotel.description },
         { icon: "check", text: "No scripta electram necessitatibus sit" },
         { icon: "check", text: "Quidam percipitur instructior an eum" },
         { icon: "check", text: "Ut est saepe munere ceteros" },
@@ -214,11 +221,18 @@ function Review(props) {
 }
 
 function Reviews(props) {
+    const hotelId = useParams();
+
+    const hotels = useSelector((state) => state.combinHotel.hotels)
+
+    const hotel = hotels[hotelId.id-1]
+
     const dispatch = useDispatch();
     const reviews = useSelector((state) => state.combinHotel.hotelReviews);
-
+    console.log(reviews);
     let register = useFormik({
         initialValues: {
+            hotel:hotel.id,
             name: "",
             rate: "",
             description: "",
@@ -229,8 +243,8 @@ function Reviews(props) {
         },
     });
     useEffect(() => {
-        dispatch(getHotelReviews());
-    }, [dispatch]);
+        dispatch(getHotelReviews(hotel.id));
+    });
     // const Revs=reviews.map((el)=> <Review name={el.name} img={el.images} description={el.descripen} rate={el.rate} />)
 
     return (
@@ -336,6 +350,12 @@ function Reviews(props) {
 }
 
 export default function HotelDetailBody({ data }) {
+    const hotelId = useParams();
+
+    const hotels = useSelector((state) => state.combinHotel.hotels)
+
+    const hotel = hotels[hotelId.id-1] 
+    console.log(hotel["name"])
     const [show, setShow] = useState(false);
     console.log(data)
     const handleClose = () => setShow(false);
@@ -374,16 +394,14 @@ export default function HotelDetailBody({ data }) {
         <Reviews />
                 
 
-                        <Description />
-                        <RoomTypes />
-                        <Reviews />
+                       
                     </div>
                     {/* details */}
                     <div className="col-md-4  cc ">
                         <i class="fa-solid fa-phone fs-2 mt-4 mb-3 icon-d"></i>
                         <p className="fs-4 icon-d">
                             {" "}
-                            <span className="sp-d">Book</span> My Phone
+                            <span className="sp-d">Book</span> {hotel.name}
                         </p>
                         <p className="fs-5 phone-icon-d ">
                             +456<span> </span>789<span> </span>0097

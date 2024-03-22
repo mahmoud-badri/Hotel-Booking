@@ -1,7 +1,6 @@
 import React, { Children } from 'react'
 import "./HotelDetailHeader.css"
 import Appointment from '../../pages/Appointment/Appointment'
-import React, { Children } from "react";
 import "./HotelDetailHeader.css";
 
 export function Rating(props) {
