@@ -44,7 +44,7 @@ const ListHotel = () => {
         // }, []);
         const dispatch = useDispatch()
         const hotels = useSelector((state) => state.combinHotel.hotels)
-            console.log(hotels);
+            // console.log(hotels);
        
         useEffect(() => {
             dispatch(getHotel())
@@ -65,7 +65,6 @@ const ListHotel = () => {
     return (
         <div className='container'> 
             {hotels && hotels.map((hotel) => (
-                <Link to={`/HotelDetails/${hotel.id}`}>
                 <div key={hotel.id}>
                     <CardListHotel
                         id={hotel.id}
@@ -77,7 +76,7 @@ const ListHotel = () => {
                         price={hotel.prices}
                     />
                 </div>
-                </Link>
+                
             ))}
 {/* <Link to={`/productdetails/${product.id}`}></Link> */}
         </div>

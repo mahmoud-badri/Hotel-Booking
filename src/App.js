@@ -18,6 +18,7 @@ import Footer from "./component/Footer/Footer.js";
 import { AuthProvider } from "./Context/AuthContext.js";
 import AddHotelForm from "./component/add_hotel_form/AddHotelForm.js";
 import ListHotel from "./pages/list_hotel/ListHotel.js";
+import AddRoomForm from "./component/add_room_form /AddRoomForm.js";
 
 function App() {
   const [contextLoggedIn, setContextLoggenIn] = useState("");
@@ -35,7 +36,7 @@ function App() {
 
           <Route exact path={"/"} component={Home} />
           <Route exact path={"/ListHotel"} component={ListHotel} />
-          <Route exact path={"/HotelDetails/:id"} component={HotelDetails} />
+          <Route exact path={"/HotelDetails"} component={HotelDetails} />
 
           <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
           <Route exact path={"/Wishlist"} component={Wishlist} />
@@ -45,6 +46,7 @@ function App() {
           <Route exact path={"/Dashboard"} component={HotelDashboard} />
           <Route exact path={"/Appointment"} component={Appointment} />
           <Route exact path={"/AddHotelForm"} component={AddHotelForm} />
+          <Route exact path={"/AddRoomForm"} component={AddRoomForm} />
 
         </Switch>
         <Footer />

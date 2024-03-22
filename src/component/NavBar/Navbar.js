@@ -83,6 +83,15 @@ var user = localStorage.getItem("user")
                 Add Hotel
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                to="AddRoomForm"
+              >
+                Add room
+              </Link>
+            </li>
           </ul>
           <form className="d-flex">
             <input

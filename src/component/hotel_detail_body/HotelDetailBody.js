@@ -229,7 +229,7 @@ function Reviews(props) {
 
     const dispatch = useDispatch();
     const reviews = useSelector((state) => state.combinHotel.hotelReviews);
-    console.log(reviews);
+    // console.log(reviews);
     let register = useFormik({
         initialValues: {
             hotel:hotel.id,
@@ -239,7 +239,7 @@ function Reviews(props) {
         },
         onSubmit: (values) => {
             dispatch(postHotelReviews(values));
-            console.log(values);
+            // console.log(values);
         },
     });
     useEffect(() => {
@@ -355,9 +355,9 @@ export default function HotelDetailBody({ data }) {
     const hotels = useSelector((state) => state.combinHotel.hotels)
 
     const hotel = hotels[hotelId.id-1] 
-    console.log(hotel["name"])
+    // console.log(hotel["name"])
     const [show, setShow] = useState(false);
-    console.log(data)
+    // console.log(data)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const iconlist = [
@@ -413,7 +413,7 @@ export default function HotelDetailBody({ data }) {
                     </div>
                 </div>
             </div>
-            <BookingModal handleClose={handleClose} showModal={show} />
+            <BookingModal handleClose={handleClose} showModal={show} hotel_id={hotel.id} />
         </>
     );
 }

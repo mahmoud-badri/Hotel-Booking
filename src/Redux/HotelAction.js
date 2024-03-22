@@ -118,11 +118,11 @@ export const removeFromWishlist = (hotel) => (dispatch) => {
 
 
 export const getHotelReviews = (hotel_id) => (dispatch) => {
-    console.log(`Fetching hotel data `);
+    // console.log(`Fetching hotel data `);
 
     return axios.get(`http://127.0.0.1:8000/api_review/get-all-rates/${hotel_id}`)
         .then((res) => {
-            console.log("Data received:", res.data);
+            // console.log("Data received:", res.data);
             dispatch({
                 type: 'GET_HOTEL_REVIEWS',
                 payload: res.data.data,

@@ -2,15 +2,20 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./booingModal.css";
+import axios from "axios";
 
-function BookingModal({ showModal, handleClose }) {
+function BookingModal({ showModal, handleClose ,hotel_id }) {
+  var user = localStorage.getItem("user")
+  user = JSON.parse(user)
   // Define state variables to store form data
   const [formData, setFormData] = useState({
-    bedType: "",
-    guests: "",
-    children: "",
-    checkIn: "",
-    checkOut: ""
+    user: user.id,
+    hotel:hotel_id,
+    
+    
+    // children: "",
+    start_date: "",
+    end_date: ""
   });
 
   // Function to handle form input changes and update state
@@ -27,14 +32,27 @@ function BookingModal({ showModal, handleClose }) {
     event.preventDefault();
 
     try {
+      const newBook = {
+        user: formData.user,
+        hotel: formData.hotel,
+        
+        start_date: formData.start_date,
+        end_date: formData.end_date,
+
+      };
+      const response = await axios.post(
+        "http://127.0.0.1:8000/hotel/booking",
+        newBook
+      );
+      console.log(response);
       // Send formData to backend API
-      const response = await fetch("http://127.0.0.1:8000/hotel/booking", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
+      // const response = await fetch("http://127.0.0.1:8000/hotel/booking/", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   },
+      //   body: JSON.stringify(formData)
+      // });
 
       // Check response status
       if (response.ok) {
@@ -65,8 +83,8 @@ function BookingModal({ showModal, handleClose }) {
                       <div className="form-group">
                         <select
                           className="form-control"
-                          name="bedType"
-                          value={formData.bedType}
+                          name="room_type"
+                          // value={formData.room_type}
                           onChange={handleInputChange}
                         >
                           <option>one bed</option>
@@ -79,8 +97,8 @@ function BookingModal({ showModal, handleClose }) {
                       <div className="form-group">
                         <select
                           className="form-control"
-                          name="guests"
-                          value={formData.guests}
+                          name="guest"
+                          // value={formData.guest}
                           onChange={handleInputChange}
                         >
                           <option>1</option>
@@ -96,7 +114,7 @@ function BookingModal({ showModal, handleClose }) {
                         <select
                           className="form-control"
                           name="children"
-                          value={formData.children}
+                          value="0"
                           onChange={handleInputChange}
                         >
                           <option>0</option>
@@ -113,8 +131,8 @@ function BookingModal({ showModal, handleClose }) {
                           className="form-control w-100"
                           type="date"
                           required
-                          name="checkIn"
-                          value={formData.checkIn}
+                          name="start_date"
+                          value={formData.start_date}
                           onChange={handleInputChange}
                         />
                         <span className="form-label">Check In</span>
@@ -126,8 +144,8 @@ function BookingModal({ showModal, handleClose }) {
                           className="form-control w-100"
                           type="date"
                           required
-                          name="checkOut"
-                          value={formData.checkOut}
+                          name="end_date"
+                          value={formData.end_date}
                           onChange={handleInputChange}
                         />
                         <span className="form-label">Check out</span>
