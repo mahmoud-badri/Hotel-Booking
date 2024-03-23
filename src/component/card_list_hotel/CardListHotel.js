@@ -4,8 +4,13 @@ import './CardListHotel.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { getHotelById, addToWishlist, removeFromWishlist } from '../../Redux/HotelAction';
 import hotel from "../media/hotel2.jpg"
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import HotelDetails from '../../pages/hotel-details/HotelDetails';
+=======
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+
+>>>>>>> origin/booking_requests
 
 const CardListHotel = (props) => {
     const dispatch = useDispatch();
@@ -50,7 +55,9 @@ const CardListHotel = (props) => {
                                 </div>
                             </div>
                             <div className="row px-3">
+                            <Link  to={{pathname: "/hotelDetails" ,state:props.hotel}}>
                                 <h3 className="font-weight-bold title">{props.name}</h3>
+                                </Link>
                             </div>
                             <div className="row px-3 mb-2 mt-2">
                                 <div className="d-flex align-items-center">

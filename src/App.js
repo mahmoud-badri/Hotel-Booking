@@ -17,13 +17,18 @@ import HotelDashboard from "./pages/Dashboard/Dashboard";
 import Footer from "./component/Footer/Footer.js";
 import { AuthProvider } from "./Context/AuthContext.js";
 import AddHotelForm from "./component/add_hotel_form/AddHotelForm.js";
+<<<<<<< HEAD
 import ListHotel from "./pages/list_hotel/ListHotel.js";
+=======
+import BookingTable from "./pages/Appointment/hotelrequests.js";
+>>>>>>> origin/booking_requests
 
 function App() {
   const [contextLoggedIn, setContextLoggenIn] = useState("");
 
   return (
     <div className="App">
+<<<<<<< HEAD
     <LoggedInContext.Provider value={{contextLoggedIn, setContextLoggenIn}}>
 
       <BrowserRouter>
@@ -52,6 +57,27 @@ function App() {
        </BrowserRouter>
       
       
+=======
+      <LoggedInContext.Provider value={{contextLoggedIn, setContextLoggenIn}}>
+        <BrowserRouter>
+          <MyNavbar />
+          <ParticlesComponent id="particles" />
+          <Switch>        
+            <Route exact path={"/"} component={Home} />
+            <Route exact path={"/HotelDetails"} component={HotelDetails} />
+            <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
+            <Route exact path={"/Wishlist"} component={Wishlist} />
+            <Route exact path={"/Register"} component={Register} />
+            <Route exact path={"/Login"} component={Login} />
+            <Route exact path={"/userprofile"} component={UserProfilePage} />
+            <Route exact path={"/Dashboard"} component={HotelDashboard} />
+            <Route exact path={"/Appointment"} component={Appointment} />
+            <Route exact path={"/AddHotelForm"} component={AddHotelForm} />
+            <Route exact path={"/HotelRequests"} component={BookingTable} />
+          </Switch>
+          <Footer />
+        </BrowserRouter>
+>>>>>>> origin/booking_requests
       </LoggedInContext.Provider>
     </div>
   );

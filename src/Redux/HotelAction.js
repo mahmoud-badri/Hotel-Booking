@@ -8,8 +8,21 @@ export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 
 export const gethotel = async () => {
     try {
+<<<<<<< HEAD
         const res = await axios.get('http://127.0.0.1:8000/hotel/');
         return res.data
+=======
+        const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
+        
+            headers: {
+                'Content-Type': 'multipart/form-data'
+                  
+            }
+           
+        });
+        return res.data 
+        // dispatch({ type: ADD_HOTEL_SUCCESS, payload: res.data });
+>>>>>>> origin/booking_requests
     } catch (error) {
         console.log(error);
     }

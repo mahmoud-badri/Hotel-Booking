@@ -35,6 +35,7 @@ const images = [
     },
 ];
 
+<<<<<<< HEAD
 function Description(props) {
     const hotelId = useParams();
 
@@ -101,6 +102,40 @@ function ItemList(props) {
         </div>
     );
 }
+=======
+function Description({data}) {
+  const list = [
+    { icon: "check", text: "Lorem ipsum dolor sit amet" },
+    { icon: "check", text: "No scripta electram necessitatibus sit" },
+    { icon: "check", text: "Quidam percipitur instructior an eum" },
+    { icon: "check", text: "Ut est saepe munere ceteros" },
+    { icon: "check", text: "No scripta electram necessitatibus sit" },
+    { icon: "check", text: "Quidam percipitur instructior an eum" },
+    { icon: "check", text: "Quidam percipitur instructior an eum" },
+    { icon: "check", text: "Lorem ipsum dolor sit amet" },
+    { icon: "check", text: "No scripta electram necessitatibus sit" },
+    { icon: "check", text: "Quidam percipitur instructior an eum" },
+    { icon: "check", text: "No scripta electram necessitatibus sit" },
+  ];
+  return (
+    <>
+      <div className="row text-dark my-3" style={{ textAlign: "start" }}>
+        <div className="col-md-3">
+          <h3>Description</h3>
+        </div>
+
+        <div className="col-md-9 ">
+          <p>
+          {data}
+          </p>
+        </div>
+      </div>
+    </>
+  );
+}
+
+
+>>>>>>> origin/booking_requests
 
 function Icons(props) {
     const list = props.iconlist.map((el) => {
@@ -114,6 +149,7 @@ function Icons(props) {
     return <>{list}</>;
 }
 
+<<<<<<< HEAD
 function RoomFeatures(props) {
     const roomImages = [
         "https://picsum.photos/id/1019/250/150/",
@@ -188,6 +224,10 @@ function RoomTypes(props) {
         </div>
     );
 }
+=======
+
+
+>>>>>>> origin/booking_requests
 function Review(props) {
     return (
         <div className="border-bottom border-1 border-dark py-2">
@@ -221,7 +261,12 @@ function Review(props) {
 }
 
 function Reviews(props) {
+<<<<<<< HEAD
     const hotelId = useParams();
+=======
+  const dispatch = useDispatch();
+  // const reviews = useSelector((state) => state.combinHotel.hotelReviews);
+>>>>>>> origin/booking_requests
 
     const hotels = useSelector((state) => state.combinHotel.hotels)
 
@@ -332,6 +377,7 @@ function Reviews(props) {
                     </div>
                 </div>
 
+<<<<<<< HEAD
                 <div className="col-md-9 text-start py-4 ">
                     {reviews.map((el) => (
                         <div key={el.id}>
@@ -379,6 +425,44 @@ export default function HotelDetailBody({ data }) {
                         <div className="col-md-12 px-4 py-2 d-flex justify-content-between border-bottom border-1 border-dark">
                             <Icons iconlist={iconlist} />
                         </div>
+=======
+        {/* <div className="col-md-9 text-start py-4 ">
+          {reviews.map((el) => (
+            <div key={el.id}>
+              <Review
+                name={el.name}
+                img={el.images}
+                description={el.description}
+                rate={el.rate}
+              />
+            </div>
+          ))}
+        </div> */}
+      </div>
+    </>
+  );
+}
+
+export default function HotelDetailBody({ data }) {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+console.log({data});
+  return (
+    <>
+      <div className="container mt-5 ">
+        <div className="row">
+          {/* first col icons , carousel , rooms , reviews */}
+          <div className="col-md-8">
+            <div className="col-md-12 pt-4">
+              <ImageGallery items={[
+              {
+                original:data?.image,
+                thumbnail: data?.image,
+              },
+              ]} />
+            </div>
+>>>>>>> origin/booking_requests
 
                         <div className="col-md-12 pt-4">
                             <ImageGallery items={images} />
@@ -388,11 +472,38 @@ export default function HotelDetailBody({ data }) {
         
         desc
         */}
+<<<<<<< HEAD
         <Description />
         <RoomTypes />
         <Appointment />
         <Reviews />
                 
+=======
+            <Description data={data?.description} />
+            <Reviews />
+          </div>
+          {/* details */}
+          <div className="col-md-4  cc ">
+            <i class="fa-solid fa-phone fs-2 mt-4 mb-3 icon-d"></i>
+            <p className="fs-4 icon-d">
+              {" "}
+              <span className="sp-d">Book</span> My Phone
+            </p>
+            <p className="fs-5 phone-icon-d ">
+              +456<span> </span>789<span> </span>0097
+            </p>
+            <p className="fs-6 text-muted">Monday to Friday 9.00am - 7.30pm</p>
+            <Button variant="primary" onClick={handleShow}>
+              Book Your Room
+            </Button>
+          </div>
+        </div>
+      </div>
+      <BookingModal handleClose={handleClose} showModal={show} />
+    </>
+  );
+}
+>>>>>>> origin/booking_requests
 
                        
                     </div>

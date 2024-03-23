@@ -12,7 +12,15 @@ const AddHotelForm = () => {
         name: '',
         address: '',
         description: '',
+<<<<<<< HEAD
         prices: 0,
+=======
+        rate: 5,
+        price: 0,
+        rating: '⭐️',
+        review: 0,
+        status: 'Good',
+>>>>>>> origin/booking_requests
         governorate: '',
         image: null,
         single_room: 0,
@@ -81,8 +89,8 @@ const AddHotelForm = () => {
                     Avrage price:
                     <input
                         type='number'
-                        name='prices'
-                        value={formData.prices}
+                        name='price'
+                        value={formData.price}
                         onChange={handleInputChange}
                         min={0}
                         step={0.01}

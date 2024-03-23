@@ -54,7 +54,8 @@ var user = localStorage.getItem("user")
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -63,7 +64,8 @@ var user = localStorage.getItem("user")
               <Link
                 className="nav-link active"
                 aria-current="page"
-                to="HotelsFilter">
+                to="HotelsFilter"
+              >
                 List Hotels
               </Link>
             </li>
@@ -84,6 +86,7 @@ var user = localStorage.getItem("user")
               </Link>
             </li>
           </ul>
+<<<<<<< HEAD
           <form className="d-flex">
             <input
               className="form-control me-2"
@@ -142,6 +145,8 @@ Dashboard
               Search
             </button>
           </form>
+=======
+>>>>>>> origin/booking_requests
 
           
 
@@ -165,15 +170,27 @@ Dashboard
               className="nav-link active"
               aria-current="page"
               to="/"
-              onClick={logOut}>
+              onClick={logOut}
+            >
               {`${contextLoggedIn ? "Log out" : ""}`}
             </Link>
+<<<<<<< HEAD
           </div> */}
 
+=======
+          </div>
+          <div className="d-flex m-2">
+            <Link to="/HotelRequests">
+            <h5>Requests </h5>  
+            </Link>
+>>>>>>> origin/booking_requests
           <div className="d-flex m-2">
             <Link to="/userprofile">
               <AccountCircleIcon fontSize="large"></AccountCircleIcon>
             </Link>
+          </div>
+
+          
           </div>
         </div>
       </div>

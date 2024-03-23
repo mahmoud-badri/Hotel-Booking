@@ -38,16 +38,23 @@ export default function HotelDetailHeader({ data }) {
               <div className="me-auto ">
                 {/* <Rating star={3} icon={"star"} color1={"color-i"} color2={"text-light"} /> */}
               </div>
+<<<<<<< HEAD
               <h1 className="me-auto text-light">Hotel</h1>
+=======
+              <h1 className="me-auto text-light"> { data?.name }</h1>
+>>>>>>> origin/booking_requests
               <p className="text-light me-auto  ">
-                Champ de Mars, 5 Avenue Anatole, 75007 Paris.
+              { data?.address }
+              </p>
+              <p className="text-light me-auto">
+              { data?.rating }
               </p>
             </div>
             <div className="col-md-6 d-flex align-items-end">
               <p className="ms-auto text-light">
                 from/per night{" "}
                 <span className="d-head-span">
-                  <sup className="sup">$</sup>89
+                  <sup className="sup">$</sup> { data?.prices }
                 </span>
               </p>
             </div>

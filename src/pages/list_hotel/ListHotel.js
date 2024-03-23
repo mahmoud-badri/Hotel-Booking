@@ -3,9 +3,16 @@
 import React, { useEffect } from 'react';
 import './ListHotel.css';
 import CardListHotel from '../../component/card_list_hotel/CardListHotel';
+<<<<<<< HEAD
 import { useSelector, useDispatch } from 'react-redux';
 import { gethotel } from '../../Redux/HotelAction';
 import { useState } from 'react';
+=======
+// import { useSelector, useDispatch } from 'react-redux';
+import { gethotel } from '../../Redux/HotelAction'; 
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+
+>>>>>>> origin/booking_requests
 const ListHotel = () => {
     const [hotels, setHotels] = useState([]);
     useEffect(() => {
@@ -19,6 +26,7 @@ const ListHotel = () => {
         <div className='container'>
             {hotels && hotels.map((hotel) => (
                 <div key={hotel.id}>
+                  
                     <CardListHotel
                         id={hotel.id}
                         image={hotel.image}
@@ -29,6 +37,7 @@ const ListHotel = () => {
                         description={hotel.descripen}
                         governorate={hotel.governorate}
                         price={hotel.prices}
+                        hotel={hotel}
                     />
                 </div>
             ))}
