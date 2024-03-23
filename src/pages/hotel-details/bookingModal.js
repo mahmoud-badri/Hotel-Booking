@@ -29,7 +29,7 @@ function BookingModal({ showModal, handleClose }) {
 
     try {
       // Send formData to backend API
-      const response = await axios.post("http://127.0.0.1:8000/hotel/booking", formData, {
+      const response = await axios.post("http://127.0.0.1:8000/hotel/booking_customer", formData, {
       headers: {
         "Content-Type": "application/json"
       }

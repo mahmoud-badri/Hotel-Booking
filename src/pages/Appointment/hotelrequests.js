@@ -19,6 +19,7 @@ const BookingTable = () => {
       console.error("Error fetching bookings:", error);
     }
   };
+  console.log(bookings)
 
   return (
     <div className="container">
