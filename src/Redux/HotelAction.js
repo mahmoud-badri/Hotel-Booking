@@ -6,12 +6,8 @@ export const GET_HOTEL_BY_ID = 'GET_HOTEL_BY_ID';
 export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
 export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 
-export const gethotel = async () => {
+export const gethotel = async (hotelData) => {
     try {
-<<<<<<< HEAD
-        const res = await axios.get('http://127.0.0.1:8000/hotel/');
-        return res.data
-=======
         const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
         
             headers: {
@@ -22,7 +18,6 @@ export const gethotel = async () => {
         });
         return res.data 
         // dispatch({ type: ADD_HOTEL_SUCCESS, payload: res.data });
->>>>>>> origin/booking_requests
     } catch (error) {
         console.log(error);
     }
