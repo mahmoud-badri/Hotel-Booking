@@ -3,19 +3,22 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./booingModal.css";
 import axios from "axios";
+import { differenceInDays } from 'date-fns'
 
-function BookingModal({ showModal, handleClose ,hotel_id }) {
+function BookingModal({ showModal, handleClose ,hotel }) {
   var user = localStorage.getItem("user")
   user = JSON.parse(user)
   // Define state variables to store form data
+  
   const [formData, setFormData] = useState({
     user: user.id,
-    hotel:hotel_id,
-    
-    
+    hotel:hotel.id,
+    room_type: "",
+    guest:"",
     // children: "",
     start_date: "",
-    end_date: ""
+    end_date: "",
+    total_price:"",
   });
 
   // Function to handle form input changes and update state
@@ -35,35 +38,35 @@ function BookingModal({ showModal, handleClose ,hotel_id }) {
       const newBook = {
         user: formData.user,
         hotel: formData.hotel,
-        
+        room_type: formData.room_type,
+        guest: formData.guest,
         start_date: formData.start_date,
         end_date: formData.end_date,
+        total_price: formData.total_price,
 
       };
+      var total_days = differenceInDays(newBook.end_date, newBook.start_date)     
+      console.log(total_days);
+      newBook.room_type === "Single" ? newBook.total_price=hotel.single_room * total_days
+      : newBook.room_type === "Suite" ? newBook.total_price=hotel.suite * total_days
+      :newBook.room_type === "Family" ? newBook.total_price=hotel.family_room * total_days
+      : console.log("invalid");
       const response = await axios.post(
         "http://127.0.0.1:8000/hotel/booking",
         newBook
       );
       console.log(response);
-      // Send formData to backend API
-      // const response = await fetch("http://127.0.0.1:8000/hotel/booking/", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   body: JSON.stringify(formData)
-      // });
-
-      // Check response status
+      
       if (response.ok) {
         // Handle success, maybe show a success message
         console.log("Form data sent successfully");
       } else {
         // Handle errors, maybe show an error message
-        console.error("Error sending form data:", response.statusText);
+        console.error("Error sendinggg form data:", response.statusText);
       }
     } catch (error) {
-      console.error("Error sending form data:", error);
+      console.error("Error sendin form data:", error);
+      console.log(formData);
     }
   };
 
@@ -84,12 +87,12 @@ function BookingModal({ showModal, handleClose ,hotel_id }) {
                         <select
                           className="form-control"
                           name="room_type"
-                          // value={formData.room_type}
+                          value={formData.room_type}
                           onChange={handleInputChange}
                         >
-                          <option>one bed</option>
-                          <option>double bed </option>
-                          <option>suite</option>
+                          <option value="Single">one bed</option>
+                          <option value="Family">double bed </option>
+                          <option value="Suite">suite</option>
                         </select>
                       </div>
                     </div>
@@ -98,12 +101,12 @@ function BookingModal({ showModal, handleClose ,hotel_id }) {
                         <select
                           className="form-control"
                           name="guest"
-                          // value={formData.guest}
+                          value={formData.guest}
                           onChange={handleInputChange}
                         >
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
                         </select>
                         <span className="select-arrow"></span>
                         <span className="form-label">Guests</span>

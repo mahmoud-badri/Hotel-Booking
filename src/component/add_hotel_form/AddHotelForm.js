@@ -3,9 +3,11 @@ import { useDispatch } from 'react-redux';
 import { addHotel } from '../../Redux/HotelAction';
 import './addHotelForm.css'
 const AddHotelForm = () => {
-    
+var user = localStorage.getItem("user")
+user = JSON.parse(user)
 
     const [formData, setFormData] = useState({
+        user:user.id,
         name: '',
         address: '',
         description: '',

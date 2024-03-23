@@ -106,8 +106,8 @@ useEffect(() => {
             err=true
           }
           else{
-            // localStorage.setItem("loginUser", (storedUser))
-            // setContextLoggenIn(JSON.parse(storedUser))
+            localStorage.setItem("loginUser", (storedUser))
+            setContextLoggenIn(JSON.parse(storedUser))
             try {
               const response = await axios.post(
                 "http://127.0.0.1:8000/api/login",
@@ -130,6 +130,8 @@ useEffect(() => {
                 //   passwordError: "Invalid Password",
                 // });
             }
+            
+            
           };
 
         }
@@ -139,8 +141,25 @@ useEffect(() => {
     err=true
   }
 };
+// const [email, setEmail] = useState('');
+// const [password, setPassword] = useState('');
 
-  
+// const handleLogin = () => {
+//   fetch('/api/login/', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({ email, password }),
+//   })
+//     .then(response => response.json())
+//     .then(data => {
+//       console.log(data.message); // Handle the response based on success or failure
+//     })
+//     .catch(error => {
+//       console.error('Error:', error);
+//     });
+// };
 
 
   return (
@@ -176,7 +195,7 @@ useEffect(() => {
                     />
                     
                     <br />
-                <button id ="reg" type="submit" className=" btn btn-default form-control" style={{"backgroundColor":"#FF5A5F"}}>Login</button>
+                <button id ="reg"  type="submit" className=" btn btn-default form-control" style={{"backgroundColor":"#FF5A5F"}}>Login</button>
                  {/* <!-- 2 column grid layout --> */}
                 <div className=" mb-4 d-flex justify-content-between">
                 <div className="checkBox">

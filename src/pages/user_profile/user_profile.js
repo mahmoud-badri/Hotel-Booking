@@ -7,6 +7,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import XIcon from "@mui/icons-material/X";
 import "./profil.css";
 import "./form.css";
+import BookinBasedHotel from "./BookingBasedHotel";
 
 function UserProfilePage() {
   const [userData, setUserData] = useState({
@@ -69,6 +70,7 @@ function UserProfilePage() {
 
   return (
     <div className="mb-3 container text-dark">
+       <BookinBasedHotel />
       <h2 className="text-center mb-4"> Profile </h2>
       {showForm && !isSubmitted && (
         <div className="container mt-5 mb-5 d-flex justify-content-center body2">
@@ -162,6 +164,8 @@ function UserProfilePage() {
                   Save
                 </button>
               </form>
+     
+
             </div>
           </div>
         </div>
@@ -232,6 +236,7 @@ function UserProfilePage() {
                 <button className="profile_button px-5" onClick={toggleForm}>
                   Edit profile
                 </button>
+
               </div>
             </div>
           </div>

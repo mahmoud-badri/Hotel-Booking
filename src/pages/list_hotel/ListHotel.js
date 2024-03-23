@@ -65,6 +65,7 @@ const ListHotel = () => {
     return (
         <div className='container'> 
             {hotels && hotels.map((hotel) => (
+                <Link to={`/HotelDetails/${hotel.id}`}>
                 <div key={hotel.id}>
                     <CardListHotel
                         id={hotel.id}
@@ -76,7 +77,7 @@ const ListHotel = () => {
                         price={hotel.prices}
                     />
                 </div>
-                
+                </Link>
             ))}
 {/* <Link to={`/productdetails/${product.id}`}></Link> */}
         </div>

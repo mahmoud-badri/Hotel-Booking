@@ -413,7 +413,7 @@ export default function HotelDetailBody({ data }) {
                     </div>
                 </div>
             </div>
-            <BookingModal handleClose={handleClose} showModal={show} hotel_id={hotel.id} />
+            <BookingModal handleClose={handleClose} showModal={show} hotel={hotel} />
         </>
     );
 }

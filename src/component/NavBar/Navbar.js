@@ -73,7 +73,10 @@ var user = localStorage.getItem("user")
                 WishList
               </Link>
             </li>
-
+{isLoggedIn && (
+  <>
+{user.type=='hotel' && (
+  <>
             <li className="nav-item">
               <Link
                 className="nav-link active"
@@ -92,6 +95,13 @@ var user = localStorage.getItem("user")
                 Add room
               </Link>
             </li>
+            <div className="nav-item">
+            <Link to="Dashboard" className="nav-link">
+            Dashboard
+            </Link>
+            </div>
+  </>)}
+  </>)}
           </ul>
           <form className="d-flex">
             <input
@@ -100,7 +110,10 @@ var user = localStorage.getItem("user")
               placeholder="Search"
               aria-label="Search"
             />
-
+            <button className="btn custom-search-btn" type="submit">
+                          Search
+                        </button>
+          </form>
 {!isLoggedIn ? (
     <>
        
@@ -109,8 +122,6 @@ var user = localStorage.getItem("user")
              Register
             </Link>
           </div>
-       
-        
     </>
  ) :(
     <>
@@ -118,11 +129,7 @@ var user = localStorage.getItem("user")
     {`Hello  ${user.name}`}
     </div>
     
-    <div className="nav-item">
-    <Link to="Dashboard" className="nav-link">
-    Dashboard
-    </Link>
-    </div>
+   
     
     <div className="d-flex m-2">
         <Link
@@ -147,10 +154,7 @@ Dashboard
 
 
 
-            <button className="btn custom-search-btn" type="submit">
-              Search
-            </button>
-          </form>
+           
 
           
 
