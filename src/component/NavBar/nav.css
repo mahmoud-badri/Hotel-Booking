@@ -1,106 +1,101 @@
-/* .navbar-text {
-    color: rgba(248, 24, 8, 0.863);
-    font-size: 20px;
-    font-weight: bold;
-    transition: 0.5s;
-}
-
-.navbar-text:hover,
-.navbar-text active {
-    color: rgb(238, 238, 48);
-}
-
-
-.transparent-input {
-    background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-} */
-
-body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    }
-     
-    
-    .navbar {
+.navbar {
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    }
-     
-    
-    .navbar-brand {
+  }
+  
+  .navbar-brand {
     font-size: 24px;
     font-weight: bold;
     color: #ff385c;
     text-decoration: none;
-    }
-     
-    
-    .navbar-nav {
+  }
+  
+  .navbar-nav {
     display: flex;
     align-items: center;
-    }
-     
-    
-    .nav-item {
+  }
+  
+  .nav-item {
     margin-right: 20px;
-    }
-     
-    
-    .nav-link {
+  }
+  
+  .nav-link {
     text-decoration: none;
     color: #484848;
     font-weight: 600;
     transition: color 0.3s ease;
-    }
-     
-    
-    .nav-link:hover {
+  }
+  
+  .nav-link:hover {
     color: #ff385c;
-    }
-     
-    
-    .form-control {
+  }
+  
+  .form-control {
     margin-right: 10px;
-    }
-     
-    
-    .btn-outline-success {
+  }
+  
+  .btn-outline-success {
     margin-right: 10px;
-    }
-     
-    
-    .d-flex {
+  }
+  
+  .d-flex {
     display: flex;
-    }
-     
-    
-    .m-2 {
+  }
+  
+  .m-2 {
     margin-right: 20px;
-    }
-     
-    
-    /* Custom Styling for Active Links */
-    .nav-link.active {
+  }
+  
+  /* Custom Styling for Active Links */
+  .nav-link.active {
     color: #ff385c !important;
-    }
-     
-    
-    /* Additional Styles for Specific Elements */
-    /* Adjust as needed */
-    .custom-search-btn {
+  }
+  
+  /* Additional Styles for Specific Elements */
+  /* Adjust as needed */
+  .custom-search-btn {
     color: #008489; /* Text color */
     background-color: #ffffff; /* Background color */
     border: 1px solid #008489; /* Border color */
     transition: all 0.3s ease; /* Transition effect */
-    }
-     
-    
-    .custom-search-btn:hover {
+  }
+  
+  .custom-search-btn:hover {
     color: #fff; /* Text color on hover */
     background-color: #ff385c; /* Background color on hover */
-    }
+  }
+  .navbar {
+    margin-bottom: 30px; /* Increased space between navbars */
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #484848;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: #ff385c; /* Hovering effect */
+  }
+  
+  .custom-search-btn {
+    color: #008489;
+    background-color: #ffffff;
+    border: 1px solid #008489;
+    transition: all 0.3s ease;
+  }
+  
+  .custom-search-btn:hover {
+    color: #fff;
+    background-color: #ff385c;
+  }
+  
+  .nav-link.active {
+    color: #ff385c !important;
+  }
+    
