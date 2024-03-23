@@ -17,7 +17,7 @@ export const gethotel = async()  => {
 
 export const addHotel = async (hotelData) => {
     try {
-        const res = await axios.post('http://127.0.0.1:8000/hotel/', hotelData, {
+        const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
         
             headers: {
                 'Content-Type': 'multipart/form-data'

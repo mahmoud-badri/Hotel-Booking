@@ -10,7 +10,7 @@ const AddHotelForm = () => {
         address: '',
         description: '',
         rate: 5,
-        prices: 0,
+        price: 0,
         rating: '⭐️',
         review: 0,
         status: 'Good',
@@ -79,8 +79,8 @@ const AddHotelForm = () => {
                     Prices:
                     <input
                         type='number'
-                        name='prices'
-                        value={formData.prices}
+                        name='price'
+                        value={formData.price}
                         onChange={handleInputChange}
                         min={0}
                         step={0.01}
