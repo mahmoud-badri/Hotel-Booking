@@ -3,15 +3,21 @@ import { useDispatch } from 'react-redux';
 import { addHotel } from '../../Redux/HotelAction';
 import './addHotelForm.css'
 const AddHotelForm = () => {
-    
+
+    var user = localStorage.getItem("user")
+    user = JSON.parse(user)
 
     const [formData, setFormData] = useState({
+        user: user.id,
         name: '',
         address: '',
         description: '',
         prices: 0,
         governorate: '',
         image: null,
+        single_room: 0,
+        suite: 0,
+        family_room: 0,
     });
 
     const handleInputChange = (e) => {
@@ -24,10 +30,11 @@ const AddHotelForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addHotel(formData);
-        window.location.reload();
+        console.log(formData); 
+        addHotel(formData); 
+        console.log(user)
+        //window.location.reload();
     };
-
     return (
         <form className="hotel-form" onSubmit={handleSubmit}>
             <div>
@@ -51,6 +58,16 @@ const AddHotelForm = () => {
                 </label>
                 <br />
                 <label>
+                    Governorate:
+                    <input
+                        type='text'
+                        name='governorate'
+                        value={formData.governorate}
+                        onChange={handleInputChange}
+                    />
+                </label>
+                <br />
+                <label>
                     Description:
                     <textarea
                         name='description'
@@ -59,9 +76,9 @@ const AddHotelForm = () => {
                     />
                 </label>
                 <br />
-               
+
                 <label>
-                    Prices:
+                    Avrage price:
                     <input
                         type='number'
                         name='prices'
@@ -72,16 +89,21 @@ const AddHotelForm = () => {
                     />
                 </label>
                 <br />
-               
                 <label>
-                    Governorate:
-                    <input
-                        type='text'
-                        name='governorate'
-                        value={formData.governorate}
+                    Rating:
+                    <select
+                        name='rating'
+                        value={formData.rating}
                         onChange={handleInputChange}
-                    />
+                    >
+                        <option value='⭐️'>⭐</option>
+                        <option value='⭐️⭐️'>⭐️⭐</option>
+                        <option value='⭐️⭐️⭐️'>⭐️⭐️⭐</option>
+                        <option value='⭐️⭐️⭐️⭐️'>⭐️⭐️⭐️⭐</option>
+                        <option value='⭐️⭐️⭐️⭐️⭐️'>⭐️⭐️⭐️⭐️⭐</option>
+                    </select>
                 </label>
+
                 <br />
                 <label>
                     Image:

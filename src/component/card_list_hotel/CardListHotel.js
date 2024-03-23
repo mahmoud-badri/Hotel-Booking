@@ -64,7 +64,7 @@ const CardListHotel = (props) => {
                                 <h5 className="mb-1 details">{props.description} </h5>
                             </div>
                             <div className="row px-3">
-                                <p className="text-left address"> {props.governorate}, Egypt &middot; 1 km from Great Sphinx.</p>
+                                <p className="text-left address"> {props.governorate}, Egypt &middot; {props.address}.</p>
                             </div>
                             <div className="line"></div>
                             <div className="row px-3 mt-3 ">
@@ -77,7 +77,7 @@ const CardListHotel = (props) => {
                                 <p className="text-muted mb-0 taxes">+ $14 taxes and charges</p>
                             </div>
                             <Link to="/HotelDetails">
-                                <button className='btn btn-success btn-regis me-2'>ENQUIRY</button>
+                                <button className='btn btn-success btn-regis me-2'>Details</button>
                             </Link>
                             <button className='btn btn-danger btn-regis'>BOOK NOW</button>
                         </div>

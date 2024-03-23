@@ -13,9 +13,8 @@ function Home() {
             const result = await axios.get('http://localhost:8000/hotel/');
     
             console.log(result.data)
-            setData(result.data)
+            setHotels(result.data)
         }
-    
         useEffect(() => {
             fetchHotels();
         }, [])
