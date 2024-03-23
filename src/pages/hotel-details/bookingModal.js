@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./booingModal.css";
+import axios from "axios";
 
 function BookingModal({ showModal, handleClose }) {
   // Define state variables to store form data
   const [formData, setFormData] = useState({
-    bedType: "",
-    guests: "",
+    room_type: "",
+    guest: "",
     children: "",
-    checkIn: "",
-    checkOut: ""
+    start_date: "",
+    end_date: ""
   });
 
   // Function to handle form input changes and update state
@@ -28,28 +29,25 @@ function BookingModal({ showModal, handleClose }) {
 
     try {
       // Send formData to backend API
-      const response = await fetch("https://api-generator.retool.com/qCCCiu/data", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
-
-      // Check response status
-      if (response.ok) {
-        // Handle success, maybe show a success message
-        console.log("Form data sent successfully");
-        console.log(response);
-        console.log("Form data sent successfully");
-      } else {
-        // Handle errors, maybe show an error message
-        console.error("Error sending form data:", response.statusText);
+      const response = await axios.post("http://127.0.0.1:8000/hotel/booking", formData, {
+      headers: {
+        "Content-Type": "application/json"
       }
-    } catch (error) {
-      console.error("Error sending form data:", error);
-    }
-  };
+    });
+
+ // Check response status
+ if (response.status === 200) {
+  // Handle success, maybe show a success message
+  console.log("Form data sent successfully");
+  console.log(formData);
+} else {
+  // Handle errors, maybe show an error message
+  console.error("Error sending form data:", response.statusText);
+}
+} catch (error) {
+console.error("Error sending form data:", error);
+}
+};
 
   return (
     <Modal show={showModal} onHide={handleClose} size="lg" className="row">
@@ -67,8 +65,8 @@ function BookingModal({ showModal, handleClose }) {
                       <div className="form-group">
                         <select
                           className="form-control"
-                          name="bedType"
-                          value={formData.bedType}
+                          name="room_type"
+                          value={formData.room_type}
                           onChange={handleInputChange}
                         >
                           <option>one bed</option>
@@ -81,8 +79,8 @@ function BookingModal({ showModal, handleClose }) {
                       <div className="form-group">
                         <select
                           className="form-control"
-                          name="guests"
-                          value={formData.guests}
+                          name="guest"
+                          value={formData.guest}
                           onChange={handleInputChange}
                         >
                           <option>1</option>
@@ -115,8 +113,8 @@ function BookingModal({ showModal, handleClose }) {
                           className="form-control w-100"
                           type="date"
                           required
-                          name="checkIn"
-                          value={formData.checkIn}
+                          name="start_date"
+                          value={formData.start_date}
                           onChange={handleInputChange}
                         />
                         <span className="form-label">Check In</span>
@@ -128,8 +126,8 @@ function BookingModal({ showModal, handleClose }) {
                           className="form-control w-100"
                           type="date"
                           required
-                          name="checkOut"
-                          value={formData.checkOut}
+                          name="end_date"
+                          value={formData.end_date}
                           onChange={handleInputChange}
                         />
                         <span className="form-label">Check out</span>
