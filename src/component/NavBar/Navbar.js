@@ -37,7 +37,8 @@ function MyNavbar() {
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -46,7 +47,8 @@ function MyNavbar() {
               <Link
                 className="nav-link active"
                 aria-current="page"
-                to="HotelsFilter">
+                to="HotelsFilter"
+              >
                 List Hotels
               </Link>
             </li>
@@ -93,7 +95,8 @@ function MyNavbar() {
               className="nav-link active"
               aria-current="page"
               to="/"
-              onClick={logOut}>
+              onClick={logOut}
+            >
               {`${contextLoggedIn ? "Log out" : ""}`}
             </Link>
           </div>
