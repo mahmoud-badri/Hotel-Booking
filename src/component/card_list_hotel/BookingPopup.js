@@ -71,8 +71,8 @@ const BookingPopup = ({
                             Select Room Type
                         </option>
                         <option value="Single">Single Room</option>
-                        <option value="double_room">Double Room</option>
-                        <option value="suite">Suite</option>
+                        <option value="Family">Family Room</option>
+                        <option value="Suite">Suite</option>
                     </select>
                 </div>
                 <div className="form-group">

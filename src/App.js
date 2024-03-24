@@ -18,6 +18,7 @@ import Footer from "./component/Footer/Footer.js";
 import { AuthProvider } from "./Context/AuthContext.js";
 import AddHotelForm from "./component/add_hotel_form/AddHotelForm.js";
 import ListHotel from "./pages/list_hotel/ListHotel.js";
+import GetBooking from "./component/get_booking/Get_Booking.js";
 
 
 function App() {
@@ -46,8 +47,8 @@ function App() {
           <Route exact path={"/Appointment"} component={Appointment} />
           <Route exact path={"/AddHotelForm"} component={AddHotelForm} />
 
-
-
+          <Route exact path={"/GetBooking"} component={GetBooking} />
+          
           
         </Switch>
         <Footer />

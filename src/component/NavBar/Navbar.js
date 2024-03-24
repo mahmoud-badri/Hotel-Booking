@@ -12,38 +12,38 @@ import {
   Button,
 } from "react-bootstrap";
 import "./nav.css";
-
+import GetBooking from "../get_booking/Get_Booking";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { LoggedInContext } from "../../Context/loggedUser";
 import { AuthContext } from "../../Context/AuthContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function MyNavbar() {
-const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
-const authContext = useContext(AuthContext);
-const history = useHistory();
-const isLoggedIn = authContext.isLoggedIn;
-const currentUser = authContext.currentUser;
+  const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
+  const authContext = useContext(AuthContext);
+  const history = useHistory();
+  const isLoggedIn = authContext.isLoggedIn;
+  const currentUser = authContext.currentUser;
 
-useEffect(() => {
+  useEffect(() => {
     history.push("/");
-}, [isLoggedIn, currentUser]);
+  }, [isLoggedIn, currentUser]);
 
-const logOut = () => {
-localStorage.removeItem("loginUser");
-setContextLoggenIn("");
-authContext.logout();
-};
-  
-var user = localStorage.getItem("user")
- user = JSON.parse(user)
+  const logOut = () => {
+    localStorage.removeItem("loginUser");
+    setContextLoggenIn("");
+    authContext.logout();
+  };
+
+  var user = localStorage.getItem("user")
+  user = JSON.parse(user)
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand">
           <h3>
             {" "}
-            ITI <sub>bnb</sub>{" "}
+            Tic <sub>Tac</sub>{" "}
           </h3>
         </Link>
 
@@ -83,6 +83,15 @@ var user = localStorage.getItem("user")
                 Add Hotel
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                to="GetBooking"
+              >
+                Booking
+              </Link>
+            </li>
           </ul>
           <form className="d-flex">
             <input
@@ -92,41 +101,42 @@ var user = localStorage.getItem("user")
               aria-label="Search"
             />
 
-{!isLoggedIn ? (
-    <>
-       
-       <div className="d-flex m-2">
-            <Link className="nav-link active" aria-current="page" to="Register">
-             Register
-            </Link>
-          </div>
-       
-        
-    </>
- ) :(
-    <>
-    <div className="d-flex m-2">
-    {`Hello  ${user.name}`}
-    </div>
-    
-    <div className="nav-item">
-    <Link to="Dashboard" className="nav-link">
-    Dashboard
-    </Link>
-    </div>
-    
-    <div className="d-flex m-2">
-        <Link
-        className="nav-link active"
-        aria-current="page"
-        to="/"
-        onClick={logOut}
-        >
-        log out
-        </Link>
-        </div>
-        </>
- )
+            {!isLoggedIn ? (
+              <>
+
+                <div className="d-flex m-2">
+                  <Link className="nav-link active" aria-current="page" to="Register">
+                    Register
+                  </Link>
+                </div>
+
+                
+              </>
+              
+            ) : (
+              <>
+                <div className="d-flex m-2">
+                  {`Hello  ${user.name}`}
+                </div>
+
+                <div className="nav-item">
+                  <Link to="Dashboard" className="nav-link">
+                    Dashboard
+                  </Link>
+                </div>
+
+                <div className="d-flex m-2">
+                  <Link
+                    className="nav-link active"
+                    aria-current="page"
+                    to="/"
+                    onClick={logOut}
+                  >
+                    log out
+                  </Link>
+                </div>
+              </>
+            )
 /* <li className="nav-item">
 <Link className="nav-link active" to="Dashboard">
 Dashboard
@@ -143,7 +153,7 @@ Dashboard
             </button>
           </form>
 
-          
+
 
           {/* <div className="d-flex m-2">
             {`${contextLoggedIn ? "Hello " + contextLoggedIn.username : ""}`}
