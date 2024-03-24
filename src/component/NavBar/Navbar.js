@@ -1,3 +1,5 @@
+
+
 // export default MyNavbar;
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -10,7 +12,7 @@ import {
   Button,
 } from "react-bootstrap";
 import "./nav.css";
-
+import GetBooking from "../get_booking/Get_Booking";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { LoggedInContext } from "../../Context/loggedUser";
 import { AuthContext } from "../../Context/AuthContext";
@@ -20,8 +22,8 @@ function MyNavbar() {
   const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
   const authContext = useContext(AuthContext);
   const history = useHistory();
-  const isLoggedIn = authContext?.isLoggedIn;
-  const currentUser = authContext?.currentUser;
+  const isLoggedIn = authContext.isLoggedIn;
+  const currentUser = authContext.currentUser;
 
   useEffect(() => {
     history.push("/");
@@ -33,15 +35,15 @@ function MyNavbar() {
     authContext.logout();
   };
 
-  var user = localStorage.getItem("user");
-  user = JSON.parse(user);
+  var user = localStorage.getItem("user")
+  user = JSON.parse(user)
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand">
           <h3>
             {" "}
-            ITI <sub>bnb</sub>{" "}
+            Tic <sub>Tac</sub>{" "}
           </h3>
         </Link>
 
@@ -52,8 +54,7 @@ function MyNavbar() {
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+          aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -62,8 +63,7 @@ function MyNavbar() {
               <Link
                 className="nav-link active"
                 aria-current="page"
-                to="HotelsFilter"
-              >
+                to="HotelsFilter">
                 List Hotels
               </Link>
             </li>
@@ -83,61 +83,77 @@ function MyNavbar() {
                 Add Hotel
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                to="GetBooking"
+              >
+                Booking
+              </Link>
+            </li>
           </ul>
           <form className="d-flex">
-            {/* <input
+            <input
               className="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
-            /> */}
+            />
 
-            {
-              !isLoggedIn ? (
-                <>
-                  <div className="d-flex m-2">
-                    <Link
-                      className="nav-link active"
-                      aria-current="page"
-                      to="Register"
-                    >
-                      Register
-                    </Link>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="d-flex m-2">{`Hello  ${user.name}`}</div>
+            {!isLoggedIn ? (
+              <>
 
-                  <div className="nav-item">
-                    <Link to="Dashboard" className="nav-link">
-                      Dashboard
-                    </Link>
-                  </div>
+                <div className="d-flex m-2">
+                  <Link className="nav-link active" aria-current="page" to="Register">
+                    Register
+                  </Link>
+                </div>
 
-                  <div className="d-flex m-2">
-                    <Link
-                      className="nav-link active"
-                      aria-current="page"
-                      to="/"
-                      onClick={logOut}
-                    >
-                      log out
-                    </Link>
-                  </div>
-                </>
-              )
-              /* <li className="nav-item">
+                
+              </>
+              
+            ) : (
+              <>
+                <div className="d-flex m-2">
+                  {`Hello  ${user.name}`}
+                </div>
+
+                <div className="nav-item">
+                  <Link to="Dashboard" className="nav-link">
+                    Dashboard
+                  </Link>
+                </div>
+
+                <div className="d-flex m-2">
+                  <Link
+                    className="nav-link active"
+                    aria-current="page"
+                    to="/"
+                    onClick={logOut}
+                  >
+                    log out
+                  </Link>
+                </div>
+              </>
+            )
+/* <li className="nav-item">
 <Link className="nav-link active" to="Dashboard">
 Dashboard
 </Link>
-</li> */
-            }
+</li> */}
 
-            {/* <button className="btn custom-search-btn" type="submit">
+
+
+
+
+
+            <button className="btn custom-search-btn" type="submit">
               Search
-            </button> */}
+            </button>
           </form>
+
+
 
           {/* <div className="d-flex m-2">
             {`${contextLoggedIn ? "Hello " + contextLoggedIn.username : ""}`}
@@ -151,6 +167,7 @@ Dashboard
             </div>
           )} */}
 
+
           {/* <div className="d-flex m-2">
 
           <div className="d-flex m-2">
@@ -158,16 +175,11 @@ Dashboard
               className="nav-link active"
               aria-current="page"
               to="/"
-              onClick={logOut}
-            >
+              onClick={logOut}>
               {`${contextLoggedIn ? "Log out" : ""}`}
             </Link>
           </div> */}
-        </div>
-        <div className="d-flex m-2">
-          <Link to="/HotelRequests">
-            <h5>Requests </h5>
-          </Link>
+
           <div className="d-flex m-2">
             <Link to="/userprofile">
               <AccountCircleIcon fontSize="large"></AccountCircleIcon>
@@ -175,7 +187,6 @@ Dashboard
           </div>
         </div>
       </div>
-      {/* </div> */}
     </nav>
   );
 }
