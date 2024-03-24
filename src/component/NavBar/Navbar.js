@@ -85,12 +85,12 @@ function MyNavbar() {
             </li>
           </ul>
           <form className="d-flex">
-            <input
+            {/* <input
               className="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
-            />
+            /> */}
 
             {
               !isLoggedIn ? (
@@ -134,9 +134,9 @@ Dashboard
 </li> */
             }
 
-            <button className="btn custom-search-btn" type="submit">
+            {/* <button className="btn custom-search-btn" type="submit">
               Search
-            </button>
+            </button> */}
           </form>
 
           {/* <div className="d-flex m-2">
