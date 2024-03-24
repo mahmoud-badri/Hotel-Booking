@@ -31,7 +31,8 @@ const ListHotel = () => {
         <div className='container'>
             {/* Render hotels for the current page */}
             {currentHotels.map((hotel) => (
-                <Link to={`/HotelDetails/${hotel.id}`} key={hotel.id}>
+                
+                // <Link to={`/HotelDetails/${hotel.id}`} key={hotel.id}>
                     <div>
                         <CardListHotel
                             id={hotel.id}
@@ -43,7 +44,7 @@ const ListHotel = () => {
                             price={hotel.prices}
                         />
                     </div>
-                </Link>
+                //  </Link>
             ))}
             {/* Render pagination component */}
             <Pagination
