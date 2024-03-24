@@ -1,4 +1,4 @@
-.cards-flex {
+/* .cards-flex {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,4 +59,15 @@
   .cards-flex {
     padding: 0px;
   }
+} */
+.card-box {
+  margin: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem 3rem;
 }
+
+

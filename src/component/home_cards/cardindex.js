@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Card from "./cards.js";
+import CarD from "./cards.js";
 import "./card.css";
 
 function Cards({ list }) {
@@ -27,9 +27,9 @@ function Cards({ list }) {
 
       <div className="cards-flex">
         {filterdList.length > 0 &&
-          filterdList?.map((card, i) => <Card card={card} key={i} />)}
+          filterdList?.map((card, i) => <CarD card={card} key={i} />)}
         {filterdList.length === 0 &&
-          list?.map((card, i) => <Card card={card} key={i} />)}
+          list?.map((card, i) => <CarD card={card} key={i} />)}
       </div>
     </>
   );

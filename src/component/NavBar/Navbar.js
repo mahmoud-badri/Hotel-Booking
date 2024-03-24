@@ -3,20 +3,21 @@
 // export default MyNavbar;
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  Navbar,
-  Nav,
-  Container,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+// import {
+//   Navbar,
+//   Nav,
+//   Container,
+//   Form,
+//   FormControl,
+//   Button,
+// } from "react-bootstrap";
 import "./nav.css";
 import GetBooking from "../get_booking/Get_Booking";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { LoggedInContext } from "../../Context/loggedUser";
 import { AuthContext } from "../../Context/AuthContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Navbar, Nav, Button ,NavDropdown, Form, FormControl } from 'react-bootstrap';
 
 function MyNavbar() {
   const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
@@ -38,16 +39,19 @@ function MyNavbar() {
   var user = localStorage.getItem("user")
   user = JSON.parse(user)
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <Navbar style= {{ opacity: " 0.8" }} className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid">
+      <Navbar.Brand class="remove"> 
         <Link to="/" className="navbar-brand">
-          <h3>
+          <h3 style={{fontFamily : "cursive" , fontWeight : "1000"}}>
             {" "}
-            Tic <sub>Tac</sub>{" "}
+            Tic<img className="d-inline mx-auto" src="https://i.ibb.co/jR5LcWJ/kisspng-hotel-computer-icons-symbol-high-resolution-india-map-5b5cb6413113c7-360607041532802625201.png" style={{width:"30px"}} alt=""/>
+ <sub>Tac</sub>{" "}
           </h3>
-        </Link>
 
-        <button
+        </Link>
+ </Navbar.Brand>
+        {/* <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -56,9 +60,9 @@ function MyNavbar() {
           aria-expanded="false"
           aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
-        </button>
+        </button> */}
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav me-auto mb-1 mb-lg-0">
             <li className="nav-item">
               <Link
                 className="nav-link active"
@@ -94,18 +98,18 @@ function MyNavbar() {
             </li>
           </ul>
           <form className="d-flex">
-            <input
+            {/* <input
               className="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
-            />
+            /> */}
 
             {!isLoggedIn ? (
               <>
 
                 <div className="d-flex m-2">
-                  <Link className="nav-link active" aria-current="page" to="Register">
+                  <Link style={{fontFamily : "cursive" , fontWeight : "500"}} className="nav-link active" aria-current="page" to="Register">
                     Register
                   </Link>
                 </div>
@@ -116,11 +120,11 @@ function MyNavbar() {
             ) : (
               <>
                 <div className="d-flex m-2">
-                  {`Hello  ${user.name}`}
+                  <h5 className="text-primary">  {` ${user.name}`} </h5> 
                 </div>
 
-                <div className="nav-item">
-                  <Link to="Dashboard" className="nav-link">
+                <div className="nav-item d-flex m-2">
+                  <Link style={{ fontWeight : "600"}} to="Dashboard" className="nav-link">
                     Dashboard
                   </Link>
                 </div>
@@ -148,9 +152,9 @@ Dashboard
 
 
 
-            <button className="btn custom-search-btn" type="submit">
+            {/* <button className="btn custom-search-btn" type="submit">
               Search
-            </button>
+            </button> */}
           </form>
 
 
@@ -187,7 +191,7 @@ Dashboard
           </div>
         </div>
       </div>
-    </nav>
+    </Navbar>
   );
 }
 

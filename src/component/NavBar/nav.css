@@ -16,16 +16,23 @@
     border: 1px solid rgba(255, 255, 255, 0.5);
 } */
 
-body {
+/* body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    }
+    } */
      
-    
+    .remove{
+    text-decoration: none !important;
+    color: black;
+}
+
+.remove:hover{
+    color: rgb(255, 87, 87) !important;
+}
     .navbar {
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 15px 20px;
+    padding: 2px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -47,7 +54,7 @@ body {
      
     
     .nav-item {
-    margin-right: 20px;
+    margin-right: 15px;
     }
      
     
