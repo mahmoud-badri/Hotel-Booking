@@ -19,6 +19,7 @@ import { AuthProvider } from "./Context/AuthContext.js";
 import AddHotelForm from "./component/add_hotel_form/AddHotelForm.js";
 import ListHotel from "./pages/list_hotel/ListHotel.js";
 import AddRoomForm from "./component/add_room_form /AddRoomForm.js";
+import GuardedRoute from './GuardedRoute';
 
 function App() {
   const isAuthenticated = true; // Replace with actual authentication check
@@ -40,7 +41,7 @@ function App() {
           <Route exact path={"/HotelDetails/:id"} component={HotelDetails} />
 
           <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
-          <Route exact path={"/Wishlist"} component={Wishlist} />
+          {/* <Route exact path={"/Wishlist"} component={Wishlist} /> */}
           <Route exact path={"/Register"} component={Register} />
           <Route exact path={"/Login"} component={Login} />
           <Route exact path={"/userprofile"} component={UserProfilePage} />
@@ -48,7 +49,14 @@ function App() {
           <Route exact path={"/Appointment"} component={Appointment} />
           <Route exact path={"/AddHotelForm"} component={AddHotelForm} />
           <Route exact path={"/AddRoomForm"} component={AddRoomForm} />
+          <PrivateRoute exact path="/Wishlist" component={Wishlist} isAuthenticated={isAuthenticated} />
 
+         
+        <GuardedRoute
+          path="/HotelDetails/:id"
+          component={Wishlist}
+          isAuthenticated={HotelDetails}
+        />
         </Switch>
         <Footer />
         </AuthProvider>
@@ -60,7 +68,7 @@ function App() {
   );
 }
 
-function PrivateRoute({ component: Wishlist, isAuthenticated, ...rest }) {
+function PrivateRoute({ component: Component, isAuthenticated, ...rest }) {
   return (
     <Route {...rest} render={(props) => (
       isAuthenticated ? <Component {...props} />
