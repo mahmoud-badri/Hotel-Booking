@@ -57,7 +57,7 @@ function BookingModal({ showModal, handleClose ,hotel }) {
       );
       console.log(response);
       
-      if (response.ok) {
+      if (response.status===200) {
         // Handle success, maybe show a success message
         console.log("Form data sent successfully");
       } else {

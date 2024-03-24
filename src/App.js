@@ -1,6 +1,6 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch,Redirect } from "react-router-dom";
 import "./App.css";
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import Wishlist from "./pages/wishlist/Wishlist";
 import MyNavbar from "./component/NavBar/Navbar";
 import HotelDetails from "./pages/hotel-details/HotelDetails";
@@ -21,6 +21,7 @@ import ListHotel from "./pages/list_hotel/ListHotel.js";
 import AddRoomForm from "./component/add_room_form /AddRoomForm.js";
 
 function App() {
+  const isAuthenticated = true; // Replace with actual authentication check
   const [contextLoggedIn, setContextLoggenIn] = useState("");
 
   return (
@@ -59,4 +60,12 @@ function App() {
   );
 }
 
+function PrivateRoute({ component: Wishlist, isAuthenticated, ...rest }) {
+  return (
+    <Route {...rest} render={(props) => (
+      isAuthenticated ? <Component {...props} />
+    : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+    )} />
+  );
+}
 export default App;

@@ -177,7 +177,7 @@ useEffect(() => {
                     <hr />
                 </div>
                     <Input 
-                    text="Email or Username"
+                    text="Email"
                     label="emailORusername"
                     type="text"
                     onChange={(e) => chageUserData(e)}
@@ -233,7 +233,7 @@ useEffect(() => {
             </div>  
             <div className="col-8 col-sm-4">
             </div>
-    </div> 
+        </div> 
           
           </div>
         

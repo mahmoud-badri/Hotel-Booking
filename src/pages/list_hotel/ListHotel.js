@@ -48,7 +48,7 @@ const ListHotel = () => {
        
         useEffect(() => {
             dispatch(getHotel())
-
+            console.log(hotels);
           }, [dispatch]);
     // const [hotels, setHotels] = useState([]);
 

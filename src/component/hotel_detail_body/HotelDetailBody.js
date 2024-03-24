@@ -41,6 +41,7 @@ function Description(props) {
     const hotels = useSelector((state) => state.combinHotel.hotels)
 
     const hotel = hotels[hotelId.id-1] 
+    
     const list = [
         { icon: "check", text: hotel.description },
         { icon: "check", text: "No scripta electram necessitatibus sit" },
@@ -354,7 +355,8 @@ export default function HotelDetailBody({ data }) {
 
     const hotels = useSelector((state) => state.combinHotel.hotels)
 
-    const hotel = hotels[hotelId.id-1] 
+    const hotel = hotels[hotelId.id-1]
+    console.log(hotel); 
     // console.log(hotel["name"])
     const [show, setShow] = useState(false);
     // console.log(data)
