@@ -1,4 +1,3 @@
- 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import React, { useState } from "react";
@@ -8,9 +7,7 @@ import HotelDetails from "./pages/hotel-details/HotelDetails";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Register from "./pages/Authorization/Register";
 import Login from "./pages/Authorization/Login";
-
-
-
+import ReviewList from "./api/apiTest.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import HotelsFilter from "./pages/HotelsFilter";
@@ -20,43 +17,43 @@ import ParticlesComponent from "./component/particles/particles";
 
 import Appointment from "./pages/Appointment/Appointment";
 import ListHotel from "./pages/list_hotel/ListHotel";
-import { LoggedInContext } from './Context/loggedUser.js';
+import { LoggedInContext } from "./Context/loggedUser.js";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import HotelDashboard from "./pages/Dashboard/Dashboard";
 import Footer from "./component/Footer/Footer.js";
-
+import StarRatingTest from "./component/api_test/api.js";
+// import ReviewList from "./api/apiTest.js";
+import ReviewTest from "./component/api_test/api_Reviews.js";
 function App() {
-  const [contextLoggedIn, setContextLoggenIn] = useState("")
+  const [contextLoggedIn, setContextLoggenIn] = useState("");
 
   return (
     <div className="App">
-    <LoggedInContext.Provider value={{contextLoggedIn, setContextLoggenIn}}>
+      <LoggedInContext.Provider value={{ contextLoggedIn, setContextLoggenIn }}>
+        <BrowserRouter>
+          <MyNavbar />
+          <ParticlesComponent id="particles" />
 
-      <BrowserRouter>
-        <MyNavbar />
-        <ParticlesComponent id="particles" />
- 
-        <Switch>        
+          <Switch>
+            <Route exact path={"/"} component={Home} />
+            <Route exact path={"/ListHotel"} component={ListHotel} />
+            <Route exact path={"/HotelDetails"} component={HotelDetails} />
 
-          <Route exact path={"/"} component={Home} />
-          <Route exact path={"/ListHotel"} component={ListHotel} />
-          <Route exact path={"/HotelDetails"} component={HotelDetails} />
-
-          <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
-          <Route exact path={"/Wishlist"} component={Wishlist} />
-          <Route exact path={"/Register"} component={Register} />
-          <Route exact path={"/Login"} component={Login} />
-          <Route exact path={"/userprofile"} component={UserProfilePage} />
-          <Route exact path={"/Dashboard"} component={HotelDashboard} />
-          <Route exact path={"/Appointment"} component={Appointment} />
-        </Switch>
-        <Footer />
-       </BrowserRouter>
+            <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
+            <Route exact path={"/Wishlist"} component={Wishlist} />
+            <Route exact path={"/Register"} component={Register} />
+            <Route exact path={"/Login"} component={Login} />
+            <Route exact path={"/userprofile"} component={UserProfilePage} />
+            <Route exact path={"/Dashboard"} component={HotelDashboard} />
+            <Route exact path={"/Appointment"} component={Appointment} />
+            <Route exact path={"/ApiTest"} component={ReviewTest} />
+          </Switch>
+          <Footer />
+        </BrowserRouter>
       </LoggedInContext.Provider>
     </div>
   );
 }
 
 export default App;
- 

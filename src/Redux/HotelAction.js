@@ -1,128 +1,170 @@
-   
- 
 // HotelAction.js
 import axios from "axios";
 
 // Action types
-export const GET_HOTEL_LIST_SUCCESS = 'GET_HOTEL_LIST_SUCCESS';
-export const GET_HOTEL_BY_ID = 'GET_HOTEL_BY_ID';
-export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
-export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
+export const GET_HOTEL_LIST_SUCCESS = "GET_HOTEL_LIST_SUCCESS";
+export const GET_HOTEL_BY_ID = "GET_HOTEL_BY_ID";
+export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
+export const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST";
 
 // Action creators
 export const gethotel = () => (dispatch) => {
-    console.log("Fetching hotel data...");
-    return axios
-        .get('https://retoolapi.dev/Ffu2bp/data')
-        .then((res) => {
-            console.log("Data received:", res.data);
-            dispatch({
-                type: GET_HOTEL_LIST_SUCCESS,
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log("Error fetching data:", err));
+  console.log("Fetching hotel data...");
+  return axios
+    .get("https://retoolapi.dev/Ffu2bp/data")
+    .then((res) => {
+      console.log("Data received:", res.data);
+      dispatch({
+        type: GET_HOTEL_LIST_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log("Error fetching data:", err));
 };
 
 export const getHotelById = (id) => (dispatch) => {
-    console.log(`Fetching hotel data for ID: ${id}`);
-    return axios
-        .get(`https://retoolapi.dev/Ffu2bp/data/${id}`)
-        .then((res) => {
-            console.log("Data received:", res.data);
-            dispatch({
-                type: GET_HOTEL_BY_ID,
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log("Error fetching data:", err));
+  console.log(`Fetching hotel data for ID: ${id}`);
+  return axios
+    .get(`https://retoolapi.dev/Ffu2bp/data/${id}`)
+    .then((res) => {
+      console.log("Data received:", res.data);
+      dispatch({
+        type: GET_HOTEL_BY_ID,
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log("Error fetching data:", err));
 };
 
 export const addToWishlist = (hotel) => (dispatch, getState) => {
-    const { combinHotel } = getState();
-    const isAlreadyInWishlistIndex = combinHotel.wishlist.findIndex((item) => item.id === hotel.id);
+  const { combinHotel } = getState();
+  const isAlreadyInWishlistIndex = combinHotel.wishlist.findIndex(
+    (item) => item.id === hotel.id
+  );
 
-    if (isAlreadyInWishlistIndex >= 0) {
-        // If already in wishlist, dispatch an action to remove it
-        dispatch({
-            type: REMOVE_FROM_WISHLIST,
-            payload: hotel.id,
-        });
-    } else {
-        // If not in wishlist, dispatch an action to add it
-        dispatch({
-            type: ADD_TO_WISHLIST,
-            payload: hotel,
-        });
-    }
+  if (isAlreadyInWishlistIndex >= 0) {
+    // If already in wishlist, dispatch an action to remove it
+    dispatch({
+      type: REMOVE_FROM_WISHLIST,
+      payload: hotel.id,
+    });
+  } else {
+    // If not in wishlist, dispatch an action to add it
+    dispatch({
+      type: ADD_TO_WISHLIST,
+      payload: hotel,
+    });
+  }
 };
 
 export const removeFromWishlist = (hotel) => (dispatch) => {
-    dispatch({
-        type: REMOVE_FROM_WISHLIST,
-        payload: hotel.id,
-    });
+  dispatch({
+    type: REMOVE_FROM_WISHLIST,
+    payload: hotel.id,
+  });
 };
-
- 
 
 export const getHotelReviews = () => (dispatch) => {
-    console.log(`Fetching hotel data `);
+  console.log(`Fetching hotel data `);
 
-    return axios.get(`https://api-generator.retool.com/qCCCiu/data`)
-        .then((res) => {
-            console.log("Data received:", res.data);
-            dispatch({
-                type: 'GET_HOTEL_REVIEWS',
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log("Error fetching data:", err));
-   
+  return axios
+    .get(`https://api-generator.retool.com/qCCCiu/data`)
+    .then((res) => {
+      console.log("Data received:", res.data);
+      dispatch({
+        type: "GET_HOTEL_REVIEWS",
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log("Error fetching data:", err));
 };
-
 
 export const postHotelReviews = (review) => (dispatch) => {
-    console.log(`Fetching hotel data for ID:`, review);
-    
-    return axios({method: 'POST', url:`https://api-generator.retool.com/qCCCiu/data`, headers: {"Content-Type":"application/json"}, data: review})
-        .then((res) => {
-            console.log("Data received:", res.data);
-            dispatch({
-                type: 'POST_HOTEL_REVIEWS',
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log("Error fetching data:", err));
-   
+  console.log(`Fetching hotel data for ID:`, review);
+
+  return axios({
+    method: "POST",
+    url: `https://api-generator.retool.com/qCCCiu/data`,
+    headers: { "Content-Type": "application/json" },
+    data: review,
+  })
+    .then((res) => {
+      console.log("Data received:", res.data);
+      dispatch({
+        type: "POST_HOTEL_REVIEWS",
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log("Error fetching data:", err));
 };
 
-export const putHotelReviews = (id,review) => (dispatch) => {
-    console.log(`Updating hotel data for ID:`, id);
-    
-    return axios({method: 'PUT', url:`https://api-generator.retool.com/qCCCiu/data/${id}`, headers: {"Content-Type":"application/json"}, data: review})
-        .then((res) => {
-            console.log("Data received:", res.data);
-            dispatch({
-                type: 'PUT_HOTEL_REVIEWS',
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log("Error fetching data:", err));
-   
+export const putHotelReviews = (id, review) => (dispatch) => {
+  console.log(`Updating hotel data for ID:`, id);
+
+  return axios({
+    method: "PUT",
+    url: `https://api-generator.retool.com/qCCCiu/data/${id}`,
+    headers: { "Content-Type": "application/json" },
+    data: review,
+  })
+    .then((res) => {
+      console.log("Data received:", res.data);
+      dispatch({
+        type: "PUT_HOTEL_REVIEWS",
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log("Error fetching data:", err));
 };
 
 export const deleteHotelReviews = (id) => (dispatch) => {
-    console.log(`Deleting hotel data for ID:`, id);
-    
-    return axios({method: 'DELETE', url:`https://api-generator.retool.com/qCCCiu/data/${id}`})
-        .then((res) => {
-            console.log("Data received:", res.data);
-            dispatch({
-                type: 'DELETE_HOTEL_REVIEWS',
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log("Error fetching data:", err));
-   
+  console.log(`Deleting hotel data for ID:`, id);
+
+  return axios({
+    method: "DELETE",
+    url: `https://api-generator.retool.com/qCCCiu/data/${id}`,
+  })
+    .then((res) => {
+      console.log("Data received:", res.data);
+      dispatch({
+        type: "DELETE_HOTEL_REVIEWS",
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log("Error fetching data:", err));
+};
+
+export const getStarRatings = () => (dispatch) => {
+  console.log("Fetching star ratings...");
+  return axios
+    .get("http://127.0.0.1:8000/api/api/ratings/")
+    .then((res) => {
+      console.log("Star ratings received:", res.data);
+      // Dispatch an action with the received star ratings
+      dispatch({
+        type: "GET_STAR_RATINGS",
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log("Error fetching star ratings:", err));
+};
+
+export const postStarRating = (hotel_name, rating) => (dispatch) => {
+  console.log(`Posting star rating: ${rating} for hotel: ${hotel_name}`);
+
+  return axios({
+    method: "POST",
+    url: "http://127.0.0.1:8000/api/api/ratings/",
+    headers: { "Content-Type": "application/json" },
+    data: { hotel_name, rating },
+  })
+    .then((res) => {
+      console.log("Star rating posted:", res.data);
+      // Dispatch an action with the posted star rating
+      dispatch({
+        type: "POST_STAR_RATING",
+        payload: res.data,
+      });
+    })
+    .catch((err) => console.log("Error posting star rating:", err));
 };
