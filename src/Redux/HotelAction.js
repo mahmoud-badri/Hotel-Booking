@@ -25,16 +25,16 @@ export const gethotel = async (hotelData) => {
 
 
 export const addHotel = async (hotelData, userId) => {
-    try {
-        const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
-        return res.data;
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+      const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+      });
+      return res.data;
+  } catch (error) {
+      console.log(error);
+  }
 };
 
 

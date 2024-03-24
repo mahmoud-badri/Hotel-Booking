@@ -1,5 +1,3 @@
-
-
 // export default MyNavbar;
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -17,7 +15,14 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { LoggedInContext } from "../../Context/loggedUser";
 import { AuthContext } from "../../Context/AuthContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { Navbar, Nav, Button ,NavDropdown, Form, FormControl } from 'react-bootstrap';
+import {
+  Navbar,
+  Nav,
+  Button,
+  NavDropdown,
+  Form,
+  FormControl,
+} from "react-bootstrap";
 
 function MyNavbar() {
   const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
@@ -36,21 +41,29 @@ function MyNavbar() {
     authContext.logout();
   };
 
-  var user = localStorage.getItem("user")
-  user = JSON.parse(user)
+  var user = localStorage.getItem("user");
+  user = JSON.parse(user);
   return (
-    <Navbar style= {{ opacity: " 0.8" }} className="navbar navbar-expand-lg navbar-light">
+    <Navbar
+      style={{ opacity: " 0.8" }}
+      className="navbar navbar-expand-lg navbar-light"
+    >
       <div className="container-fluid">
-      <Navbar.Brand class="remove"> 
-        <Link to="/" className="navbar-brand">
-          <h3 style={{fontFamily : "cursive" , fontWeight : "1000"}}>
-            {" "}
-            Tic<img className="d-inline mx-auto" src="https://i.ibb.co/jR5LcWJ/kisspng-hotel-computer-icons-symbol-high-resolution-india-map-5b5cb6413113c7-360607041532802625201.png" style={{width:"30px"}} alt=""/>
- <sub>Tac</sub>{" "}
-          </h3>
-
-        </Link>
- </Navbar.Brand>
+        <Navbar.Brand class="remove">
+          <Link to="/" className="navbar-brand">
+            <h3 style={{ fontFamily: "cursive", fontWeight: "1000" }}>
+              {" "}
+              Tic
+              <img
+                className="d-inline mx-auto"
+                src="https://i.ibb.co/jR5LcWJ/kisspng-hotel-computer-icons-symbol-high-resolution-india-map-5b5cb6413113c7-360607041532802625201.png"
+                style={{ width: "30px" }}
+                alt=""
+              />
+              <sub>Tac</sub>{" "}
+            </h3>
+          </Link>
+        </Navbar.Brand>
         {/* <button
           className="navbar-toggler"
           type="button"
@@ -67,7 +80,8 @@ function MyNavbar() {
               <Link
                 className="nav-link active"
                 aria-current="page"
-                to="HotelsFilter">
+                to="HotelsFilter"
+              >
                 List Hotels
               </Link>
             </li>
@@ -105,59 +119,59 @@ function MyNavbar() {
               aria-label="Search"
             /> */}
 
-            {!isLoggedIn ? (
-              <>
+            {
+              !isLoggedIn ? (
+                <>
+                  <div className="d-flex m-2">
+                    <Link
+                      style={{ fontFamily: "cursive", fontWeight: "500" }}
+                      className="nav-link active"
+                      aria-current="page"
+                      to="Register"
+                    >
+                      Register
+                    </Link>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="d-flex m-2">
+                    <h5 className="text-primary"> {` ${currentUser.name}`} </h5>
+                  </div>
 
-                <div className="d-flex m-2">
-                  <Link style={{fontFamily : "cursive" , fontWeight : "500"}} className="nav-link active" aria-current="page" to="Register">
-                    Register
-                  </Link>
-                </div>
+                  <div className="nav-item d-flex m-2">
+                    <Link
+                      style={{ fontWeight: "600" }}
+                      to="Dashboard"
+                      className="nav-link"
+                    >
+                      Dashboard
+                    </Link>
+                  </div>
 
-                
-              </>
-              
-            ) : (
-              <>
-                <div className="d-flex m-2">
-                  <h5 className="text-primary">  {` ${user.name}`} </h5> 
-                </div>
-
-                <div className="nav-item d-flex m-2">
-                  <Link style={{ fontWeight : "600"}} to="Dashboard" className="nav-link">
-                    Dashboard
-                  </Link>
-                </div>
-
-                <div className="d-flex m-2">
-                  <Link
-                    className="nav-link active"
-                    aria-current="page"
-                    to="/"
-                    onClick={logOut}
-                  >
-                    log out
-                  </Link>
-                </div>
-              </>
-            )
-/* <li className="nav-item">
+                  <div className="d-flex m-2">
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/"
+                      onClick={logOut}
+                    >
+                      log out
+                    </Link>
+                  </div>
+                </>
+              )
+              /* <li className="nav-item">
 <Link className="nav-link active" to="Dashboard">
 Dashboard
 </Link>
-</li> */}
-
-
-
-
-
+</li> */
+            }
 
             {/* <button className="btn custom-search-btn" type="submit">
               Search
             </button> */}
           </form>
-
-
 
           {/* <div className="d-flex m-2">
             {`${contextLoggedIn ? "Hello " + contextLoggedIn.username : ""}`}
@@ -170,7 +184,6 @@ Dashboard
               </Link>
             </div>
           )} */}
-
 
           {/* <div className="d-flex m-2">
 
