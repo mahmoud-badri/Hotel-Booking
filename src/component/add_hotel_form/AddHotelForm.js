@@ -7,19 +7,23 @@ const AddHotelForm = () => {
     var user = localStorage.getItem("user")
     user = JSON.parse(user)
 
+   
     const [formData, setFormData] = useState({
-        user: user.id,
+        user:user.id,
         name: '',
         address: '',
+        prices:0,
         description: '',
-        prices: 0,
         governorate: '',
         image: null,
-        single_room: 0,
         suite: 0,
-        family_room: 0,
+        single_room:'',
+        family_room:'',
+        facility:'',
+        
     });
 
+   
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -27,13 +31,33 @@ const AddHotelForm = () => {
     const handleImageChange = (e) => {
         setFormData({ ...formData, image: e.target.files[0] });
     };
-
+   
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData); 
         addHotel(formData); 
         console.log(user)
+        // fetch('/api/add', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(FormData),
+        //   })
+        //     .then((response) => {
+        //       if (response.ok) {
+        //         // Handle success
+        //         console.log('Hotel added successfully');
+        //       } else {
+        //         // Handle error
+        //         console.error('Failed to add hotel');
+        //       }
+        //     })
+        //     .catch((error) => {
+        //       console.error('Error:', error);
+        //     });
         //window.location.reload();
+
     };
     return (
         <form className="hotel-form" onSubmit={handleSubmit}>
@@ -113,6 +137,15 @@ const AddHotelForm = () => {
                         onChange={handleImageChange}
                     />
                 </label>
+                <label>
+                    Facilities(comma separator):
+                    <textarea
+                        name='facility'
+                        value={formData.facility}
+                        onChange={handleInputChange}
+                    />
+                </label>
+                <br />
                 <label>
                     Single Room Price:
                     <input

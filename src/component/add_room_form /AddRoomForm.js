@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addHotel } from '../../Redux/HotelAction';
 import './addRoomForm.css'
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 const AddRoomForm = () => {
-    
 
     const [formData, setFormData] = useState({
-        name: '',
-        address: '',
-        description: '',
-        prices: 0,
-        governorate: '',
+        hotel:'',
+        bed: '',
+        type: '',
         image: null,
     });
 
@@ -31,58 +29,36 @@ const AddRoomForm = () => {
     return (
         <form className="hotel-form" onSubmit={handleSubmit}>
             <div>
-                <label>
-                    Name:
+            <label>
+                    hotel:
                     <input
                         type='text'
-                        name='name'
-                        value={formData.name}
+                        name='hotel'
+                        value={formData.hotel}
                         onChange={handleInputChange}
                     />
                 </label>
                 <br />
                 <label>
-                    Address:
-                    <textarea
-                        name='address'
-                        value={formData.address}
-                        onChange={handleInputChange}
-                    />
-                </label>
-                <br />
-                <label>
-                    Description:
-                    <textarea
-                        name='description'
-                        value={formData.description}
-                        onChange={handleInputChange}
-                    />
-                </label>
-                <br />
-               
-                <label>
-                    Prices:
-                    <input
-                        type='number'
-                        name='prices'
-                        value={formData.prices}
-                        onChange={handleInputChange}
-                        min={0}
-                        step={0.01}
-                    />
-                </label>
-                <br />
-               
-                <label>
-                    Governorate:
+                    Bed:
                     <input
                         type='text'
-                        name='governorate'
-                        value={formData.governorate}
+                        name='bed'
+                        value={formData.bed}
                         onChange={handleInputChange}
                     />
                 </label>
                 <br />
+                <label>
+                    type:
+                    <textarea
+                        name='type'
+                        value={formData.type}
+                        onChange={handleInputChange}
+                    />
+                </label>
+                <br />
+{/*                
                 <label>
                     Image:
                     <input
@@ -90,42 +66,8 @@ const AddRoomForm = () => {
                         name='image'
                         onChange={handleImageChange}
                     />
-                </label>
-                <label>
-                    Single Room Price:
-                    <input
-                        type='number'
-                        name='single_room'
-                        value={formData.single_room}
-                        onChange={handleInputChange}
-                        min={0}
-                        step={0.01}
-                    />
-                </label>
-                <br />
-                <label>
-                    Suite Price:
-                    <input
-                        type='number'
-                        name='suite'
-                        value={formData.suite}
-                        onChange={handleInputChange}
-                        min={0}
-                        step={0.01}
-                    />
-                </label>
-                <br />
-                <label>
-                    Family Room Price:
-                    <input
-                        type='number'
-                        name='family_room'
-                        value={formData.family_room}
-                        onChange={handleInputChange}
-                        min={0}
-                        step={0.01}
-                    />
-                </label>
+                </label> */}
+           
                 <br />
                 <button
                     className='btn btn-danger w-50 fw-bold'
@@ -134,7 +76,7 @@ const AddRoomForm = () => {
                     onMouseOver={(e) => e.target.classList.add('btn-hover')}
                     onMouseOut={(e) => e.target.classList.remove('btn-hover')}
                 >
-                    Add Hotel
+                    Add room
                 </button>
             </div>
         </form>

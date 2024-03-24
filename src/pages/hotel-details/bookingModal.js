@@ -2,15 +2,23 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./booingModal.css";
+import axios from "axios";
+import { differenceInDays } from 'date-fns'
 
-function BookingModal({ showModal, handleClose }) {
+function BookingModal({ showModal, handleClose ,hotel }) {
+  var user = localStorage.getItem("user")
+  user = JSON.parse(user)
   // Define state variables to store form data
+  
   const [formData, setFormData] = useState({
-    bedType: "",
-    guests: "",
-    children: "",
-    checkIn: "",
-    checkOut: ""
+    user: user.id,
+    hotel:hotel.id,
+    room_type: "",
+    guest:"",
+    // children: "",
+    start_date: "",
+    end_date: "",
+    total_price:"",
   });
 
   // Function to handle form input changes and update state
@@ -27,25 +35,38 @@ function BookingModal({ showModal, handleClose }) {
     event.preventDefault();
 
     try {
-      // Send formData to backend API
-      const response = await fetch("http://127.0.0.1:8000/hotel/booking", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
+      const newBook = {
+        user: formData.user,
+        hotel: formData.hotel,
+        room_type: formData.room_type,
+        guest: formData.guest,
+        start_date: formData.start_date,
+        end_date: formData.end_date,
+        total_price: formData.total_price,
 
-      // Check response status
-      if (response.ok) {
+      };
+      var total_days = differenceInDays(newBook.end_date, newBook.start_date)     
+      console.log(total_days);
+      newBook.room_type === "Single" ? newBook.total_price=hotel.single_room * total_days
+      : newBook.room_type === "Suite" ? newBook.total_price=hotel.suite * total_days
+      :newBook.room_type === "Family" ? newBook.total_price=hotel.family_room * total_days
+      : console.log("invalid");
+      const response = await axios.post(
+        "http://127.0.0.1:8000/hotel/booking",
+        newBook
+      );
+      console.log(response);
+      
+      if (response.status===200) {
         // Handle success, maybe show a success message
         console.log("Form data sent successfully");
       } else {
         // Handle errors, maybe show an error message
-        console.error("Error sending form data:", response.statusText);
+        console.error("Error sendinggg form data:", response.statusText);
       }
     } catch (error) {
-      console.error("Error sending form data:", error);
+      console.error("Error sendin form data:", error);
+      console.log(formData);
     }
   };
 
@@ -65,13 +86,13 @@ function BookingModal({ showModal, handleClose }) {
                       <div className="form-group">
                         <select
                           className="form-control"
-                          name="bedType"
-                          value={formData.bedType}
+                          name="room_type"
+                          value={formData.room_type}
                           onChange={handleInputChange}
                         >
-                          <option>one bed</option>
-                          <option>double bed </option>
-                          <option>suite</option>
+                          <option value="Single">one bed</option>
+                          <option value="Family">double bed </option>
+                          <option value="Suite">suite</option>
                         </select>
                       </div>
                     </div>
@@ -79,13 +100,13 @@ function BookingModal({ showModal, handleClose }) {
                       <div className="form-group">
                         <select
                           className="form-control"
-                          name="guests"
-                          value={formData.guests}
+                          name="guest"
+                          value={formData.guest}
                           onChange={handleInputChange}
                         >
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
                         </select>
                         <span className="select-arrow"></span>
                         <span className="form-label">Guests</span>
@@ -96,7 +117,7 @@ function BookingModal({ showModal, handleClose }) {
                         <select
                           className="form-control"
                           name="children"
-                          value={formData.children}
+                          value="0"
                           onChange={handleInputChange}
                         >
                           <option>0</option>
@@ -113,8 +134,8 @@ function BookingModal({ showModal, handleClose }) {
                           className="form-control w-100"
                           type="date"
                           required
-                          name="checkIn"
-                          value={formData.checkIn}
+                          name="start_date"
+                          value={formData.start_date}
                           onChange={handleInputChange}
                         />
                         <span className="form-label">Check In</span>
@@ -126,8 +147,8 @@ function BookingModal({ showModal, handleClose }) {
                           className="form-control w-100"
                           type="date"
                           required
-                          name="checkOut"
-                          value={formData.checkOut}
+                          name="end_date"
+                          value={formData.end_date}
                           onChange={handleInputChange}
                         />
                         <span className="form-label">Check out</span>

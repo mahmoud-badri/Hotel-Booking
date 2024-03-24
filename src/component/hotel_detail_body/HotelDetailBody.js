@@ -9,7 +9,7 @@ import {
 } from "../../Redux/HotelAction";
 import "./HotelDetailBody.css";
 import { Rating } from "../hotel_detail_header/HotelDetailHeader";
-
+import Pagination from '../Pagination/Pagintaion';
 import ImageGallery from "react-image-gallery";
 // import stylesheet if you're not already using CSS @import
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -20,6 +20,8 @@ import BookingModal from "../../pages/hotel-details/bookingModal";
 import axios from "axios";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
+var user = localStorage.getItem("user")
+ user = JSON.parse(user)
 const images = [
     {
         original: "https://picsum.photos/id/1018/1000/600/",
@@ -41,19 +43,33 @@ function Description(props) {
     const hotels = useSelector((state) => state.combinHotel.hotels)
 
     const hotel = hotels[hotelId.id-1] 
-    const list = [
-        { icon: "check", text: hotel.description },
-        { icon: "check", text: "No scripta electram necessitatibus sit" },
-        { icon: "check", text: "Quidam percipitur instructior an eum" },
-        { icon: "check", text: "Ut est saepe munere ceteros" },
-        { icon: "check", text: "No scripta electram necessitatibus sit" },
-        { icon: "check", text: "Quidam percipitur instructior an eum" },
-        { icon: "check", text: "Quidam percipitur instructior an eum" },
-        { icon: "check", text: "Lorem ipsum dolor sit amet" },
-        { icon: "check", text: "No scripta electram necessitatibus sit" },
-        { icon: "check", text: "Quidam percipitur instructior an eum" },
-        { icon: "check", text: "No scripta electram necessitatibus sit" },
-    ];
+
+  
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const response = await fetch(`http://127.0.0.1:8000/hotel/allFacilites/${hotel}`);
+//         const jsonData = await response.json();
+//         setFacility(jsonData);
+//         console.log(jsonData);
+//       } catch (error) {
+//         setError(error.message);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+const dispatch = useDispatch()
+// const facilities = useSelector((state) => state.combinHotel.facilities)
+const fa = hotel.facility.split(',')
+useEffect(() => {
+    console.log(fa);
+    // dispatch(getFacilities(hotel.id))
+  }, [dispatch]);
+   
+    const list = fa.map((item) => ( {icon: "check", text: item }))
+                
+    
     return (
         <>
             <div className="row text-dark my-3" style={{ textAlign: "start" }}>
@@ -63,17 +79,11 @@ function Description(props) {
 
                 <div className="col-md-9 ">
                     <p>
-                        Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno
-                        legimus insolens ad. Sit cu detraxit constituam, an mel iudico
-                        constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens
-                        in pro. Mea liber ridens inermis ei, mei legendos vulputate an,
-                        labitur tibique te qui.
+                   { hotel.description}
                     </p>
                     <h4 className="py-3">Hotel facilities</h4>
                     <p>
-                        Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno
-                        legimus insolens ad. Sit cu detraxit constituam, an mel iudico
-                        constituto efficiendi.
+                       { hotel.facility_desc}
                     </p>
                     <ItemList columns={2} itemlist={list} />
                 </div>
@@ -229,24 +239,35 @@ function Reviews(props) {
 
     const dispatch = useDispatch();
     const reviews = useSelector((state) => state.combinHotel.hotelReviews);
-    console.log(reviews);
+    // console.log(reviews);
     let register = useFormik({
         initialValues: {
             hotel:hotel.id,
             name: "",
             rate: "",
             description: "",
+            user:user.id,
         },
         onSubmit: (values) => {
             dispatch(postHotelReviews(values));
-            console.log(values);
+            // console.log(values);
         },
     });
     useEffect(() => {
         dispatch(getHotelReviews(hotel.id));
     });
     // const Revs=reviews.map((el)=> <Review name={el.name} img={el.images} description={el.descripen} rate={el.rate} />)
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize] = useState(5); // Set the number of reviews per page
+    // Calculate the index of the first and last reviews to display based on pagination
+    const indexOfLastReview = currentPage * pageSize;
+    const indexOfFirstReview = indexOfLastReview - pageSize;
+    const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
 
+    // Function to handle page changes
+    const onPageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    }
     return (
         <>
             <div className="row text-dark ">
@@ -332,7 +353,7 @@ function Reviews(props) {
                     </div>
                 </div>
 
-                <div className="col-md-9 text-start py-4 ">
+                {/* <div className="col-md-9 text-start py-4 ">
                     {reviews.map((el) => (
                         <div key={el.id}>
                             <Review
@@ -343,6 +364,24 @@ function Reviews(props) {
                             />
                         </div>
                     ))}
+                </div> */}
+                <div className="col-md-9 text-start py-4 ">
+                    {currentReviews.map((el) => (
+                        <div key={el.id}>
+                            <Review
+                                name={el.name}
+                                img={el.images}
+                                description={el.description}
+                                rate={el.rate}
+                            />
+                        </div>
+                    ))}
+                    {/* Pagination component */}
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={Math.ceil(reviews.length / pageSize)}
+                        onPageChange={onPageChange}
+                    />
                 </div>
             </div>
         </>
@@ -354,10 +393,11 @@ export default function HotelDetailBody({ data }) {
 
     const hotels = useSelector((state) => state.combinHotel.hotels)
 
-    const hotel = hotels[hotelId.id-1] 
-    console.log(hotel["name"])
+    const hotel = hotels[hotelId.id-1]
+    console.log(hotel); 
+    // console.log(hotel["name"])
     const [show, setShow] = useState(false);
-    console.log(data)
+    // console.log(data)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const iconlist = [
@@ -369,7 +409,21 @@ export default function HotelDetailBody({ data }) {
         { iconsrc: "wheelchair", icontext: "Accessibiliy" },
         { iconsrc: "car", icontext: "Parking" },
     ];
-
+    
+const images = [
+    {
+        original: hotel.image,
+        thumbnail: hotel.image,
+    },
+    // {
+    //     original: "https://picsum.photos/id/1015/1000/600/",
+    //     thumbnail: "https://picsum.photos/id/1015/250/150/",
+    // },
+    // {
+    //     original: "https://picsum.photos/id/1019/1000/600/",
+    //     thumbnail: "https://picsum.photos/id/1019/250/150/",
+    // },
+];
     return (
         <>
             <div className="container mt-5 ">
@@ -413,7 +467,7 @@ export default function HotelDetailBody({ data }) {
                     </div>
                 </div>
             </div>
-            <BookingModal handleClose={handleClose} showModal={show} />
+            <BookingModal handleClose={handleClose} showModal={show} hotel={hotel} />
         </>
     );
 }

@@ -6,17 +6,18 @@ export const GET_HOTEL_BY_ID = 'GET_HOTEL_BY_ID';
 export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
 export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 
-export const gethotel = async () => {
-    try {
-        const res = await axios.get('http://127.0.0.1:8000/hotel/');
-        return res.data
-    } catch (error) {
-        console.log(error);
-    }
-};
+export const getHotel = () => (dispatch) => {
+    return axios.get("http://127.0.0.1:8000/hotel/")
+    .then ((res) => dispatch({
+        type: "GET_HOTELS_LIST",
+        payload: res.data
+    }))
+    .catch((err) => console.log(err))
+    
+}
 
 
-export const addHotel = async (hotelData, userId) => {
+export const addHotel = async (hotelData) => {
     try {
         const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
             headers: {
@@ -29,6 +30,19 @@ export const addHotel = async (hotelData, userId) => {
     }
 };
 
+// export const getFacilities = (id) => (dispatch) => {
+//     console.log(`Fetching hotel data for hotel: ${id}`);
+//     return axios
+//         .get(`http://127.0.0.1:8000/hotel/allFacilites/${id}`)
+//         .then((res) => {
+//             console.log("Data received:", res.data);
+//             dispatch({
+//                 type: 'GET_FACILITIES',
+//                 payload: res.data,
+//             });
+//         })
+//         .catch((err) => console.log("Error fetching data:", err));
+// };
 
 export const getHotelById = (id) => (dispatch) => {
     console.log(`Fetching hotel data for ID: ${id}`);
@@ -72,15 +86,16 @@ export const removeFromWishlist = (hotel) => (dispatch) => {
 
 
 
-export const getHotelReviews = () => (dispatch) => {
-    console.log(`Fetching hotel data `);
 
-    return axios.get(`https://api-generator.retool.com/qCCCiu/data`)
+export const getHotelReviews = (hotel_id) => (dispatch) => {
+    // console.log(`Fetching hotel data `);
+
+    return axios.get(`http://127.0.0.1:8000/api_review/get-all-rates/${hotel_id}`)
         .then((res) => {
-            console.log("Data received:", res.data);
+            // console.log("Data received:", res.data);
             dispatch({
                 type: 'GET_HOTEL_REVIEWS',
-                payload: res.data,
+                payload: res.data.data,
             });
         })
         .catch((err) => console.log("Error fetching data:", err));

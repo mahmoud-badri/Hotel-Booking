@@ -19,7 +19,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function MyNavbar() {
-  const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
+  // const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
   const authContext = useContext(AuthContext);
   const history = useHistory();
   const isLoggedIn = authContext.isLoggedIn;
@@ -29,14 +29,29 @@ function MyNavbar() {
     history.push("/");
   }, [isLoggedIn, currentUser]);
 
-  const logOut = () => {
-    localStorage.removeItem("loginUser");
-    setContextLoggenIn("");
-    authContext.logout();
-  };
+  // const logOut = () => {
+  //   localStorage.removeItem("loginUser");
+  //   setContextLoggenIn("");
+  //   authContext.logout();
+  // };
 
   var user = localStorage.getItem("user")
   user = JSON.parse(user)
+const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
+// const history = useHistory();
+var user = localStorage.getItem("user")
+ user = JSON.parse(user)
+useEffect(() => {
+    history.push("/");
+},[user] );
+
+const logOut = () => {
+localStorage.removeItem("loginUser");
+setContextLoggenIn("");
+authContext.logout();
+};
+  
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -73,7 +88,10 @@ function MyNavbar() {
                 WishList
               </Link>
             </li>
-
+{user && (
+  <>
+{user.type=='hotel' && (
+  <>
             <li className="nav-item">
               <Link
                 className="nav-link active"
@@ -92,6 +110,22 @@ function MyNavbar() {
                 Booking
               </Link>
             </li>
+            <li className="nav-item">
+            <Link
+                className="nav-link active"
+                aria-current="page"
+                to="AddRoomForm">
+             
+                Add room
+              </Link>
+            </li>
+            <div className="nav-item">
+            <Link to="Dashboard" className="nav-link">
+            Dashboard
+            </Link>
+            </div>
+  </>)}
+  </>)}
           </ul>
           <form className="d-flex">
             <input
@@ -100,86 +134,41 @@ function MyNavbar() {
               placeholder="Search"
               aria-label="Search"
             />
-
-            {!isLoggedIn ? (
-              <>
-
-                <div className="d-flex m-2">
-                  <Link className="nav-link active" aria-current="page" to="Register">
-                    Register
-                  </Link>
-                </div>
-
-                
-              </>
-              
-            ) : (
-              <>
-                <div className="d-flex m-2">
-                  {`Hello  ${user.name}`}
-                </div>
-
-                <div className="nav-item">
-                  <Link to="Dashboard" className="nav-link">
-                    Dashboard
-                  </Link>
-                </div>
-
-                <div className="d-flex m-2">
-                  <Link
-                    className="nav-link active"
-                    aria-current="page"
-                    to="/"
-                    onClick={logOut}
-                  >
-                    log out
-                  </Link>
-                </div>
-              </>
-            )
-/* <li className="nav-item">
-<Link className="nav-link active" to="Dashboard">
-Dashboard
-</Link>
-</li> */}
-
-
-
-
-
-
             <button className="btn custom-search-btn" type="submit">
               Search
             </button>
           </form>
-
-
-
-          {/* <div className="d-flex m-2">
-            {`${contextLoggedIn ? "Hello " + contextLoggedIn.username : ""}`}
-          </div>
-
-          {contextLoggedIn && (
-            <div className="nav-item">
-              <Link to="Dashboard" className="nav-link">
-                Dashboard
-              </Link>
-            </div>
-          )} */}
-
-
-          {/* <div className="d-flex m-2">
-
-          <div className="d-flex m-2">
-            <Link
-              className="nav-link active"
-              aria-current="page"
-              to="/"
-              onClick={logOut}>
-              {`${contextLoggedIn ? "Log out" : ""}`}
+                
+{!user ? (
+    <>
+       
+       <div className="d-flex m-2">
+            <Link className="nav-link active" aria-current="page" to="Register">
+             Register
             </Link>
-          </div> */}
-
+          </div>
+    </>
+ ) :(
+    <>
+    <div className="d-flex m-2">
+    {`Hello  ${user.name}`}
+    </div>
+    
+   
+    
+    <div className="d-flex m-2">
+        <Link
+        className="nav-link active"
+        aria-current="page"
+        to="/"
+        onClick={logOut}
+        >
+        log out
+        </Link>
+        </div>
+        </>
+ )
+}
           <div className="d-flex m-2">
             <Link to="/userprofile">
               <AccountCircleIcon fontSize="large"></AccountCircleIcon>
@@ -190,5 +179,4 @@ Dashboard
     </nav>
   );
 }
-
 export default MyNavbar;

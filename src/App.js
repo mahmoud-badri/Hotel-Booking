@@ -1,6 +1,6 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch,Redirect } from "react-router-dom";
 import "./App.css";
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import Wishlist from "./pages/wishlist/Wishlist";
 import MyNavbar from "./component/NavBar/Navbar";
 import HotelDetails from "./pages/hotel-details/HotelDetails";
@@ -20,8 +20,11 @@ import AddHotelForm from "./component/add_hotel_form/AddHotelForm.js";
 import ListHotel from "./pages/list_hotel/ListHotel.js";
 import GetBooking from "./component/get_booking/Get_Booking.js";
 
+import AddRoomForm from "./component/add_room_form /AddRoomForm.js";
+import GuardedRoute from './GuardedRoute';
 
 function App() {
+  const isAuthenticated = true; // Replace with actual authentication check
   const [contextLoggedIn, setContextLoggenIn] = useState("");
 
   return (
@@ -39,17 +42,24 @@ function App() {
           <Route exact path={"/HotelDetails/:id"} component={HotelDetails} />
 
           <Route exact path={"/HotelsFilter"} component={HotelsFilter} />
-          <Route exact path={"/Wishlist"} component={Wishlist} />
+          {/* <Route exact path={"/Wishlist"} component={Wishlist} /> */}
           <Route exact path={"/Register"} component={Register} />
           <Route exact path={"/Login"} component={Login} />
           <Route exact path={"/userprofile"} component={UserProfilePage} />
           <Route exact path={"/Dashboard"} component={HotelDashboard} />
           <Route exact path={"/Appointment"} component={Appointment} />
           <Route exact path={"/AddHotelForm"} component={AddHotelForm} />
+          <Route exact path={"/AddRoomForm"} component={AddRoomForm} />
+          <PrivateRoute exact path="/Wishlist" component={Wishlist} isAuthenticated={isAuthenticated} />
 
           <Route exact path={"/GetBooking"} component={GetBooking} />
           
-          
+                   
+        <GuardedRoute
+          path="/HotelDetails/:id"
+          component={Wishlist}
+          isAuthenticated={HotelDetails}
+        />
         </Switch>
         <Footer />
         </AuthProvider>
@@ -61,4 +71,12 @@ function App() {
   );
 }
 
+function PrivateRoute({ component: Component, isAuthenticated, ...rest }) {
+  return (
+    <Route {...rest} render={(props) => (
+      isAuthenticated ? <Component {...props} />
+    : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+    )} />
+  );
+}
 export default App;

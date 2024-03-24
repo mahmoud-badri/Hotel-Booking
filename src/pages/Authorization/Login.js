@@ -15,7 +15,7 @@ function Login() {
 
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
-  const isLoggedIn = authContext.isLoggedIn;
+  var isLoggedIn = false
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -24,10 +24,7 @@ function Login() {
     email: "",
     password: "",
   });
-  //for show password
-  //  this field is required
-  // please enter a valid email
-  //messages
+  
   const [erros, setErrors] = useState({
     emailError: "",
     passwordError: "",
@@ -95,19 +92,7 @@ useEffect(() => {
 
   const submitData = async (e) => {
     e.preventDefault();
-    const storedUser = localStorage.getItem(userData.email)
-      console.log(storedUser);
-      if(storedUser){
-        const user = JSON.parse(storedUser)
-
-        if(!erros.emailError || !erros.passwordError){
-          e.preventDefault()
-          if(userData.email !== user.email || userData.password !== user.password){
-            err=true
-          }
-          else{
-            // localStorage.setItem("loginUser", (storedUser))
-            // setContextLoggenIn(JSON.parse(storedUser))
+    
             try {
               const response = await axios.post(
                 "http://127.0.0.1:8000/api/login",
@@ -119,28 +104,20 @@ useEffect(() => {
               console.log(response.data.user);
               console.log(response.status);
               if (response.status === 200) {
-                authContext.login(response.data.jwt, response.data.user);
+                // authContext.login(response.data.jwt, response.data.user);
+                localStorage.setItem("token", response.data.jwt);
+                localStorage.setItem("user", JSON.stringify(response.data.user));
                 history.push('/');
+                isLoggedIn = true
               } 
             } catch (error) {
               console.log(error)
-                // setErrors({
-                //   ...erros,
-                //   emailError: "Invalid Email",
-                //   passwordError: "Invalid Password",
-                // });
+                
             }
-          };
-
-        }
-      } 
-  
-  else{
-    err=true
-  }
+            
+         
 };
 
-  
 
 
   return (
@@ -158,7 +135,7 @@ useEffect(() => {
                     <hr />
                 </div>
                     <Input 
-                    text="Email or Username"
+                    text="Email"
                     label="emailORusername"
                     type="text"
                     onChange={(e) => chageUserData(e)}
@@ -176,7 +153,7 @@ useEffect(() => {
                     />
                     
                     <br />
-                <button id ="reg" type="submit" className=" btn btn-default form-control" style={{"backgroundColor":"#FF5A5F"}}>Login</button>
+                <button id ="reg"  type="submit" className=" btn btn-default form-control" style={{"backgroundColor":"#FF5A5F"}}>Login</button>
                  {/* <!-- 2 column grid layout --> */}
                 <div className=" mb-4 d-flex justify-content-between">
                 <div className="checkBox">
@@ -214,7 +191,7 @@ useEffect(() => {
             </div>  
             <div className="col-8 col-sm-4">
             </div>
-    </div> 
+        </div> 
           
           </div>
         
