@@ -26,7 +26,7 @@ const ListHotel = () => {
                         status={hotel.status}
                         review={hotel.review}
                         name={hotel.name}
-                        description={hotel.descripen}
+                        description={hotel.description}
                         governorate={hotel.governorate}
                         price={hotel.prices}
                     />
