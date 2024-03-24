@@ -1,28 +1,64 @@
 // BookingPopup.js
-import React from 'react';
-import Modal from 'react-modal';
+import React from "react";
+import Modal from "react-modal";
 
-const BookingPopup = ({ isOpen, closeModal, handleSubmit, handleInputChange, formData }) => {
+import axios from "axios";
+
+const BookingPopup = ({
+    isOpen,
+    closeModal,
+    handleSubmit,
+    handleInputChange,
+    formData,
+    hotel,
+    current_user,
+}) => {
     const customStyles = {
         content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-            backgroundColor: '#fff',
-            padding: '35px',
-            border: '1px solid #ccc',
-            borderRadius: '5px',
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "#fff",
+            padding: "35px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
             width: "550px",
         },
+    };
+
+    function send_post_request(formData, current_user, hotel) {
+        axios
+            .post(" http://127.0.0.1:8000/hotel/booking_customer", {
+                user: current_user.id,
+                hotel: hotel.id,
+                room_type: formData.room_type,
+                start_date: formData.start_date,
+                end_date: formData.end_date,
+                guest: formData.guest,
+            })
+            .then(
+                (response) => {
+                    console.log(response);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+    }
+
+    const myHAndelSbmit = (e) => {
+        e.preventDefault();
+        send_post_request(formData, current_user, hotel);
+        closeModal();
     };
 
     return (
         <Modal isOpen={isOpen} style={customStyles} onRequestClose={closeModal}>
             <h2 className="text-primary mb-4">Booking Details</h2>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <div className="form-group">
                     <select
                         className="form-control"
@@ -31,8 +67,10 @@ const BookingPopup = ({ isOpen, closeModal, handleSubmit, handleInputChange, for
                         onChange={handleInputChange}
                         required
                     >
-                        <option value="" disabled>Select Room Type</option>
-                        <option value="single_room">Single Room</option>
+                        <option value="" disabled>
+                            Select Room Type
+                        </option>
+                        <option value="Single">Single Room</option>
                         <option value="double_room">Double Room</option>
                         <option value="suite">Suite</option>
                     </select>
@@ -74,11 +112,24 @@ const BookingPopup = ({ isOpen, closeModal, handleSubmit, handleInputChange, for
                         required
                     />
                 </div>
-                <button type="submit" className="btn btn-success btn-regis me-2">Confirm</button>
-                <button type="button" className="btn btn-danger btn-regis" onClick={closeModal}>Cancel</button>
+                <button
+                    type="submit"
+                    value="submit"
+                    className="btn btn-success btn-regis me-2"
+                    onClick={myHAndelSbmit}
+                >
+                    Confirm
+                </button>
+                <button
+                    type="button"
+                    className="btn btn-danger btn-regis"
+                    onClick={closeModal}
+                >
+                    Cancel
+                </button>
             </form>
         </Modal>
     );
-}
+};
 
 export default BookingPopup;
