@@ -132,9 +132,7 @@ const CardListHotel = (props) => {
                                 </div>
                             </div>
                             <div className="row px-3">
-                            <Link  to={{pathname: "/hotelDetails" ,state:props.hotel}}>
                                 <h3 className="font-weight-bold title">{props.name}</h3>
-                                </Link>
                             </div>
                             <div className="row px-3 mb-2 mt-2">
                                 <div className="d-flex align-items-center">
