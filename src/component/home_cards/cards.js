@@ -10,8 +10,9 @@ import { Link } from "react-router-dom";
 
 function Card({ card }) {
   return (
-    <Link to={{pathname: "/hotelDetails" ,state:card}} >
-      <div className="card-box">
+    <Link  style={{ fontWeight: "500",textDecoration: "none",color :"black"  }} to={{pathname: "/hotelDetails" ,state:card}} >
+      <div className="card-box bg-light" >
+      <h3 className="card-title m-2 bg-light">{card?.name}</h3>
         <Swiper
           slidesPerView={1}
           spaceBetween={10}
@@ -29,18 +30,20 @@ function Card({ card }) {
           {/* ))} */}
         </Swiper>
         <div className="card-info-flex">
-          <h3 className="card-title">{card?.name}</h3>
+          
+          
           <div className="card-rating">
             <StarRateRoundedIcon />
-            <p>{card?.rating}</p>
+          <p style={{ marginLeft : "10px"}}>{card?.rating}</p> 
           </div>
+          
         </div>
-        <p style={{ margin: 0, color: "var(--font-grey)" }}>
+        <p style={{  margin:"15px", color: "black"}}>
           {card.description}
         </p>
         {/* <p style={{ margin: 0, color: "var(--font-grey)" }}>{card.date}</p> */}
-        <p style={{ margin: "0.2rem", fontSize: "1rem", color: "var(--black" }}>
-          <span style={{ fontWeight: "600" }}>${card?.prices}</span> night
+        <p style={{ marginLeft : "200px", fontSize: "1.3rem", color: "black" }}>
+          <span style={{ fontWeight: "800" }}>${card?.prices}</span> <span style={{ fontWeight: "800" }} > night</span> 
         </p>
       </div>
     </Link>
