@@ -12,15 +12,11 @@ const AddHotelForm = () => {
         name: '',
         address: '',
         description: '',
-<<<<<<< HEAD
-        prices: 0,
-=======
         rate: 5,
         price: 0,
         rating: '⭐️',
         review: 0,
         status: 'Good',
->>>>>>> origin/booking_requests
         governorate: '',
         image: null,
         single_room: 0,

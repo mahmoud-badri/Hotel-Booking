@@ -10,11 +10,7 @@ import { Link } from "react-router-dom";
 
 function Card({ card }) {
   return (
-<<<<<<< HEAD
-    <NavLink to={"/hotelDetails"} state={card}>
-=======
     <Link to={{pathname: "/hotelDetails" ,state:card}} >
->>>>>>> origin/booking_requests
       <div className="card-box">
         <Swiper
           slidesPerView={1}
@@ -27,15 +23,9 @@ function Card({ card }) {
           modules={[Pagination, Navigation]}
           className="swiper-container">
           {/* {card.image.map((src, i) => ( */}
-<<<<<<< HEAD
-          <SwiperSlide >
-            <img src={card.image} className="card-img" />
-          </SwiperSlide>
-=======
             <SwiperSlide >
               <img src={card?.image} className="card-img" />
             </SwiperSlide>
->>>>>>> origin/booking_requests
           {/* ))} */}
         </Swiper>
         <div className="card-info-flex">

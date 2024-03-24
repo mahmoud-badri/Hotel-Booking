@@ -6,12 +6,15 @@ import axios from "axios";
 
 function BookingModal({ showModal, handleClose }) {
   // Define state variables to store form data
+  var user = localStorage.getItem("user");
+  user = JSON.parse(user);
   const [formData, setFormData] = useState({
     room_type: "",
     guest: "",
     children: "",
     start_date: "",
-    end_date: ""
+    end_date: "",
+    user:user?.id
   });
 
   // Function to handle form input changes and update state
@@ -29,8 +32,7 @@ function BookingModal({ showModal, handleClose }) {
 
     try {
       // Send formData to backend API
-<<<<<<< HEAD
-      const response = await fetch("http://127.0.0.1:8000/hotel/booking", {
+      const response = await fetch("http://127.0.0.1:8000/hotel/booking_customer", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -45,26 +47,11 @@ function BookingModal({ showModal, handleClose }) {
       } else {
         // Handle errors, maybe show an error message
         console.error("Error sending form data:", response.statusText);
-=======
-      const response = await axios.post("http://127.0.0.1:8000/hotel/booking_customer", formData, {
-      headers: {
-        "Content-Type": "application/json"
->>>>>>> origin/booking_requests
       }
-    });
+    } catch (error) {
+      console.error("Error sending form data:", error);
+      }
 
- // Check response status
- if (response.status === 200) {
-  // Handle success, maybe show a success message
-  console.log("Form data sent successfully");
-  console.log(formData);
-} else {
-  // Handle errors, maybe show an error message
-  console.error("Error sending form data:", response.statusText);
-}
-} catch (error) {
-console.error("Error sending form data:", error);
-}
 };
 
   return (

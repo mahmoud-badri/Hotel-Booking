@@ -9,7 +9,7 @@ const BookingTable = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/hotel/bookingList");
+      const response = await fetch("http://127.0.0.1:8000/hotel/booking_by_hotel_owner/2/");
       if (!response.ok) {
         throw new Error("Failed to fetch bookings");
       }

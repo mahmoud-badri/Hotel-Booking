@@ -8,7 +8,7 @@ export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 
 export const gethotel = async (hotelData) => {
     try {
-        const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
+        const res = await axios.get('http://127.0.0.1:8000/hotel/', hotelData, {
         
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -80,19 +80,19 @@ export const removeFromWishlist = (hotel) => (dispatch) => {
 
 
 
-export const getHotelReviews = () => (dispatch) => {
-    console.log(`Fetching hotel data `);
+// export const getHotelReviews = () => (dispatch) => {
+//     console.log(`Fetching hotel data `);
 
-    return axios.get(`https://api-generator.retool.com/qCCCiu/data`)
-        .then((res) => {
-            console.log("Data received:", res.data);
-            dispatch({
-                type: 'GET_HOTEL_REVIEWS',
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log("Error fetching data:", err));
-};
+//     return axios.get(`https://api-generator.retool.com/qCCCiu/data`)
+//         .then((res) => {
+//             console.log("Data received:", res.data);
+//             dispatch({
+//                 type: 'GET_HOTEL_REVIEWS',
+//                 payload: res.data,
+//             });
+//         })
+//         .catch((err) => console.log("Error fetching data:", err));
+// };
 
 
 export const postHotelReviews = (review) => (dispatch) => {

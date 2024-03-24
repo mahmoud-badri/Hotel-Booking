@@ -4,13 +4,8 @@ import './CardListHotel.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { getHotelById, addToWishlist, removeFromWishlist } from '../../Redux/HotelAction';
 import hotel from "../media/hotel2.jpg"
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-import HotelDetails from '../../pages/hotel-details/HotelDetails';
-=======
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
->>>>>>> origin/booking_requests
 
 const CardListHotel = (props) => {
     const dispatch = useDispatch();

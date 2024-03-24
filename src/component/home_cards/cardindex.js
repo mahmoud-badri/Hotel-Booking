@@ -3,14 +3,6 @@ import Card from "./cards.js";
 import "./card.css";
 
 function Cards({ list }) {
-<<<<<<< HEAD
-  return (
-    <div className="cards-flex">
-      {list?.map((card, i) => (
-        <Card card={card} key={i} />
-      ))}
-    </div>
-=======
   const [filterdList, setFilterdList] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -40,7 +32,6 @@ function Cards({ list }) {
           list?.map((card, i) => <Card card={card} key={i} />)}
       </div>
     </>
->>>>>>> origin/booking_requests
   );
 }
 
