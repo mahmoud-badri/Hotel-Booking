@@ -154,7 +154,7 @@ function Register() {
       console.log(response);
       console.log(userRegister.type);
       if (response.status === 200) {
-        localStorage.setItem(userRegister.email, JSON.stringify(userRegister))
+        // localStorage.setItem(userRegister.email, JSON.stringify(userRegister))
         setSignedUp(true);
       }
     }

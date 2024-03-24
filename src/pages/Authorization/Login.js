@@ -15,7 +15,7 @@ function Login() {
 
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
-  const isLoggedIn = authContext.isLoggedIn;
+  var isLoggedIn = false
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -24,10 +24,7 @@ function Login() {
     email: "",
     password: "",
   });
-  //for show password
-  //  this field is required
-  // please enter a valid email
-  //messages
+  
   const [erros, setErrors] = useState({
     emailError: "",
     passwordError: "",
@@ -95,19 +92,7 @@ useEffect(() => {
 
   const submitData = async (e) => {
     e.preventDefault();
-    const storedUser = localStorage.getItem(userData.email)
-      console.log(storedUser);
-      if(storedUser){
-        const user = JSON.parse(storedUser)
-
-        if(!erros.emailError || !erros.passwordError){
-          e.preventDefault()
-          if(userData.email !== user.email || userData.password !== user.password){
-            err=true
-          }
-          else{
-            localStorage.setItem("loginUser", (storedUser))
-            setContextLoggenIn(JSON.parse(storedUser))
+    
             try {
               const response = await axios.post(
                 "http://127.0.0.1:8000/api/login",
@@ -119,47 +104,20 @@ useEffect(() => {
               console.log(response.data.user);
               console.log(response.status);
               if (response.status === 200) {
-                authContext.login(response.data.jwt, response.data.user);
+                // authContext.login(response.data.jwt, response.data.user);
+                localStorage.setItem("token", response.data.jwt);
+                localStorage.setItem("user", JSON.stringify(response.data.user));
                 history.push('/');
+                isLoggedIn = true
               } 
             } catch (error) {
               console.log(error)
-                // setErrors({
-                //   ...erros,
-                //   emailError: "Invalid Email",
-                //   passwordError: "Invalid Password",
-                // });
+                
             }
             
-            
-          };
-
-        }
-      } 
-  
-  else{
-    err=true
-  }
+         
 };
-// const [email, setEmail] = useState('');
-// const [password, setPassword] = useState('');
 
-// const handleLogin = () => {
-//   fetch('/api/login/', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({ email, password }),
-//   })
-//     .then(response => response.json())
-//     .then(data => {
-//       console.log(data.message); // Handle the response based on success or failure
-//     })
-//     .catch(error => {
-//       console.error('Error:', error);
-//     });
-// };
 
 
   return (

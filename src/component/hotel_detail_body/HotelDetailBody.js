@@ -20,6 +20,8 @@ import BookingModal from "../../pages/hotel-details/bookingModal";
 import axios from "axios";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
+var user = localStorage.getItem("user")
+ user = JSON.parse(user)
 const images = [
     {
         original: "https://picsum.photos/id/1018/1000/600/",
@@ -43,6 +45,7 @@ function Description(props) {
     const hotel = hotels[hotelId.id-1] 
     
     const list = [
+       
         { icon: "check", text: hotel.description },
         { icon: "check", text: "No scripta electram necessitatibus sit" },
         { icon: "check", text: "Quidam percipitur instructior an eum" },
@@ -64,17 +67,11 @@ function Description(props) {
 
                 <div className="col-md-9 ">
                     <p>
-                        Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno
-                        legimus insolens ad. Sit cu detraxit constituam, an mel iudico
-                        constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens
-                        in pro. Mea liber ridens inermis ei, mei legendos vulputate an,
-                        labitur tibique te qui.
+                   { hotel.description}
                     </p>
                     <h4 className="py-3">Hotel facilities</h4>
                     <p>
-                        Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno
-                        legimus insolens ad. Sit cu detraxit constituam, an mel iudico
-                        constituto efficiendi.
+                       { hotel.facility_desc}
                     </p>
                     <ItemList columns={2} itemlist={list} />
                 </div>
@@ -237,6 +234,7 @@ function Reviews(props) {
             name: "",
             rate: "",
             description: "",
+            user:user.id,
         },
         onSubmit: (values) => {
             dispatch(postHotelReviews(values));
@@ -371,7 +369,21 @@ export default function HotelDetailBody({ data }) {
         { iconsrc: "wheelchair", icontext: "Accessibiliy" },
         { iconsrc: "car", icontext: "Parking" },
     ];
-
+    
+const images = [
+    {
+        original: hotel.image,
+        thumbnail: hotel.image,
+    },
+    // {
+    //     original: "https://picsum.photos/id/1015/1000/600/",
+    //     thumbnail: "https://picsum.photos/id/1015/250/150/",
+    // },
+    // {
+    //     original: "https://picsum.photos/id/1019/1000/600/",
+    //     thumbnail: "https://picsum.photos/id/1019/250/150/",
+    // },
+];
     return (
         <>
             <div className="container mt-5 ">

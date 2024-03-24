@@ -10,10 +10,13 @@ user = JSON.parse(user)
         user:user.id,
         name: '',
         address: '',
+        prices:0,
         description: '',
-        prices: 0,
         governorate: '',
         image: null,
+        single_room:'',
+        suite:'',
+        family_room:'',
     });
 
     const handleInputChange = (e) => {

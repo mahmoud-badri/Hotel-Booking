@@ -22,12 +22,11 @@ function MyNavbar() {
 const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
 const authContext = useContext(AuthContext);
 const history = useHistory();
-const isLoggedIn = authContext.isLoggedIn;
-const currentUser = authContext.currentUser;
-
+var user = localStorage.getItem("user")
+ user = JSON.parse(user)
 useEffect(() => {
     history.push("/");
-}, [isLoggedIn, currentUser]);
+},[user] );
 
 const logOut = () => {
 localStorage.removeItem("loginUser");
@@ -35,8 +34,7 @@ setContextLoggenIn("");
 authContext.logout();
 };
   
-var user = localStorage.getItem("user")
- user = JSON.parse(user)
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -73,7 +71,7 @@ var user = localStorage.getItem("user")
                 WishList
               </Link>
             </li>
-{isLoggedIn && (
+{user && (
   <>
 {user.type=='hotel' && (
   <>
@@ -114,7 +112,7 @@ var user = localStorage.getItem("user")
                           Search
                         </button>
           </form>
-{!isLoggedIn ? (
+{!user ? (
     <>
        
        <div className="d-flex m-2">
@@ -143,45 +141,8 @@ var user = localStorage.getItem("user")
         </div>
         </>
  )
-/* <li className="nav-item">
-<Link className="nav-link active" to="Dashboard">
-Dashboard
-</Link>
-</li> */}
+}
 
-
-
-
-
-
-           
-
-          
-
-          {/* <div className="d-flex m-2">
-            {`${contextLoggedIn ? "Hello " + contextLoggedIn.username : ""}`}
-          </div>
-
-          {contextLoggedIn && (
-            <div className="nav-item">
-              <Link to="Dashboard" className="nav-link">
-                Dashboard
-              </Link>
-            </div>
-          )} */}
-
-
-          {/* <div className="d-flex m-2">
-
-          <div className="d-flex m-2">
-            <Link
-              className="nav-link active"
-              aria-current="page"
-              to="/"
-              onClick={logOut}>
-              {`${contextLoggedIn ? "Log out" : ""}`}
-            </Link>
-          </div> */}
 
           <div className="d-flex m-2">
             <Link to="/userprofile">
