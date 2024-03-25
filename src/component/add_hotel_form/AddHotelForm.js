@@ -14,6 +14,10 @@ const AddHotelForm = () => {
         address: '',
         prices:0,
         description: '',
+        rate: 5,
+        prices: 0,
+        RATING_CHOICES: '⭐️',
+        status: 'Pending',
         governorate: '',
         image: null,
         suite: 0,
@@ -104,8 +108,8 @@ const AddHotelForm = () => {
                 <label>
                     Rating:
                     <select
-                        name='rating'
-                        value={formData.rating}
+                        name='RATING_CHOICES'
+                        value={formData.RATING_CHOICES}
                         onChange={handleInputChange}
                     >
                         <option value='⭐️'>⭐</option>
@@ -113,6 +117,20 @@ const AddHotelForm = () => {
                         <option value='⭐️⭐️⭐️'>⭐️⭐️⭐</option>
                         <option value='⭐️⭐️⭐️⭐️'>⭐️⭐️⭐️⭐</option>
                         <option value='⭐️⭐️⭐️⭐️⭐️'>⭐️⭐️⭐️⭐️⭐</option>
+                    </select>
+                </label>
+                <br />
+                <label>
+                  Status:
+                    <select
+                        name='status'
+                        value={formData.status}
+                        onChange={handleInputChange}
+                    >
+                        <option value='Pending'>Pending</option>
+                        <option value='Verified'>Verified</option>
+                        <option value='Regected'>Regected</option>
+                      
                     </select>
                 </label>
 

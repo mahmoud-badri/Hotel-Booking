@@ -3,13 +3,17 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./booingModal.css";
 import axios from "axios";
+<<<<<<< HEAD
 import { differenceInDays } from 'date-fns'
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+=======
+>>>>>>> main
 
 function BookingModal({ showModal, handleClose ,hotel }) {
   var user = localStorage.getItem("user")
   user = JSON.parse(user)
   // Define state variables to store form data
+<<<<<<< HEAD
   
   const [formData, setFormData] = useState({
     user:user? user.id :'',
@@ -20,6 +24,17 @@ function BookingModal({ showModal, handleClose ,hotel }) {
     start_date: "",
     end_date: "",
     total_price:"",
+=======
+  var user = localStorage.getItem("user");
+  user = JSON.parse(user);
+  const [formData, setFormData] = useState({
+    room_type: "",
+    guest: "",
+    children: "",
+    start_date: "",
+    end_date: "",
+    user:user?.id
+>>>>>>> main
   });
 
   // Function to handle form input changes and update state
@@ -36,6 +51,7 @@ function BookingModal({ showModal, handleClose ,hotel }) {
     event.preventDefault();
 
     try {
+<<<<<<< HEAD
       const newBook = {
         user: formData.user,
         hotel: formData.hotel,
@@ -44,6 +60,16 @@ function BookingModal({ showModal, handleClose ,hotel }) {
         start_date: formData.start_date,
         end_date: formData.end_date,
         total_price: formData.total_price,
+=======
+      // Send formData to backend API
+      const response = await fetch("http://127.0.0.1:8000/hotel/booking_customer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+>>>>>>> main
 
       };
       var total_days = differenceInDays(newBook.end_date, newBook.start_date)     
@@ -66,10 +92,18 @@ function BookingModal({ showModal, handleClose ,hotel }) {
         console.error("Error sendinggg form data:", response.statusText);
       }
     } catch (error) {
+<<<<<<< HEAD
       console.error("Error sendin form data:", error);
       console.log(formData);
     }
   };
+=======
+      console.error("Error sending form data:", error);
+      }
+
+};
+
+>>>>>>> main
   return (
     <Modal show={showModal} onHide={handleClose} size="lg" className="row">
       <Modal.Header closeButton>

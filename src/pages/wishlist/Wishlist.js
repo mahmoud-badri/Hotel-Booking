@@ -30,6 +30,7 @@ const Wishlist = () => {
                             description={hotel.descripen}
                             governorate={hotel.governorate}
                             price={hotel.price}
+                            hotel={hotel}
                         />
                     </div>
                 ))}

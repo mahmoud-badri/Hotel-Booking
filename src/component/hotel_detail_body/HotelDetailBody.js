@@ -46,60 +46,60 @@ const iconlist = [
     { iconsrc: "wheelchair", icontext: "Accessibility", field: "is_Accessibility" },
     { iconsrc: "car", icontext: "Parking", field: "is_Parking" },
 ];
-function Description(props) {
-    const hotelId = useParams();
+// function Description(props) {
+//     const hotelId = useParams();
 
-    const hotels = useSelector((state) => state.combinHotel.hotels)
+//     const hotels = useSelector((state) => state.combinHotel.hotels)
 
-    const hotel = hotels[hotelId.id-1] 
+//     const hotel = hotels[hotelId.id-1] 
 
   
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch(`http://127.0.0.1:8000/hotel/allFacilites/${hotel}`);
-//         const jsonData = await response.json();
-//         setFacility(jsonData);
-//         console.log(jsonData);
-//       } catch (error) {
-//         setError(error.message);
-//       }
-//     };
+// //   useEffect(() => {
+// //     const fetchData = async () => {
+// //       try {
+// //         const response = await fetch(`http://127.0.0.1:8000/hotel/allFacilites/${hotel}`);
+// //         const jsonData = await response.json();
+// //         setFacility(jsonData);
+// //         console.log(jsonData);
+// //       } catch (error) {
+// //         setError(error.message);
+// //       }
+// //     };
 
-//     fetchData();
-//   }, []);
-const dispatch = useDispatch()
-// const facilities = useSelector((state) => state.combinHotel.facilities)
-const fa = hotel.facility.split(',')
-useEffect(() => {
-    console.log(fa);
-    // dispatch(getFacilities(hotel.id))
-  }, [dispatch]);
+// //     fetchData();
+// //   }, []);
+// const dispatch = useDispatch()
+// // const facilities = useSelector((state) => state.combinHotel.facilities)
+// const fa = hotel.facility.split(',')
+// useEffect(() => {
+//     console.log(fa);
+//     // dispatch(getFacilities(hotel.id))
+//   }, [dispatch]);
    
-    const list = fa.map((item) => ( {icon: "check", text: item }))
+//     const list = fa.map((item) => ( {icon: "check", text: item }))
                 
     
-    return (
-        <>
-            <div className="row text-dark my-3" style={{ textAlign: "start" }}>
-                <div className="col-md-3">
-                    <h3>Description</h3>
-                </div>
+//     return (
+//         <>
+//             <div className="row text-dark my-3" style={{ textAlign: "start" }}>
+//                 <div className="col-md-3">
+//                     <h3>Description</h3>
+//                 </div>
 
-                <div className="col-md-9 ">
-                    <p>
-                   { hotel.description}
-                    </p>
-                    <h4 className="py-3">Hotel facilities</h4>
-                    <p>
-                       { hotel.facility_desc}
-                    </p>
-                    <ItemList columns={2} itemlist={list} />
-                </div>
-            </div>
-        </>
-    );
-}
+//                 <div className="col-md-9 ">
+//                     <p>
+//                    { hotel.description}
+//                     </p>
+//                     <h4 className="py-3">Hotel facilities</h4>
+//                     <p>
+//                        { hotel.facility_desc}
+//                     </p>
+//                     <ItemList columns={2} itemlist={list} />
+//                 </div>
+//             </div>
+//         </>
+//     );
+// }
 
 function ItemList(props) {
     const list = props.itemlist.map((el) => {
@@ -110,16 +110,33 @@ function ItemList(props) {
             </div>
         );
     });
-    return (
-        <div
-            style={{
-                columns: props.columns,
-                columnGap: "2vw",
-            }}>
-            {list}
-        </div>
-    );
+    // return (
+    //     <div
+    //         style={{
+    //             columns: props.columns,
+    //             columnGap: "2vw",
+    //         }}>
+    //         {list}
+
 }
+function Description({data}) {
+  return (
+    <>
+      <div className="row text-dark my-3" style={{ textAlign: "start" }}>
+        <div className="col-md-3">
+          <h3>Description</h3>
+        </div>
+
+        <div className="col-md-9 ">
+          <p>
+          {data}
+          </p>
+        </div>
+      </div>
+    </>
+  );
+  }
+
 
 function Icons(props) {
     const hotelId = useParams();
@@ -141,80 +158,8 @@ function Icons(props) {
     return <>{list}</>;
 }
 
-function RoomFeatures(props) {
-    const roomImages = [
-        "https://picsum.photos/id/1019/250/150/",
-        "https://picsum.photos/id/1019/250/150/",
-        "https://picsum.photos/id/1019/250/150/",
-        "https://picsum.photos/id/1019/250/150/",
-    ].map((el) => (
-        <div className="col-md-3">
-            <img src={el} className="w-100 m-0" />
-        </div>
-    ));
 
-    return (
-        <>
-            <div className="row">
-                <div className="col-md-6">
-                    <ItemList columns={1} itemlist={props.roomIcons} />
-                </div>
-                <div className="col-md-6">
-                    <ItemList columns={1} itemlist={props.roomItems} />
-                </div>
-            </div>
-            <div className="row my-3">{roomImages}</div>
-        </>
-    );
-}
 
-function RoomType(props) {
-    return (
-        <>
-            <h4>{props.title}</h4>
-            <p>
-                Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus
-                insolens ad. Sit cu detraxit constituam, an mel iudico constituto
-                efficiendi.
-            </p>
-            <RoomFeatures roomIcons={props.iconlist} roomItems={props.itemlist} />
-        </>
-    );
-}
-
-function RoomTypes(props) {
-    const roomIcons = [
-        { icon: "wifi", text: "Lorem ipsum dolor sit amet" },
-        { icon: "tv", text: "No scripta electram necessitatibus sit" },
-        { icon: "shield", text: "Quidam percipitur instructior an eum" },
-    ];
-
-    const roomItems = [
-        { icon: "check", text: "Lorem ipsum dolor sit amet" },
-        { icon: "check", text: "No scripta electram necessitatibus sit" },
-        { icon: "check", text: "Quidam percipitur instructior an eum" },
-    ];
-    return (
-        <div className="row text-dark my-3" style={{ textAlign: "start" }}>
-            <div className="col-md-3">
-                <h3>Rooms Types</h3>
-            </div>
-
-            <div className="col-md-9">
-                <RoomType
-                    title={"Single Room"}
-                    iconlist={roomIcons}
-                    itemlist={roomItems}
-                />
-                <RoomType
-                    title={"Double Room"}
-                    iconlist={roomIcons}
-                    itemlist={roomItems}
-                />
-            </div>
-        </div>
-    );
-}
 function Review(props) {
     const fullDate = new Date(props.date)
     const date = fullDate.toDateString();
@@ -251,18 +196,19 @@ function Review(props) {
 }
 
 function Reviews(props) {
-    const hotelId = useParams();
+    // const hotelId = useParams();
+  const dispatch = useDispatch();
+  // const reviews = useSelector((state) => state.combinHotel.hotelReviews);
 
     const hotels = useSelector((state) => state.combinHotel.hotels)
 
-    const hotel = hotels[hotelId.id-1]
+    // const hotel = hotels[hotelId.id-1]
 
-    const dispatch = useDispatch();
     const reviews = useSelector((state) => state.combinHotel.hotelReviews);
     // console.log(reviews);
     let register = useFormik({
         initialValues: {
-            hotel:hotel.id,
+            // hotel:hotel.id,
             name: "",
             rating: "",
             description: "",
@@ -274,9 +220,9 @@ function Reviews(props) {
             // console.log(values);
         },
     });
-    useEffect(() => {
-        dispatch(getHotelReviews(hotel.id));
-    });
+    // useEffect(() => {
+    //     dispatch(getHotelReviews(hotel.id));
+    // });
     // const Revs=reviews.map((el)=> <Review name={el.name} img={el.images} description={el.descripen} rate={el.rate} />)
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(5); // Set the number of reviews per page
@@ -405,9 +351,22 @@ function Reviews(props) {
                         onPageChange={onPageChange}
                     />
                 </div>
+
+        {/* <div className="col-md-9 text-start py-4 ">
+          {reviews.map((el) => (
+            <div key={el.id}>
+              <Review
+                name={el.name}
+                img={el.images}
+                description={el.description}
+                rate={el.rate}
+              />
             </div>
-        </>
-    );
+          ))}
+        </div> */}
+      </div>
+    </>
+  );
 }
 
 export default function HotelDetailBody({ data }) {
@@ -448,14 +407,7 @@ const images = [
         original: hotel.image,
         thumbnail: hotel.image,
     },
-    // {
-    //     original: "https://picsum.photos/id/1015/1000/600/",
-    //     thumbnail: "https://picsum.photos/id/1015/250/150/",
-    // },
-    // {
-    //     original: "https://picsum.photos/id/1019/1000/600/",
-    //     thumbnail: "https://picsum.photos/id/1019/250/150/",
-    // },
+    
 ];
     return (
         <>
@@ -476,6 +428,26 @@ const images = [
                         <div className="col-md-12 pt-4">
                             <ImageGallery items={images} />
                         </div>
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+console.log({data});
+  return (
+    <>
+      <div className="container mt-5 ">
+        <div className="row">
+          {/* first col icons , carousel , rooms , reviews */}
+          <div className="col-md-8">
+            <div className="col-md-12 pt-4">
+              <ImageGallery items={[
+              {
+                original:data?.image,
+                thumbnail: data?.image,
+              },
+              ]} />
+            </div>
+
 
                         {/* 
         
@@ -510,4 +482,29 @@ const images = [
             <BookingModal handleClose={handleClose} showModal={show} hotel={hotel} />
         </>
     );
+}
+
+            <Description data={data?.description} />
+            <Reviews />
+          </div>
+          {/* details */}
+          <div className="col-md-4  cc ">
+            <i class="fa-solid fa-phone fs-2 mt-4 mb-3 icon-d"></i>
+            <p className="fs-4 icon-d">
+              {" "}
+              <span className="sp-d">Book</span> My Phone
+            </p>
+            <p className="fs-5 phone-icon-d ">
+              +456<span> </span>789<span> </span>0097
+            </p>
+            <p className="fs-6 text-muted">Monday to Friday 9.00am - 7.30pm</p>
+            <Button variant="primary" onClick={handleShow}>
+              Book Your Room
+            </Button>
+          </div>
+        </div>
+      </div>
+      <BookingModal handleClose={handleClose} showModal={show} />
+    </>
+  );
 }

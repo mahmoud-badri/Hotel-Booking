@@ -20,6 +20,7 @@ function Login() {
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
   var isLoggedIn = false
+  const isLoggedIn = authContext?.isLoggedIn;
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -113,6 +114,8 @@ useEffect(() => {
                 localStorage.setItem("token", response.data.jwt);
                 localStorage.setItem("user", JSON.stringify(response.data.user));
                 response.data.user.email_verified && setConfirm('Your Email Verified successfully')
+
+                authContext?.login(response?.data?.jwt, response?.data?.user);
                 history.push('/');
                 isLoggedIn = true
               }

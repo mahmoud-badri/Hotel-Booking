@@ -1,6 +1,6 @@
 function Footer() {
     return (
-    <footer className="bg-dark text-white">
+    <footer className="bg-dark text-white m-5">
     <div className="container py-4">
     <div className="row">
     <div className="col-lg-4 col-md-6 mb-4 mb-md-0">
@@ -30,9 +30,9 @@ function Footer() {
     </div>
     
     <div className="col-lg-4 col-md-6 mb-4 mb-md-0">
-    <h5 className="text-uppercase mb-4 pb-1">Search</h5>
+    {/* <h5 className="text-uppercase mb-4 pb-1">Search</h5> */}
     <div className="input-group mb-4">
-    <input
+    {/* <input
     type="text"
     className="form-control"
     placeholder="Search"
@@ -45,7 +45,7 @@ function Footer() {
     id="button-addon2"
     >
     Go
-    </button>
+    </button> */}
     </div>
     <ul className="list-unstyled">
     <li className="mb-3">

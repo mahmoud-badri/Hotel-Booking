@@ -28,12 +28,19 @@ const ListHotel = () => {
     };
     const [query, setQuery] = useState("")
 
+
+        getHotel()?.then((res) => {
+            console.log(res)
+            setHotels(res);
+        });
+    // }, []);
+console.log(hotels,"jhjh");
     return (
         <>
         
         <div className='container'>
         
-<div><input placeholder="Search" className="form-control me-2"  aria-label="Search" type="search" onChange={event => setQuery(event.target.value)}/><br/></div>
+        <div><input placeholder="Search" className="form-control me-2"  aria-label="Search" type="search" onChange={event => setQuery(event.target.value)}/><br/></div>
             {/* Render hotels for the current page */}
             {currentHotels &&
                 currentHotels.filter(post => {
@@ -58,7 +65,24 @@ const ListHotel = () => {
                         />
                     </div>
                 //  </Link>
-            ))}
+                ))}
+            {/* {hotels && hotels?.map((hotel) => (
+                <div key={hotel?.id}>
+                  
+                    <CardListHotel
+                        id={hotel.id}
+                        image={hotel.image}
+                        rate={hotel.rate}
+                        status={hotel.status}
+                        review={hotel.review}
+                        name={hotel.name}
+                        description={hotel.description}
+                        governorate={hotel.governorate}
+                        price={hotel.prices}
+                        hotel={hotel}
+                    />
+                </div>
+            ))} */}
             {/* Render pagination component */}
             <Pagination
                 currentPage={currentPage}
@@ -68,7 +92,8 @@ const ListHotel = () => {
                 width="40px" // Adjust the width of the page buttons if needed
             />
         </div>
-        </>);
+        </>
+        );
 }
 
 export default ListHotel;

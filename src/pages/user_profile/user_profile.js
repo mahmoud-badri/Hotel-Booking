@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import GoogleIcon from "@mui/icons-material/Google";
@@ -9,15 +9,21 @@ import "./profil.css";
 import "./form.css";
 import BookinBasedHotel from "./BookingBasedHotel";
 
+import { AuthContext } from "../../Context/AuthContext";
+
 function UserProfilePage() {
+  const authContext = useContext(AuthContext);
+  // const isLoggedIn = authContext.isLoggedIn;
+  const currentUser = authContext.currentUser;
+
   const [userData, setUserData] = useState({
     name: "",
     address: "",
     image: null,
     phone: "",
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [showForm, setShowForm] = useState(true);
+  // const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -43,10 +49,6 @@ function UserProfilePage() {
       formData.append("image", userData.image);
       formData.append("phone", userData.phone);
 
-     
-
-
-
       await axios.post(
         "https://api-generator.retool.com/4tQuPx/data",
         formData,
@@ -57,22 +59,24 @@ function UserProfilePage() {
         }
       );
 
-      setIsSubmitted(true);
+      setShowForm(!showForm);
+
+      // setIsSubmitted(true);
     } catch (error) {
       console.error("Error posting user data:", error);
     }
   };
 
   const toggleForm = () => {
-    setShowForm(showForm);
-    setIsSubmitted(false); // Reset submission status when showing form
+    setShowForm(!showForm);
+    // setIsSubmitted(false); // Reset submission status when showing form
   };
 
   return (
     <div className="mb-3 container text-dark">
        <BookinBasedHotel />
       <h2 className="text-center mb-4"> Profile </h2>
-      {showForm && !isSubmitted && (
+      {showForm && (
         <div className="container mt-5 mb-5 d-flex justify-content-center body2">
           <div className="card2 px-1 py-4">
             <div className="card-body">
@@ -88,7 +92,7 @@ function UserProfilePage() {
                         type="text"
                         placeholder="Name"
                         name="name"
-                        value={userData.name}
+                        value={currentUser.name}
                         onChange={handleChange}
                       />{" "}
                     </div>
@@ -103,7 +107,7 @@ function UserProfilePage() {
                           className="form-control"
                           type="text"
                           name="phone"
-                          value={userData.phone}
+                          value={currentUser.email}
                           onChange={handleChange}
                           placeholder="Mobile"
                         />{" "}
@@ -150,7 +154,6 @@ function UserProfilePage() {
                     </div>
                   </div>
                 </div>
-
                 <div className=" d-flex flex-column text-center px-5 mt-3 mb-3">
                   {" "}
                   <small className="agree-text">
@@ -171,7 +174,7 @@ function UserProfilePage() {
         </div>
       )}
 
-      {isSubmitted && (
+      {!showForm && (
         <div className="container d-flex justify-content-center body">
           <div className="card_profile p-3 py-4">
             <div className="text-center">
@@ -185,7 +188,7 @@ function UserProfilePage() {
               )}
 
               <h3 style={{ color: "white" }} className="mt-2">
-                {userData.name}
+                {currentUser.name}
               </h3>
               <span style={{ color: "white" }} className="mt-1 clearfix">
                 -- -- -- -- -- --
@@ -200,8 +203,8 @@ function UserProfilePage() {
           <span className="num">10</span>
         </div> */}
                 <div className="col-md-4 ms-5">
-                  <h5 style={{ color: "white" }}>Phone</h5>
-                  <span className="num">{userData.phone}</span>
+                  <h5 style={{ color: "white" }}>Email</h5>
+                  <span className="num">{currentUser.email}</span>
                 </div>
               </div>
 
