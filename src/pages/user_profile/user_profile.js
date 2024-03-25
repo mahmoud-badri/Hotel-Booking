@@ -173,7 +173,7 @@ function UserProfilePage() {
       {!showForm && (
         <div className="container d-flex justify-content-center body">
           <div className="card_profile p-3 py-4">
-            <div className="text-center">
+            <div >
               {userData.image && (
                 <img
                   src={URL.createObjectURL(userData.image)}
@@ -183,32 +183,34 @@ function UserProfilePage() {
                 />
               )}
 
-              <h3 style={{ color: "white" }} className="mt-2">
-                {currentUser.name}
-              </h3>
+              <h5 style={{ color: "white" }} className="mt-2">
+              User Name :  {currentUser.name}
+              </h5>
               <span style={{ color: "white" }} className="mt-1 clearfix">
-                -- -- -- -- -- --
+              <hr style={{ color: "white" }} className="line" />
               </span>
               <div className="row mt-3 mb-3">
-                <div className="col-md-4 ms-5">
-                  <h5 style={{ color: "white" }}>Address</h5>
-                  <span className="num">{userData.address}</span>
+                <div className="col-md- ms-">
+                  <h5 style={{ color: "white" }}>Address : {userData.address} </h5>
+                  <span className="num"></span>
                 </div>
+                <span style={{ color: "white" }} className="mt-1 clearfix">
+                <hr style={{ color: "white" }} className="line" />
+              </span>
                 {/* <div className="col-md-4">
           <h5>Projects</h5>
           <span className="num">10</span>
         </div> */}
-                <div className="col-md-4 ms-5">
-                  <h5 style={{ color: "white" }}>Email</h5>
-                  <span className="num">{currentUser.email}</span>
+                <div className="col-md- ms-">
+                  <h5 style={{ color: "white" }}>Email : {currentUser.email}</h5>
                 </div>
               </div>
 
               <hr style={{ color: "white" }} className="line" />
-              <small style={{ color: "white" }} className="mt-4">
+              {/* <small style={{ color: "white" }} className="mt-4">
                 I am an android developer working at google Inc at
                 california,USA
-              </small>
+              </small> */}
 
               <div className="social-buttons mt-5">
                 <button className="neo-button">

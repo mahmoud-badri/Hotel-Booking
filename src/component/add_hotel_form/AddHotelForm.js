@@ -15,7 +15,7 @@ const AddHotelForm = () => {
         description: '',
         rate: 5,
         prices: 0,
-        RATING_CHOICES: '⭐️',
+        rating: '⭐️',
         status: 'Pending',
         governorate: '',
         image: null,
@@ -100,8 +100,8 @@ const AddHotelForm = () => {
                 <label>
                     Rating:
                     <select
-                        name='RATING_CHOICES'
-                        value={formData.RATING_CHOICES}
+                        name='rating'
+                        value={formData.rating}
                         onChange={handleInputChange}
                     >
                         <option value='⭐️'>⭐</option>
