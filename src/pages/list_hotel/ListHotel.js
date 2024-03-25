@@ -14,7 +14,6 @@ const ListHotel = () => {
             setHotels(res);
         });
     }, []);
-    console.log(hotels, "jhjh");
     return (
         <div className='container'>
             {hotels && hotels?.map((hotel) => (
