@@ -17,8 +17,8 @@
     width: 400px;
     border-radius: 10px;
    background: linear-gradient(145deg, #ff5574, #e86574fa);
-box-shadow:  20px 200px 70px #f3b72b95, 
-             -20px -20px 70px #f1d2219c;
+box-shadow:  20px 70px 70px #f3b72b44, 
+             -20px -20px 30px #f1d2212b;
     border: none
 }
 

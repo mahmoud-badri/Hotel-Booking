@@ -205,10 +205,10 @@ function UserProfilePage() {
               </div>
 
               <hr style={{ color: "white" }} className="line" />
-              <small style={{ color: "white" }} className="mt-4">
+              {/* <small style={{ color: "white" }} className="mt-4">
                 I am an android developer working at google Inc at
                 california,USA
-              </small>
+              </small> */}
 
               <div className="social-buttons mt-5">
                 <button className="neo-button">
