@@ -13,10 +13,9 @@ const AddHotelForm = () => {
         address: '',
         description: '',
         rate: 5,
-        price: 0,
-        rating: '⭐️',
-        review: 0,
-        status: 'Good',
+        prices: 0,
+        RATING_CHOICES: '⭐️',
+        status: 'Pending',
         governorate: '',
         image: null,
         single_room: 0,
@@ -85,8 +84,8 @@ const AddHotelForm = () => {
                     Avrage price:
                     <input
                         type='number'
-                        name='price'
-                        value={formData.price}
+                        name='prices'
+                        value={formData.prices}
                         onChange={handleInputChange}
                         min={0}
                         step={0.01}
@@ -96,8 +95,8 @@ const AddHotelForm = () => {
                 <label>
                     Rating:
                     <select
-                        name='rating'
-                        value={formData.rating}
+                        name='RATING_CHOICES'
+                        value={formData.RATING_CHOICES}
                         onChange={handleInputChange}
                     >
                         <option value='⭐️'>⭐</option>
@@ -105,6 +104,20 @@ const AddHotelForm = () => {
                         <option value='⭐️⭐️⭐️'>⭐️⭐️⭐</option>
                         <option value='⭐️⭐️⭐️⭐️'>⭐️⭐️⭐️⭐</option>
                         <option value='⭐️⭐️⭐️⭐️⭐️'>⭐️⭐️⭐️⭐️⭐</option>
+                    </select>
+                </label>
+                <br />
+                <label>
+                  Status:
+                    <select
+                        name='status'
+                        value={formData.status}
+                        onChange={handleInputChange}
+                    >
+                        <option value='Pending'>Pending</option>
+                        <option value='Verified'>Verified</option>
+                        <option value='Regected'>Regected</option>
+                      
                     </select>
                 </label>
 
