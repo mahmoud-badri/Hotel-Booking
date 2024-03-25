@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom'; // Import useHistory
 import { addHotel } from '../../Redux/HotelAction';
 import './addHotelForm.css'
 const AddHotelForm = () => {
@@ -23,6 +24,10 @@ const AddHotelForm = () => {
         family_room: 0,
     });
 
+    const dispatch = useDispatch(); // No longer needed in this component
+
+    const history = useHistory(); // Initialize useHistory hook
+
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -31,12 +36,12 @@ const AddHotelForm = () => {
         setFormData({ ...formData, image: e.target.files[0] });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData); 
-        addHotel(formData); 
-        console.log(user)
-        //window.location.reload();
+        //console.log(formData); 
+        await addHotel(formData); // Assuming addHotel is an asynchronous action
+        //console.log(user)
+        history.push('/'); // Redirect to home component
     };
     return (
         <form className="hotel-form" onSubmit={handleSubmit}>
