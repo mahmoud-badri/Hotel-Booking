@@ -18,6 +18,8 @@ import Footer from "./component/Footer/Footer.js";
 import { AuthProvider } from "./Context/AuthContext.js";
 import AddHotelForm from "./component/add_hotel_form/AddHotelForm.js";
 import ListHotel from "./pages/list_hotel/ListHotel.js";
+import GetBooking from "./component/get_booking/Get_Booking.js";
+
 
 function App() {
   const [contextLoggedIn, setContextLoggenIn] = useState("");
@@ -30,7 +32,6 @@ function App() {
       <AuthProvider>
         <MyNavbar />
         <ParticlesComponent id="particles" />
- 
         <Switch>        
 
           <Route exact path={"/"} component={Home} />
@@ -46,10 +47,13 @@ function App() {
           <Route exact path={"/Appointment"} component={Appointment} />
           <Route exact path={"/AddHotelForm"} component={AddHotelForm} />
 
+          <Route exact path={"/GetBooking"} component={GetBooking} />
+          
+          
         </Switch>
         <Footer />
         </AuthProvider>
-       </BrowserRouter>
+      </BrowserRouter>
       
       
       </LoggedInContext.Provider>

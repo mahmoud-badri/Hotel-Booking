@@ -1,6 +1,4 @@
 import axios from "axios";
-// import { axiosInstance } from "../Network/axiosInstance";
-// import { axiosInstance } from "../../Network/axiosInstance";
 
 export const GET_HOTEL_LIST_SUCCESS = 'GET_HOTEL_LIST_SUCCESS';
 export const ADD_HOTEL_SUCCESS = 'ADD_HOTEL_SUCCESS';
@@ -8,64 +6,9 @@ export const GET_HOTEL_BY_ID = 'GET_HOTEL_BY_ID';
 export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
 export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 
-// Action creators
-// export const gethotel = () => (dispatch) => {
-//     console.log("Fetching hotel data...");
-//     return axios
-//         .get('http://127.0.0.1:8000/api/hotels')
-//         .then((res) => {
-//             console.log("Data received:", res.data);
-//             dispatch({
-//                 type: GET_HOTEL_LIST_SUCCESS,
-//                 payload: res.data,
-//             });
-//         })
-//         .catch((err) => console.log("Error fetching data:", err));
-//     }
-// export const gethotel = () => async dispatch => {
-
-// export const gethotel = async () => {
-//     try {
-//         const res = await axios.get('http://127.0.0.1:8000/hotel/');
-//         return res.data
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
-
-// export const gethotel = () =>
-//   (dispatch) => {
-//     const url = "http://127.0.0.1:8000/hotel/";
-
-//     return axiosInstance
-//       .get(url)
-//       .then((res) => {
-//         dispatch({
-//           type: "GET_HOTELS_LIST",
-//           payload: res.data,
-//         });
-//       })
-//       .catch((err) => console.log(err));
-//   };
-
-export const getHotel = () => (dispatch) => {
-    return axios.get("http://127.0.0.1:8000/hotel/")
-    .then ((res) => dispatch({
-        type: "GET_HOTELS_LIST",
-        payload: res.data
-    }))
-    .catch((err) => console.log(err))
-    
-}
-
-
-export const addHotel = async (hotelData) => {
+export const gethotel = async () => {
     try {
-        const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
+        const res = await axios.get('http://127.0.0.1:8000/hotel/');
         return res.data
     } catch (error) {
         console.log(error);
@@ -73,6 +16,18 @@ export const addHotel = async (hotelData) => {
 };
 
 
+export const addHotel = async (hotelData, userId) => {
+    try {
+        const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 
 export const getHotelById = (id) => (dispatch) => {
@@ -117,15 +72,15 @@ export const removeFromWishlist = (hotel) => (dispatch) => {
 
 
 
-export const getHotelReviews = (hotel_id) => (dispatch) => {
+export const getHotelReviews = () => (dispatch) => {
     console.log(`Fetching hotel data `);
 
-    return axios.get(`http://127.0.0.1:8000/api_review/get-all-rates/${hotel_id}`)
+    return axios.get(`https://api-generator.retool.com/qCCCiu/data`)
         .then((res) => {
             console.log("Data received:", res.data);
             dispatch({
                 type: 'GET_HOTEL_REVIEWS',
-                payload: res.data.data,
+                payload: res.data,
             });
         })
         .catch((err) => console.log("Error fetching data:", err));
@@ -135,7 +90,7 @@ export const getHotelReviews = (hotel_id) => (dispatch) => {
 export const postHotelReviews = (review) => (dispatch) => {
     console.log(`Fetching hotel data for ID:`, review);
 
-    return axios({ method: 'POST', url: `http://127.0.0.1:8000/api_review/create-rate/`, headers: { "Content-Type": "application/json" }, data: review })
+    return axios({ method: 'POST', url: `https://api-generator.retool.com/qCCCiu/data`, headers: { "Content-Type": "application/json" }, data: review })
         .then((res) => {
             console.log("Data received:", res.data);
             dispatch({
