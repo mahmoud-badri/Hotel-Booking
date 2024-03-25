@@ -29,11 +29,11 @@ function MyNavbar() {
   const authContext = useContext(AuthContext);
   const history = useHistory();
   const isLoggedIn = authContext.isLoggedIn;
-  const currentUser = authContext.currentUser;
+  // const currentUser = authContext.currentUser;
 
   useEffect(() => {
     history.push("/");
-  }, [isLoggedIn, currentUser]);
+  }, [isLoggedIn]);
 
   // const logOut = () => {
   //   localStorage.removeItem("loginUser");
@@ -45,8 +45,7 @@ function MyNavbar() {
   user = JSON.parse(user)
 const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
 // const history = useHistory();
-var user = localStorage.getItem("user")
- user = JSON.parse(user)
+
 useEffect(() => {
     history.push("/");
 },[user] );
@@ -59,8 +58,7 @@ authContext.logout();
   
 
 
-  var user = localStorage.getItem("user");
-  user = JSON.parse(user);
+ 
   return (
     <Navbar
       style={{ opacity: " 0.8" }}
@@ -179,7 +177,7 @@ authContext.logout();
               ) : (
                 <>
                   <div className="d-flex m-2">
-                    <h5 className="text-primary"> {` ${currentUser.name}`} </h5>
+                    <h5 className="text-primary"> {` ${user.name}`} </h5>
                   </div>
 
                   <div className="nav-item d-flex m-2">
@@ -202,7 +200,7 @@ authContext.logout();
                       log out
                     </Link>
                   </div>
-                </>
+                </>)
       </div>        
   </div>
             

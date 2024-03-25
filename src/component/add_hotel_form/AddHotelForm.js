@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addHotel } from '../../Redux/HotelAction';
-import './addHotelForm.css'
+import '../add_hotel_form/addHotelForm.css'
 const AddHotelForm = () => {
 
     var user = localStorage.getItem("user")

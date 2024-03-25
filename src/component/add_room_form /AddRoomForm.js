@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addHotel } from '../../Redux/HotelAction';
-import './addRoomForm.css'
+
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 const AddRoomForm = () => {
 

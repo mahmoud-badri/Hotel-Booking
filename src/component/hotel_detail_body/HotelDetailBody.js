@@ -46,60 +46,60 @@ const iconlist = [
     { iconsrc: "wheelchair", icontext: "Accessibility", field: "is_Accessibility" },
     { iconsrc: "car", icontext: "Parking", field: "is_Parking" },
 ];
-// function Description(props) {
-//     const hotelId = useParams();
+function Description(props) {
+    const hotelId = useParams();
 
-//     const hotels = useSelector((state) => state.combinHotel.hotels)
+    const hotels = useSelector((state) => state.combinHotel.hotels)
 
-//     const hotel = hotels[hotelId.id-1] 
+    const hotel = hotels[hotelId.id-1] 
 
   
-// //   useEffect(() => {
-// //     const fetchData = async () => {
-// //       try {
-// //         const response = await fetch(`http://127.0.0.1:8000/hotel/allFacilites/${hotel}`);
-// //         const jsonData = await response.json();
-// //         setFacility(jsonData);
-// //         console.log(jsonData);
-// //       } catch (error) {
-// //         setError(error.message);
-// //       }
-// //     };
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const response = await fetch(`http://127.0.0.1:8000/hotel/allFacilites/${hotel}`);
+//         const jsonData = await response.json();
+//         setFacility(jsonData);
+//         console.log(jsonData);
+//       } catch (error) {
+//         setError(error.message);
+//       }
+//     };
 
-// //     fetchData();
-// //   }, []);
-// const dispatch = useDispatch()
-// // const facilities = useSelector((state) => state.combinHotel.facilities)
-// const fa = hotel.facility.split(',')
-// useEffect(() => {
-//     console.log(fa);
-//     // dispatch(getFacilities(hotel.id))
-//   }, [dispatch]);
+//     fetchData();
+//   }, []);
+const dispatch = useDispatch()
+// const facilities = useSelector((state) => state.combinHotel.facilities)
+const fa = hotel.facility.split(',')
+useEffect(() => {
+    console.log(fa);
+    // dispatch(getFacilities(hotel.id))
+  }, [dispatch]);
    
-//     const list = fa.map((item) => ( {icon: "check", text: item }))
+    const list = fa.map((item) => ( {icon: "check", text: item }))
                 
     
-//     return (
-//         <>
-//             <div className="row text-dark my-3" style={{ textAlign: "start" }}>
-//                 <div className="col-md-3">
-//                     <h3>Description</h3>
-//                 </div>
+    return (
+        <>
+            <div className="row text-dark my-3" style={{ textAlign: "start" }}>
+                <div className="col-md-3">
+                    <h3>Description</h3>
+                </div>
 
-//                 <div className="col-md-9 ">
-//                     <p>
-//                    { hotel.description}
-//                     </p>
-//                     <h4 className="py-3">Hotel facilities</h4>
-//                     <p>
-//                        { hotel.facility_desc}
-//                     </p>
-//                     <ItemList columns={2} itemlist={list} />
-//                 </div>
-//             </div>
-//         </>
-//     );
-// }
+                <div className="col-md-9 ">
+                    <p>
+                   { hotel.description}
+                    </p>
+                    <h4 className="py-3">Hotel facilities</h4>
+                    <p>
+                       { hotel.facility_desc}
+                    </p>
+                    <ItemList columns={2} itemlist={list} />
+                </div>
+            </div>
+        </>
+    );
+}
 
 function ItemList(props) {
     const list = props.itemlist.map((el) => {
@@ -119,23 +119,23 @@ function ItemList(props) {
     //         {list}
 
 }
-function Description({data}) {
-  return (
-    <>
-      <div className="row text-dark my-3" style={{ textAlign: "start" }}>
-        <div className="col-md-3">
-          <h3>Description</h3>
-        </div>
+// function Description({data}) {
+//   return (
+//     <>
+//       <div className="row text-dark my-3" style={{ textAlign: "start" }}>
+//         <div className="col-md-3">
+//           <h3>Description</h3>
+//         </div>
 
-        <div className="col-md-9 ">
-          <p>
-          {data}
-          </p>
-        </div>
-      </div>
-    </>
-  );
-  }
+//         <div className="col-md-9 ">
+//           <p>
+//           {data}
+//           </p>
+//         </div>
+//       </div>
+//     </>
+//   );
+//   }
 
 
 function Icons(props) {

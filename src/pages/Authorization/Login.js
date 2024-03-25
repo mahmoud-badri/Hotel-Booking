@@ -20,7 +20,7 @@ function Login() {
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
   var isLoggedIn = false
-  const isLoggedIn = authContext?.isLoggedIn;
+  // const isLoggedIn = authContext?.isLoggedIn;
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);

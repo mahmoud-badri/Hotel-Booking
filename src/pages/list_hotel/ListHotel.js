@@ -29,10 +29,10 @@ const ListHotel = () => {
     const [query, setQuery] = useState("")
 
 
-        getHotel()?.then((res) => {
-            console.log(res)
-            setHotels(res);
-        });
+        // getHotel()?.then((res) => {
+        //     console.log(res)
+        //     setHotels(res);
+        // });
     // }, []);
 console.log(hotels,"jhjh");
     return (
