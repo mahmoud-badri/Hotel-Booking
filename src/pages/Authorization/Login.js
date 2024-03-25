@@ -15,7 +15,7 @@ function Login() {
 
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
-  const isLoggedIn = authContext.isLoggedIn;
+  const isLoggedIn = authContext?.isLoggedIn;
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -119,7 +119,7 @@ useEffect(() => {
               console.log(response.data.user);
               console.log(response.status);
               if (response.status === 200) {
-                authContext.login(response.data.jwt, response.data.user);
+                authContext?.login(response?.data?.jwt, response?.data?.user);
                 history.push('/');
               } 
             } catch (error) {

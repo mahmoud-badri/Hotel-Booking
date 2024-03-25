@@ -14,11 +14,12 @@ const ListHotel = () => {
             setHotels(res);
         });
     }, []);
-
+console.log(hotels,"jhjh");
     return (
         <div className='container'>
-            {hotels && hotels.map((hotel) => (
-                <div key={hotel.id}>
+            {hotels && hotels?.map((hotel) => (
+                <div key={hotel?.id}>
+                  
                     <CardListHotel
                         id={hotel.id}
                         image={hotel.image}
@@ -29,6 +30,7 @@ const ListHotel = () => {
                         description={hotel.description}
                         governorate={hotel.governorate}
                         price={hotel.prices}
+                        hotel={hotel}
                     />
                 </div>
             ))}
