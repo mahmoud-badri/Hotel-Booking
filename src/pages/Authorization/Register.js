@@ -28,6 +28,7 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordR, setShowPasswordR] = useState(false);
   const [error, setError] = useState("") 
+  const [confirm, setConfirm] = useState("") 
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -158,6 +159,7 @@ function Register() {
       console.log(response);
       console.log(userRegister.type);
       if (response.status === 200) {
+        
         // localStorage.setItem(userRegister.email, JSON.stringify(userRegister))
         setSignedUp(true);
       }
@@ -175,7 +177,8 @@ function Register() {
   
   useEffect(() => {
     if (signedUp) {
-      history.push('/Login');    }
+      setConfirm('We send an activation Email,please check your email')
+        }
   }, [signedUp,history]);
 
   return (
@@ -184,6 +187,11 @@ function Register() {
                     <Alert key="danger" variant="danger" className="d-block" 
                     >
                         {error}
+                    </Alert>)}
+                    {confirm && (
+                    <Alert key="danger" variant="danger" className="d-block" 
+                    >
+                        {confirm}
                     </Alert>)}
           <div className="row ">
             <div className="col-5 col-sm-4">

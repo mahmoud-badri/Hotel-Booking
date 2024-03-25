@@ -15,6 +15,7 @@ function Login() {
   const authContext = useContext(AuthContext);
   const [error, setError] = useState("") 
   const [showAlert, setShowAlert] = useState(false);
+  const [confirm, setConfirm] = useState(false);
 
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
@@ -93,7 +94,7 @@ useEffect(() => {
     if (isLoggedIn) {
      history.push('/');
     }
-  }, [history, isLoggedIn]);
+  }, );
   
   const submitData = async (e) => {
     e.preventDefault();
@@ -111,6 +112,7 @@ useEffect(() => {
                 // authContext.login(response.data.jwt, response.data.user);
                 localStorage.setItem("token", response.data.jwt);
                 localStorage.setItem("user", JSON.stringify(response.data.user));
+                response.data.user.email_verified && setConfirm('Your Email Verified successfully')
                 history.push('/');
                 isLoggedIn = true
               }
@@ -122,9 +124,10 @@ useEffect(() => {
               if(error.response.data.detail  === 'User not found!') {
                 setError(error.response.data.detail)
               }
-              if(error.response.data.detail=== 'Incorrect password!'){
+              if(error.response.data.detail=== 'Email not verified! Please verify your email.'){
                 setError(error.response.data.detail)
               }
+              
             }
             
          
