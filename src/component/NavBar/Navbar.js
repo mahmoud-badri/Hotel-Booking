@@ -78,7 +78,7 @@ authContext.logout();
               <Link
                 className="nav-link active"
                 aria-current="page"
-                to="HotelsFilter">
+                to="/HotelsFilter">
                 List Hotels
               </Link>
             </li>
@@ -128,22 +128,24 @@ authContext.logout();
   </>)}
           </ul>
           <form className="d-flex">
-            <input
+          <input placeholder="Search" className="form-control me-2"  aria-label="Search" type="search" /><br/>
+
+            {/* <input
               className="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
-            />
-            <button className="btn custom-search-btn" type="submit">
+            /> */}
+            <Link className="btn custom-search-btn" to="/Search" type="submit">
               Search
-            </button>
+            </Link>
           </form>
                 
 {!user ? (
     <>
        
        <div className="d-flex m-2">
-            <Link className="nav-link active" aria-current="page" to="Register">
+            <Link className="nav-link active" aria-current="page" to="/Register">
              Register
             </Link>
           </div>

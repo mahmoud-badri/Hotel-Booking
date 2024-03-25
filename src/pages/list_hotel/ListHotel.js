@@ -26,13 +26,25 @@ const ListHotel = () => {
     const onPageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
+    const [query, setQuery] = useState("")
 
     return (
+        <>
+        
         <div className='container'>
+        
+<div><input placeholder="Search" className="form-control me-2"  aria-label="Search" type="search" onChange={event => setQuery(event.target.value)}/><br/></div>
             {/* Render hotels for the current page */}
-            {currentHotels.map((hotel) => (
+            {currentHotels &&
+                currentHotels.filter(post => {
+                    if (query === '') {
+                        return post;
+                    } else if (post.name.toLowerCase().includes(query.toLowerCase())) {
+                        return post;
+                    }
+                }).map((hotel) => (
                 
-                // <Link to={`/HotelDetails/${hotel.id}`} key={hotel.id}>
+                
                     <div>
                         <CardListHotel
                             id={hotel.id}
@@ -42,6 +54,7 @@ const ListHotel = () => {
                             description={hotel.descripen}
                             governorate={hotel.governorate}
                             price={hotel.prices}
+                            
                         />
                     </div>
                 //  </Link>
@@ -55,7 +68,7 @@ const ListHotel = () => {
                 width="40px" // Adjust the width of the page buttons if needed
             />
         </div>
-    );
+        </>);
 }
 
 export default ListHotel;

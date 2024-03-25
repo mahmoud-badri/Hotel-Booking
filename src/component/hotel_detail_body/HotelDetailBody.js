@@ -19,6 +19,7 @@ import { Button } from "react-bootstrap";
 import BookingModal from "../../pages/hotel-details/bookingModal";
 import axios from "axios";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import Alert from 'react-bootstrap/Alert';
 
 var user = localStorage.getItem("user")
  user = JSON.parse(user)
@@ -36,7 +37,15 @@ const images = [
         thumbnail: "https://picsum.photos/id/1019/250/150/",
     },
 ];
-
+const iconlist = [
+    { iconsrc: "tv", icontext: "Plasma TV", field: "is_tv" },
+    { iconsrc: "wifi", icontext: "Free Wifi", field: "is_wifi" },
+    { iconsrc: "person-swimming", icontext: "Pool", field: "is_poll" },
+    { iconsrc: "mug-hot", icontext: "Breakfast", field: "is_BreakFast" },
+    { iconsrc: "dog", icontext: "Pet allowed", field: "is_Pet" },
+    { iconsrc: "wheelchair", icontext: "Accessibility", field: "is_Accessibility" },
+    { iconsrc: "car", icontext: "Parking", field: "is_Parking" },
+];
 function Description(props) {
     const hotelId = useParams();
 
@@ -113,13 +122,21 @@ function ItemList(props) {
 }
 
 function Icons(props) {
+    const hotelId = useParams();
+
+    const hotels = useSelector((state) => state.combinHotel.hotels)
+
+    const hotel = hotels[hotelId.id-1]
     const list = props.iconlist.map((el) => {
+        const isChecked = hotel[el.field];
+        if (isChecked) {
         return (
             <div className={`d-flex flex-column`}>
                 <i className={`fa-solid fa-${el.iconsrc} size-i text-muted`}></i>
                 <span className="text-muted">{el.icontext}</span>
             </div>
         );
+        }
     });
     return <>{list}</>;
 }
@@ -199,6 +216,8 @@ function RoomTypes(props) {
     );
 }
 function Review(props) {
+    const fullDate = new Date(props.date)
+    const date = fullDate.toDateString();
     return (
         <div className="border-bottom border-1 border-dark py-2">
             <div className="row d-flex  justify-content-between">
@@ -213,11 +232,12 @@ function Review(props) {
                     </div>
                     <span className="ms-3 fs-5">{props.name}</span>
                 </div>
-
                 <div className="col-md-6 d-flex align-items-center justify-content-end">
-                    <span className="text-muted fs-6">- 10 March 2015 -</span>
+                    <span className="text-muted fs-6"> {date} </span>
                 </div>
             </div>
+            <div>Rate:{props.rate}</div>
+
             <p className="my-4 ">{props.description}</p>
 
             <Rating
@@ -244,9 +264,10 @@ function Reviews(props) {
         initialValues: {
             hotel:hotel.id,
             name: "",
-            rate: "",
+            rating: "",
             description: "",
-            user:user.id,
+            user:user? user.id : '',
+            image:user?user.image :null
         },
         onSubmit: (values) => {
             dispatch(postHotelReviews(values));
@@ -315,15 +336,15 @@ function Reviews(props) {
                                             className="form-control mb-3"
                                             placeholder="Name"
                                         />
-                                        <label htmlFor="rate"> Rate</label>
+                                        <label htmlFor="rating"> rating</label>
                                         <input
-                                            value={register.values.rate}
+                                            value={register.values.rating}
                                             onChange={register.handleChange}
                                             type="number"
-                                            name="rate"
-                                            id="rate"
+                                            name="rating"
+                                            id="rating"
                                             className="form-control mb-3"
-                                            placeholder="rate"
+                                            placeholder="rating"
                                         />
                                         <label for="textarea" class="col-4 col-form-label">
                                             Description
@@ -370,9 +391,10 @@ function Reviews(props) {
                         <div key={el.id}>
                             <Review
                                 name={el.name}
-                                img={el.images}
+                                img={el.image}
                                 description={el.description}
-                                rate={el.rate}
+                                rate={el.rating}
+                                date={el.createAt}
                             />
                         </div>
                     ))}
@@ -390,26 +412,37 @@ function Reviews(props) {
 
 export default function HotelDetailBody({ data }) {
     const hotelId = useParams();
+    const [posts, setPost] = useState(null);
+    const [error, setError] = useState("") 
+    // const [showAlert, setShowAlert] = useState(false);
 
+    useEffect(() => {
+       
+
+    }, []);
     const hotels = useSelector((state) => state.combinHotel.hotels)
 
+// console.log(posts);
     const hotel = hotels[hotelId.id-1]
     console.log(hotel); 
     // console.log(hotel["name"])
     const [show, setShow] = useState(false);
     // console.log(data)
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    const iconlist = [
-        { iconsrc: "tv", icontext: "Plasma TV " },
-        { iconsrc: "wifi", icontext: "Free Wifi" },
-        { iconsrc: "person-swimming", icontext: "poll" },
-        { iconsrc: "mug-hot", icontext: "BreakFast" },
-        { iconsrc: "dog", icontext: "Pet allowed" },
-        { iconsrc: "wheelchair", icontext: "Accessibiliy" },
-        { iconsrc: "car", icontext: "Parking" },
-    ];
-    
+    const handleShow = () =>{
+        if (!user) {
+            setError('You must login first');
+            setShow(false); // Set show to false to prevent showing the modal
+            
+            // alert('You must login first'); // Display an alert instead
+          } else {
+            setShow(true); // Show the modal if the user is true
+          }
+    } 
+     // Hide the alert after a certain delay
+//   setTimeout(() => {
+//     setShowAlert(false);
+//   }, 3000); // Adjust the delay as needed
 const images = [
     {
         original: hotel.image,
@@ -427,6 +460,12 @@ const images = [
     return (
         <>
             <div className="container mt-5 ">
+                    {error && (
+                    <Alert key="danger" variant="danger"  
+                    >
+                        {error}
+                    </Alert>
+                    )}
                 <div className="row">
                     {/* first col icons , carousel , rooms , reviews */}
                     <div className="col-md-8">
@@ -443,7 +482,7 @@ const images = [
         desc
         */}
         <Description />
-        <RoomTypes />
+        {/* <RoomTypes /> */}
         <Appointment />
         <Reviews />
                 
@@ -461,6 +500,7 @@ const images = [
                             +456<span> </span>789<span> </span>0097
                         </p>
                         <p className="fs-6 text-muted">Monday to Friday 9.00am - 7.30pm</p>
+                        
                         <Button variant="primary" onClick={handleShow}>
                             Book Your Room
                         </Button>

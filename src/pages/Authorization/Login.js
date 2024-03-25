@@ -9,9 +9,12 @@ import { useHistory } from 'react-router-dom';
 import { faEye, faEyeSlash  } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext, AuthProvider } from "../../Context/AuthContext";
 import axios from "axios";
+import Alert from 'react-bootstrap/Alert';
 
 function Login() {
   const authContext = useContext(AuthContext);
+  const [error, setError] = useState("") 
+  const [showAlert, setShowAlert] = useState(false);
 
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
@@ -83,13 +86,15 @@ function Login() {
   };
 const {contextLoggedIn, setContextLoggenIn} = useContext(LoggedInContext)
 let err = false
-
+setTimeout(() => {
+  setShowAlert(false);
+}, 3000);
 useEffect(() => {
     if (isLoggedIn) {
      history.push('/');
     }
   }, [history, isLoggedIn]);
-
+  
   const submitData = async (e) => {
     e.preventDefault();
     
@@ -99,20 +104,27 @@ useEffect(() => {
                 userData
               );
               console.log(response)
-              console.log(response);
-              console.log(localStorage.getItem('token'));
               console.log(response.data.user);
               console.log(response.status);
+              
               if (response.status === 200) {
                 // authContext.login(response.data.jwt, response.data.user);
                 localStorage.setItem("token", response.data.jwt);
                 localStorage.setItem("user", JSON.stringify(response.data.user));
                 history.push('/');
                 isLoggedIn = true
-              } 
+              }
+              
             } catch (error) {
               console.log(error)
-                
+              console.log(error.response.data.detail);
+
+              if(error.response.data.detail  === 'User not found!') {
+                setError(error.response.data.detail)
+              }
+              if(error.response.data.detail=== 'Incorrect password!'){
+                setError(error.response.data.detail)
+              }
             }
             
          
@@ -122,10 +134,20 @@ useEffect(() => {
 
   return (
     <div className="tabbar col-12 " style={{"margin":"auto"}}>
+     
       <div className="row">
-            <div className="col-8 col-sm-4">
+     <div className="container">
+      {error && (
+                    <Alert key="danger" variant="danger" className="d-block" 
+                    >
+                        {error}
+                    </Alert>)}
+                    </div>
+            <div className="col-10 col-sm-4 ">
+            
             </div>
             <div className="col-8 col-sm-4 bg-light my-5">
+           
             <form className="form-horizontal" onSubmit={(e) => submitData(e)}>
             <div className={` align-items-center mb-3 pb-1`}>
                     <span className={` fw-bold mb-0 text-danger  ${err && (localStorage.getItem(userData.email)) ? "d-block" : "d-none" }`}> Error in email or incorrect password</span>

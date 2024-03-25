@@ -19,8 +19,15 @@ const AddHotelForm = () => {
         suite: 0,
         single_room:'',
         family_room:'',
+        facility_desc: '',
         facility:'',
-        
+        is_tv:false,
+        is_wifi:false,
+        is_poll:false,
+        is_BreakFast:false,
+        is_Pet:false,
+        is_Accessibiliy:false,
+        is_Parking:false,
     });
 
    
@@ -37,26 +44,7 @@ const AddHotelForm = () => {
         console.log(formData); 
         addHotel(formData); 
         console.log(user)
-        // fetch('/api/add', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(FormData),
-        //   })
-        //     .then((response) => {
-        //       if (response.ok) {
-        //         // Handle success
-        //         console.log('Hotel added successfully');
-        //       } else {
-        //         // Handle error
-        //         console.error('Failed to add hotel');
-        //       }
-        //     })
-        //     .catch((error) => {
-        //       console.error('Error:', error);
-        //     });
-        //window.location.reload();
+        
 
     };
     return (
@@ -138,6 +126,10 @@ const AddHotelForm = () => {
                     />
                 </label>
                 <label>
+                Facility Description:
+                <textarea name="facility_desc" value={formData.facility_desc} onChange={handleInputChange} />
+                </label>
+                <label>
                     Facilities(comma separator):
                     <textarea
                         name='facility'
@@ -182,6 +174,42 @@ const AddHotelForm = () => {
                     />
                 </label>
                 <br />
+             <div className='d-flex justify-content-between'>  
+        <label>
+          TV:
+          <input type="checkbox" name="is_tv" checked={formData.is_tv} onChange={handleInputChange} />
+        </label>
+       
+        <label>
+          WiFi:
+          <input type="checkbox" name="is_wifi" checked={formData.is_wifi} onChange={handleInputChange} />
+        </label>
+       
+        <label>
+          Pool:
+          <input type="checkbox" name="is_poll" checked={formData.is_poll} onChange={handleInputChange} />
+        </label>
+       
+        <label>
+          Breakfast:
+          <input type="checkbox" name="is_BreakFast" checked={formData.is_BreakFast} onChange={handleInputChange} />
+        </label>
+       
+       <label>
+          Pet-friendly:
+          <input type="checkbox" name="is_Pet" checked={formData.is_Pet} onChange={handleInputChange} />
+        </label>
+       
+        <label>
+          Accessibility:
+          <input type="checkbox" name="is_Accessibility" checked={formData.is_Accessibility} onChange={handleInputChange} />
+        </label>
+       
+        <label>
+          Parking:
+          <input type="checkbox" name="is_Parking" checked={formData.is_Parking} onChange={handleInputChange} />
+        </label>
+        </div> 
                 <button
                     className='btn btn-danger w-50 fw-bold'
                     type='submit'

@@ -105,7 +105,7 @@ export const getHotelReviews = (hotel_id) => (dispatch) => {
 export const postHotelReviews = (review) => (dispatch) => {
     console.log(`Fetching hotel data for ID:`, review);
 
-    return axios({ method: 'POST', url: `https://api-generator.retool.com/qCCCiu/data`, headers: { "Content-Type": "application/json" }, data: review })
+    return axios({ method: 'POST', url: `http://127.0.0.1:8000/api_review/create-rate/`, headers: { "Content-Type": "application/json" }, data: review })
         .then((res) => {
             console.log("Data received:", res.data);
             dispatch({

@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import "./booingModal.css";
 import axios from "axios";
 import { differenceInDays } from 'date-fns'
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function BookingModal({ showModal, handleClose ,hotel }) {
   var user = localStorage.getItem("user")
@@ -11,7 +12,7 @@ function BookingModal({ showModal, handleClose ,hotel }) {
   // Define state variables to store form data
   
   const [formData, setFormData] = useState({
-    user: user.id,
+    user:user? user.id :'',
     hotel:hotel.id,
     room_type: "",
     guest:"",
@@ -69,7 +70,6 @@ function BookingModal({ showModal, handleClose ,hotel }) {
       console.log(formData);
     }
   };
-
   return (
     <Modal show={showModal} onHide={handleClose} size="lg" className="row">
       <Modal.Header closeButton>
@@ -155,7 +155,7 @@ function BookingModal({ showModal, handleClose ,hotel }) {
                       </div>
                     </div>
                     <Button variant="primary" type="submit">
-                      Check availability
+                     <Link to='GetBooking'> Check availability </Link>
                     </Button>
                   </form>
                 </div>

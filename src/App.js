@@ -22,6 +22,7 @@ import GetBooking from "./component/get_booking/Get_Booking.js";
 
 import AddRoomForm from "./component/add_room_form /AddRoomForm.js";
 import GuardedRoute from './GuardedRoute';
+import Search from "./pages/Search.js";
 
 function App() {
   const isAuthenticated = true; // Replace with actual authentication check
@@ -50,6 +51,8 @@ function App() {
           <Route exact path={"/Appointment"} component={Appointment} />
           <Route exact path={"/AddHotelForm"} component={AddHotelForm} />
           <Route exact path={"/AddRoomForm"} component={AddRoomForm} />
+          <Route exact path={"/Search"} component={Search} />
+
           <PrivateRoute exact path="/Wishlist" component={Wishlist} isAuthenticated={isAuthenticated} />
 
           <Route exact path={"/GetBooking"} component={GetBooking} />

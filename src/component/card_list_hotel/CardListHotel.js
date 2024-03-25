@@ -43,7 +43,7 @@ const CardListHotel = (props) => {
             dispatch(removeFromWishlist(props.id));
         } else {
             dispatch(getHotelById(props.id));
-            dispatch(addToWishlist(props.hotel));
+            dispatch(addToWishlist(hotel));
         }
     };
 
@@ -162,7 +162,7 @@ const CardListHotel = (props) => {
                             <div className="row px-3 mb-3">
                                 <p className="text-muted mb-0 taxes">+ $14 taxes and charges</p>
                             </div>
-                            <Link to="/HotelDetails">
+                            <Link to={`/HotelDetails/${props.id}`}>
                                 <button className="btn btn-success btn-regis me-2">
                                     Details
                                 </button>
