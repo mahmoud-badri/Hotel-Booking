@@ -428,10 +428,10 @@ const images = [
                         <div className="col-md-12 pt-4">
                             <ImageGallery items={images} />
                         </div>
-
+{/* 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => setShow(true); */}
 console.log({data});
   return (
     <>
@@ -482,7 +482,7 @@ console.log({data});
             <BookingModal handleClose={handleClose} showModal={show} hotel={hotel} />
         </>
     );
-}
+
 
             <Description data={data?.description} />
             <Reviews />
