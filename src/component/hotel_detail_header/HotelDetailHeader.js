@@ -1,6 +1,4 @@
-import React, { Children } from 'react'
-import "./HotelDetailHeader.css"
-import Appointment from '../../pages/Appointment/Appointment'
+import React, { Children } from "react";
 import "./HotelDetailHeader.css";
 
 export function Rating(props) {
@@ -28,9 +26,6 @@ export function Rating(props) {
 export default function HotelDetailHeader({ data }) {
   return (
     <>
- 
-     
-
       <header className="position-relative">
         <div className="container position-absolute con bottom-0">
           <div className="row d-flex justify-content-between position-relative  ">
@@ -56,12 +51,6 @@ export default function HotelDetailHeader({ data }) {
             </div>
           </div>
         </div>
-   
-
-  
-            
-      
-
       </header>
     </>
   );
