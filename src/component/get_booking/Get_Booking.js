@@ -3,13 +3,10 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 function GetBooking() {
-
     const [bookings, setBookings] = useState([]);
     const current_user = JSON.parse(localStorage.getItem('user'));
-    
 
     useEffect(() => {
-
         fetch(`http://127.0.0.1:8000/hotel/booking_by_hotel_owner/${current_user.id}/`)
             .then(response => {
                 if (response.ok) {
@@ -20,12 +17,58 @@ function GetBooking() {
             })
             .then(data => setBookings(data))
             .catch(error => console.error('Error:', error));
-
     }, []);
+
+    const handleConfirm = async (bookingId, index) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/hotel/confirm_booking/${bookingId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                console.log(`Booking confirmed /${bookingId}/`);
+                // Remove the confirmed booking from the state
+                const updatedBookings = [...bookings];
+                updatedBookings.splice(index, 1);
+                setBookings(updatedBookings);
+            } else {
+                throw new Error('Error confirming booking');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    const handleReject = async (bookingId, index) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/hotel/reject_booking/${bookingId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                console.log(`Booking rejected /${bookingId}/`);
+                // Remove the rejected booking from the state
+                const updatedBookings = [...bookings];
+                updatedBookings.splice(index, 1);
+                setBookings(updatedBookings);
+            } else {
+                throw new Error('Error rejecting booking');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     if (!Array.isArray(bookings)) {
         return <div>Loading...</div>;
     }
+
     return (
         <Table striped bordered hover variant="dark">
             <thead>
@@ -51,8 +94,8 @@ function GetBooking() {
                         <td>{booking.end_date}</td>
                         <td>{booking.guest}</td>
                         <td>
-                            <Button variant="success">Confirm</Button>{' '}
-                            <Button variant="danger">Cancel</Button>
+                            <Button variant="success" onClick={() => handleConfirm(booking.id, index)}>Confirm</Button>{' '}
+                            <Button variant="danger" onClick={() => handleReject(booking.id, index)}>Cancel</Button>
                         </td>
                     </tr>
                 ))}
