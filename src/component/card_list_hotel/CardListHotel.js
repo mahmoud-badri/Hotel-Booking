@@ -40,7 +40,8 @@ const CardListHotel = (props) => {
 
     const handleHeartIconClick = () => {
         if (isAlreadyInWishlist) {
-            dispatch(removeFromWishlist(props.id));
+            
+            dispatch(removeFromWishlist(props.hotel));
         } else {
             dispatch(getHotelById(props.id));
             dispatch(addToWishlist(props.hotel));
