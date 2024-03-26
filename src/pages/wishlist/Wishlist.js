@@ -23,13 +23,13 @@ const Wishlist = () => {
                         <CardListHotel
                             id={hotel.id}
                             image={hotel.image}
-                            rate={hotel.rate}
+                            rating={hotel.rating}
                             status={hotel.status}
                             review={hotel.review}
                             name={hotel.name}
                             description={hotel.descripen}
                             governorate={hotel.governorate}
-                            price={hotel.price}
+                            price={hotel.prices}
                             hotel={hotel}
                         />
                     </div>

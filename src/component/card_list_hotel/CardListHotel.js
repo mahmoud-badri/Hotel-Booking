@@ -12,6 +12,7 @@ import HotelDetails from "../../pages/hotel-details/HotelDetails";
 import BookingPopup from "./BookingPopup";
 
 const CardListHotel = (props) => {
+  console.log(props,'kkkkkkk');
     const dispatch = useDispatch();
     const wishlistItems = useSelector((state) => state.combinHotel.wishlist);
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -123,7 +124,7 @@ const CardListHotel = (props) => {
                             <div className="row px-3 mt-4 mb-3">
                                 <div className="d-flex align-items-center">
                                     <p className="rating mb-0 px-2 mr-3 me-2">
-                                        <strong>{props.rate}</strong>
+                                        <strong></strong>
                                     </p>
                                     <p className="text-primary mb-0 mr-2 grade me-2">
                                         <strong>{props.status}</strong>
@@ -137,10 +138,10 @@ const CardListHotel = (props) => {
                             </div>
                             <div className="row px-3 mb-2 mt-2">
                                 <div className="d-flex align-items-center">
+                                    <span className="text-warning mr-1">{props.rating}</span>
+                                    {/* <span className="fa fa-star text-warning mr-1"></span>
                                     <span className="fa fa-star text-warning mr-1"></span>
-                                    <span className="fa fa-star text-warning mr-1"></span>
-                                    <span className="fa fa-star text-warning mr-1"></span>
-                                    <span className="fa fa-star text-warning mr-1"></span>
+                                    <span className="fa fa-star text-warning mr-1"></span> */}
                                 </div>
                             </div>
                             <div className="row px-3 text-left">
@@ -156,19 +157,19 @@ const CardListHotel = (props) => {
                                 <h5 className="text-secondary mb-1 suite">Sky Suite</h5>
                             </div>
                             <div className="row px-3">
-                                <h2 className="text-success mb-1 font-weight-bold price">
-                                    ${props.price}
+                                <h2 className="text-danger mb-1 font-weight-bold price">
+                                  {props.price} <span className="text-success mb-1 font-weight-bold price" style={{fontWeight:"900"}}>$$</span>
                                 </h2>
                             </div>
                             <div className="row px-3 mb-3">
                                 <p className="text-muted mb-0 taxes">+ $14 taxes and charges</p>
                             </div>
                             <Link to={{pathname: "/hotelDetails" ,state:props.hotel}}>
-                                <button className="btn btn-success btn-regis me-2">
+                                <button style={{width:"20%",height:"15%"}} className="btn btn-success btn-regis me-2">
                                     Details
                                 </button>
                             </Link>
-                            <button className="btn btn-danger btn-regis" onClick={openModal}>
+                            <button style={{width:"20%"}} className="btn btn-danger btn-regis" onClick={openModal}>
                                 BOOK NOW
                             </button>
 

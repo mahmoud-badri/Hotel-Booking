@@ -40,7 +40,7 @@ const ListHotel = () => {
                     <CardListHotel
                         id={hotel.id}
                         image={hotel.image}
-                        rate={hotel.rate}
+                        rating={hotel.rating}
                         status={hotel.status}
                         review={hotel.review}
                         name={hotel.name}
