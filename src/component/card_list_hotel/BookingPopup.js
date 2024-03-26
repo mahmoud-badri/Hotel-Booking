@@ -3,6 +3,7 @@ import React from "react";
 import Modal from "react-modal";
 
 import axios from "axios";
+import { differenceInDays } from "date-fns";
 
 const BookingPopup = ({
   isOpen,
@@ -30,6 +31,8 @@ const BookingPopup = ({
   };
 
   function send_post_request(formData, current_user, hotel) {
+    var total_days = differenceInDays(formData.end_date, formData.start_date)     
+
     axios
       .post(" http://127.0.0.1:8000/hotel/booking_customer", {
         user: current_user.id,
@@ -38,15 +41,25 @@ const BookingPopup = ({
         start_date: formData.start_date,
         end_date: formData.end_date,
         guest: formData.guest,
+        
       })
+      
       .then(
+        
         (response) => {
           console.log(response);
         },
         (error) => {
           console.log(error);
+          console.log(formData);
         }
+      
       );
+      formData.room_type === "Single" ? formData.total_price=hotel.single_room * total_days
+      : formData.room_type === "Suite" ? formData.total_price=hotel.suite * total_days
+      :formData.room_type === "Family" ? formData.total_price=hotel.family_room * total_days
+      : console.log("invalid");
+      
   }
 
   const myHAndelSbmit = (e) => {

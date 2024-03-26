@@ -10,6 +10,7 @@ const INITIAL_VALUES = {
     wishlist: [],
     hotelReviews: [],
     currentHotel: null,
+    facilities:[]
 };
 
 const hotelReducer = (state = INITIAL_VALUES, action) => {
@@ -59,6 +60,11 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
                 ...state,
                 
             };
+        case 'GET_FACILITIES':
+            return{
+                ...state,
+                facilities: action.payload
+            }    
         default:
             return state;
     }

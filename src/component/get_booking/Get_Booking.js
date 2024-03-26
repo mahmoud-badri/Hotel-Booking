@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import { AuthContext } from '../../Context/AuthContext';
 
 function GetBooking() {
 
     const [bookings, setBookings] = useState([]);
     const current_user = JSON.parse(localStorage.getItem('user'));
-    
+    const {getBookings,bookingsCont} = useContext(AuthContext);
+    const [res, setRes] = useState(false);
 
     useEffect(() => {
 
-        fetch(`http://127.0.0.1:8000/hotel/booking_by_hotel_owner/${current_user.id}/`)
+        fetch(`http://127.0.0.1:8000/hotel/booking_by_hotel_owner/${current_user.id}`)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -23,6 +25,61 @@ function GetBooking() {
 
     }, []);
 
+    if (!Array.isArray(bookings)) {
+        return <div>Loading...</div>;
+    }
+
+    const handleConfirm = async (bookingId, index) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/hotel/confirm_booking/${bookingId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            setRes(response.ok)
+            const updatedBookings = [...bookings];
+            updatedBookings[index].status = 'confirmed';
+            setBookings(updatedBookings);
+
+            // if (response.ok) {
+            //     console.log(`Booking confirmed /${bookingId}/`);
+            //     // Remove the confirmed booking from the state
+            //     const updatedBookings = [...bookings];
+            //     updatedBookings.splice(index, 1);
+            //     setBookings(updatedBookings);
+            // } else {
+            //     throw new Error('Error confirming booking');
+            // }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+    const handleReject = async (bookingId, index) => {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/hotel/reject_booking/${bookingId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            setRes(response.ok)
+            const updatedBookings = [...bookings];
+            updatedBookings[index].status = 'cancelled';
+            setBookings(updatedBookings);
+            // if (response.ok) {
+            //     console.log(`Booking rejected /${bookingId}/`);
+            //     // Remove the rejected booking from the state
+            //     const updatedBookings = [...bookings];
+            //     updatedBookings.splice(index, 1);
+            //     setBookings(updatedBookings);
+            // } else {
+            //     throw new Error('Error rejecting booking');
+            // }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
     if (!Array.isArray(bookings)) {
         return <div>Loading...</div>;
     }
@@ -51,9 +108,33 @@ function GetBooking() {
                         <td>{booking.end_date}</td>
                         <td>{booking.guest}</td>
                         <td>
-                            <Button variant="success">Confirm</Button>{' '}
-                            <Button variant="danger">Cancel</Button>
-                        </td>
+
+ {booking.status !== 'confirmed' && (
+
+ <>
+
+ <Button variant="success" onClick={() => handleConfirm(booking.id, index)}>Confirm</Button>{' '}
+
+ <Button variant="danger" onClick={() => handleReject(booking.id, index)}>Cancel</Button>
+
+ </>
+
+ )}
+
+ {booking.status === 'confirmed' && (
+
+ <Button variant="secondary" disabled>Confirmed</Button>
+
+ )}
+
+ {booking.status === 'cancelled' && (
+
+ <Button variant="secondary" disabled>Cancelled</Button>
+
+ )}
+
+ </td>
+
                     </tr>
                 ))}
             </tbody>

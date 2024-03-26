@@ -73,7 +73,7 @@ function CarD({ card }) {
         <div style={{width:"30%"}}>
         <Link
           style={{ fontWeight: "800"}}
-          to={{ pathname: "/hotelDetails", state: card }}
+          to={{ pathname: `/HotelDetails/${card.id}`, state: card }}
         >
           <Button className="btn btn-warning text-white font-weight-bold  px-4 ml-0">
             Select

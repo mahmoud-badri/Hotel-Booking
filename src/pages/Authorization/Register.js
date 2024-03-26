@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { faEye, faEyeSlash  } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
+import Alert from 'react-bootstrap/Alert';
 
 function Register() {
   const history = useHistory();
@@ -26,6 +27,8 @@ function Register() {
   //for show password
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordR, setShowPasswordR] = useState(false);
+  const [error, setError] = useState("") 
+  const [confirm, setConfirm] = useState("") 
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -146,7 +149,9 @@ function Register() {
         email: userRegister.email,
         type: userRegister.type,
         password: userRegister.password,
+        confirm_password:userRegister.confirmpass
       };
+      try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/register",
         newUser
@@ -154,20 +159,40 @@ function Register() {
       console.log(response);
       console.log(userRegister.type);
       if (response.status === 200) {
-        localStorage.setItem(userRegister.email, JSON.stringify(userRegister))
+        
+        // localStorage.setItem(userRegister.email, JSON.stringify(userRegister))
         setSignedUp(true);
       }
+    }catch (error) {
+      console.log(error)
+      console.log(error.response.data.email[0]);
+
+      if(error.response.data.email[0]  === 'user with this email already exists.') {
+        setError(error.response.data.email[0])
+      }
+     
+    }
     }
   };
   
   useEffect(() => {
     if (signedUp) {
-      history.push('/Login');    }
+      setConfirm('We send an activation Email,please check your email')
+        }
   }, [signedUp,history]);
 
   return (
     <div classNameName="tabbar col-6">
-      
+      {error && (
+                    <Alert key="danger" variant="danger" className="d-block" 
+                    >
+                        {error}
+                    </Alert>)}
+                    {confirm && (
+                    <Alert key="danger" variant="danger" className="d-block" 
+                    >
+                        {confirm}
+                    </Alert>)}
           <div className="row ">
             <div className="col-5 col-sm-4">
             </div>

@@ -16,98 +16,143 @@
     border: 1px solid rgba(255, 255, 255, 0.5);
 } */
 
-/* body {
+body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
-    } */
-     
-    .remove{
-    text-decoration: none !important;
-    color: black;
-}
-
-.remove:hover{
-    color: rgb(255, 87, 87) !important;
-}
-    .navbar {
+    font-family: "Arial", sans-serif;
+  }
+  
+  .navbar {
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 2px;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    }
-     
-    
-    .navbar-brand {
+    position: fixed;
+  }
+  
+  .navbar-brand {
     font-size: 24px;
     font-weight: bold;
     color: #ff385c;
     text-decoration: none;
-    }
-     
-    
-    .navbar-nav {
+  }
+  
+  .navbar-nav {
     display: flex;
     align-items: center;
-    }
-     
-    
-    .nav-item {
-    margin-right: 15px;
-    }
-     
-    
-    .nav-link {
+  }
+  
+  .nav-item {
+    margin-right: 20px;
+  }
+  
+  .nav-link {
     text-decoration: none;
     color: #484848;
     font-weight: 600;
     transition: color 0.3s ease;
-    }
-     
-    
-    .nav-link:hover {
+  }
+  
+  .nav-link:hover {
     color: #ff385c;
-    }
-     
-    
-    .form-control {
+  }
+  
+  .form-control {
     margin-right: 10px;
-    }
-     
-    
-    .btn-outline-success {
+  }
+  
+  .btn-outline-success {
     margin-right: 10px;
-    }
-     
-    
-    .d-flex {
+  }
+  
+  .d-flex {
     display: flex;
-    }
-     
-    
-    .m-2 {
+  }
+  
+  .m-2 {
     margin-right: 20px;
-    }
-     
-    
-    /* Custom Styling for Active Links */
-    .nav-link.active {
-    color: #ff385c !important;
-    }
-     
-    
-    /* Additional Styles for Specific Elements */
-    /* Adjust as needed */
-    .custom-search-btn {
+  }
+  
+  /* Custom Styling for Active Links */
+  
+  /* Additional Styles for Specific Elements */
+  /* Adjust as needed */
+  .custom-search-btn {
     color: #008489; /* Text color */
     background-color: #ffffff; /* Background color */
     border: 1px solid #008489; /* Border color */
     transition: all 0.3s ease; /* Transition effect */
-    }
-     
-    
-    .custom-search-btn:hover {
+  }
+  
+  .custom-search-btn:hover {
     color: #fff; /* Text color on hover */
     background-color: #ff385c; /* Background color on hover */
-    }
+  }
+  .Btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: 0.3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: rgb(255, 65, 65);
+  }
+  
+  /* plus sign */
+  .sign {
+    width: 100%;
+    transition-duration: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sign svg {
+    width: 17px;
+  }
+  
+  .sign svg path {
+    fill: white;
+  }
+  /* text */
+  .text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: 0.3s;
+  }
+  /* hover effect on button width */
+  .Btn:hover {
+    width: 125px;
+    border-radius: 40px;
+    transition-duration: 0.3s;
+  }
+  
+  .Btn:hover .sign {
+    width: 30%;
+    transition-duration: 0.3s;
+    padding-left: 20px;
+  }
+  /* hover effect button's text */
+  .Btn:hover .text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: 0.3s;
+    padding-right: 10px;
+  }
+  /* button click effect*/
+  .Btn:active {
+    transform: translate(2px, 2px);
+  }
+  

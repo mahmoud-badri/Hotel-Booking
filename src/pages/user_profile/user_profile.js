@@ -7,19 +7,23 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import XIcon from "@mui/icons-material/X";
 import "./profil.css";
 import "./form.css";
+import BookinBasedHotel from "./BookingBasedHotel";
 
 import { AuthContext } from "../../Context/AuthContext";
 
 function UserProfilePage() {
-  const authContext = useContext(AuthContext);
+  var currentUser = localStorage.getItem("user")
+  currentUser = JSON.parse(currentUser)
+
+  // const authContext = useContext(AuthContext);
   // const isLoggedIn = authContext.isLoggedIn;
-  const currentUser = authContext.currentUser;
+  // const currentUser = authContext.currentUser;
 
   const [userData, setUserData] = useState({
     name: "",
-    address: "",
-    image: null,
-    phone: "",
+    email: "",
+    // image: null,
+    // phone: "",
   });
   // const [isSubmitted, setIsSubmitted] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -44,9 +48,9 @@ function UserProfilePage() {
     try {
       const formData = new FormData();
       formData.append("name", userData.name);
-      formData.append("address", userData.address);
-      formData.append("image", userData.image);
-      formData.append("phone", userData.phone);
+      formData.append("address", userData.email);
+      // formData.append("image", userData.image);
+      // formData.append("phone", userData.phone);
 
       await axios.post(
         "https://api-generator.retool.com/4tQuPx/data",
@@ -73,6 +77,7 @@ function UserProfilePage() {
 
   return (
     <div className="mb-3 container text-dark">
+       <BookinBasedHotel />
       <h2 className="text-center mb-4"> Profile </h2>
       {showForm && (
         <div className="container mt-5 mb-5 d-flex justify-content-center body2">
@@ -165,6 +170,8 @@ function UserProfilePage() {
                   Save
                 </button>
               </form>
+     
+
             </div>
           </div>
         </div>
@@ -237,6 +244,7 @@ function UserProfilePage() {
                 <button className="profile_button px-5" onClick={toggleForm}>
                   Edit profile
                 </button>
+
               </div>
             </div>
           </div>
