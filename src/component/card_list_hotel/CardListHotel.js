@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // Added useState import
+import React, { useEffect, useState } from "react";
 import "./CardListHotel.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -6,15 +6,15 @@ import {
     addToWishlist,
     removeFromWishlist,
 } from "../../Redux/HotelAction";
-import hotel from "../media/hotel2.jpg";
 import { Link } from "react-router-dom";
-import HotelDetails from "../../pages/hotel-details/HotelDetails";
 import BookingPopup from "./BookingPopup";
+import Swal from "sweetalert2";
 
 const CardListHotel = (props) => {
     const dispatch = useDispatch();
     const wishlistItems = useSelector((state) => state.combinHotel.wishlist);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [getLocalValues, setgetLocalValues] = useState(JSON.parse(localStorage.getItem("userData")))
     const [formData, setFormData] = useState({
         room_type: "",
         start_date: "",
@@ -23,15 +23,6 @@ const CardListHotel = (props) => {
     });
 
     const current_user = JSON.parse(localStorage.getItem('user'));
-    const hotel = props
-
-    console.log("=========hotel data============");
-    console.log(hotel);
-    console.log("===============================");
-
-    console.log("=========user data============");
-    console.log(current_user);
-    console.log("===============================");
 
     // Check if the current hotel is in the wishlist
     const isAlreadyInWishlist = wishlistItems.some(
@@ -40,11 +31,10 @@ const CardListHotel = (props) => {
 
     const handleHeartIconClick = () => {
         if (isAlreadyInWishlist) {
-            
-            dispatch(removeFromWishlist(props.hotel));
+            dispatch(removeFromWishlist(props));
         } else {
             dispatch(getHotelById(props.id));
-            dispatch(addToWishlist(props.hotel));
+            dispatch(addToWishlist(props));
         }
     };
 
@@ -100,7 +90,12 @@ const CardListHotel = (props) => {
         // Close the modal
         closeModal();
     };
-
+    function alert() {
+        Swal.fire("You need to login first");
+      }
+      useEffect(() => {
+        setgetLocalValues(JSON.parse(localStorage.getItem("userData")))
+      }, [getLocalValues])
     return (
         <div className="container-fluid px-4 py-5 mx-auto">
             <div className="row d-flex justify-content-center">
@@ -109,7 +104,7 @@ const CardListHotel = (props) => {
                         <div className="col-sm-4 px-0">
                             <button
                                 className="btn-icon"
-                                onClick={() => handleHeartIconClick(props)}
+                                onClick={handleHeartIconClick}
                             >
                                 <i
                                     className={`fa-solid fa-heart fa-lg ${isAlreadyInWishlist ? "red-heart" : ""
@@ -163,12 +158,14 @@ const CardListHotel = (props) => {
                             <div className="row px-3 mb-3">
                                 <p className="text-muted mb-0 taxes">+ $14 taxes and charges</p>
                             </div>
-                            <Link to="/HotelDetails">
+                            <Link to={{pathname: "/hotelDetails" ,state:props.hotel}}>
                                 <button className="btn btn-success btn-regis me-2">
                                     Details
                                 </button>
                             </Link>
-                            <button className="btn btn-danger btn-regis" onClick={openModal}>
+                            <button className="btn btn-danger btn-regis" onClick={() => {
+                                getLocalValues ? openModal() : alert()
+                              }}>
                                 BOOK NOW
                             </button>
 
@@ -180,7 +177,7 @@ const CardListHotel = (props) => {
                                 handleInputChange={handleInputChange}
                                 formData={formData}
                                 current_user={current_user}
-                                hotel={hotel}
+                                hotel={props}
                             />
                         </div>
                     </div>

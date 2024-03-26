@@ -120,6 +120,7 @@ useEffect(() => {
               console.log(response.status);
               if (response.status === 200) {
                 authContext?.login(response?.data?.jwt, response?.data?.user);
+                localStorage.setItem("userData", JSON.stringify(response.data.user));
                 history.push('/');
               } 
             } catch (error) {

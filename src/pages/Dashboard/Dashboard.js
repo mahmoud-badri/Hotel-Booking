@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Bar, Pie, Line } from "react-chartjs-2";
 import { Chart, registerables, LinearScale } from "chart.js";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -14,6 +14,9 @@ import {
   styled,
 } from "@mui/material";
 import HouseIcon from "@mui/icons-material/House";
+import GetBooking from "../../component/get_booking/Get_Booking";
+import { AuthContext } from "../../Context/AuthContext";
+import { useState } from "react";
 
 Chart.register(...registerables, LinearScale);
 
@@ -134,7 +137,11 @@ const HotelDashboard = () => {
       animateRotate: false,
     },
   };
-
+  const {getBookings,bookingsCont} = useContext(AuthContext);
+  const [bookings, setBookings] = useState(bookingsCont);
+  useEffect(() => {
+      getBookings()
+  }, [bookingsCont]);
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="lg">
@@ -161,11 +168,12 @@ const HotelDashboard = () => {
             <Grid item xs={3}>
               <StyledCard
                 elevation={3}
-                sx={{ borderRadius: 2, textAlign: "center" }}
+                sx={{ borderRadius: 2, textAlign: "center",cursor:"pointer" }}
+                data-bs-toggle="modal" data-bs-target="#exampleModal" 
               >
                 <CardHeader
                   title={
-                    <Box>
+                    <Box >
                       <HouseIcon style={{ fontSize: 18, marginRight: 1 }} />
                       Bookings
                     </Box>
@@ -173,7 +181,7 @@ const HotelDashboard = () => {
                 />
                 <CardContent>
                   <Typography variant="h3" style={{ color: "#00a699" }}>
-                    {breakdownData.bookingConfirmations}
+                    {bookings.length}
                   </Typography>
                 </CardContent>
               </StyledCard>
@@ -236,6 +244,20 @@ const HotelDashboard = () => {
             </Grid>
           </Grid>
         </Grid>
+        {/* Modal   */}
+        <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog">
+            <div className="modal-content" style={{ width: "160%" }}>
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+              </div>
+              <div className="modal-body">
+                  <GetBooking/>
+              </div>
+            </div>
+          </div>
+        </div>
       </Container>
     </ThemeProvider>
   );

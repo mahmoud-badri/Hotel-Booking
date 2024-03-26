@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import { AuthContext } from '../../Context/AuthContext';
 
 function GetBooking() {
-    const [bookings, setBookings] = useState([]);
     const current_user = JSON.parse(localStorage.getItem('user'));
-
+    const {getBookings,bookingsCont} = useContext(AuthContext);
+    const [bookings, setBookings] = useState(bookingsCont);
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/hotel/booking_by_hotel_owner/${current_user.id}/`)
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Error fetching bookings');
-                }
-            })
-            .then(data => setBookings(data))
-            .catch(error => console.error('Error:', error));
+        getBookings()
     }, []);
 
     const handleConfirm = async (bookingId, index) => {

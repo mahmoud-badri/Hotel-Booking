@@ -7,6 +7,7 @@ const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(false);
   const [token, setToken] = useState("");
+  const [bookingsCont, setBookingsCont] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -44,6 +45,19 @@ const AuthProvider = ({ children }) => {
     setCurrentUser(localStorage.getItem("user"));
   }
   , []);
+  const current_user = JSON.parse(localStorage.getItem('user'));
+  function getBookings() {
+    fetch(`http://127.0.0.1:8000/hotel/booking_by_hotel_owner/${current_user.id}/`)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error fetching bookings');
+                }
+            })
+            .then(data => setBookingsCont(data))
+            .catch(error => console.error('Error:', error));
+  }
   return (
     <AuthContext.Provider
       value={{
@@ -55,6 +69,8 @@ const AuthProvider = ({ children }) => {
         login,
         logout,
         setIsLoggedIn,
+        getBookings,
+        bookingsCont
       }}
     >
       {children}
