@@ -22,7 +22,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import Alert from 'react-bootstrap/Alert';
 
 var user = localStorage.getItem("user")
- user = JSON.parse(user)
+user = JSON.parse(user)
 const images = [
     {
         original: "https://picsum.photos/id/1018/1000/600/",
@@ -53,32 +53,32 @@ function Description(props) {
 
     const hotel = hotels.find((hotel) => hotel.id == hotelId.id)
 
-  
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch(`http://127.0.0.1:8000/hotel/allFacilites/${hotel}`);
-//         const jsonData = await response.json();
-//         setFacility(jsonData);
-//         console.log(jsonData);
-//       } catch (error) {
-//         setError(error.message);
-//       }
-//     };
 
-//     fetchData();
-//   }, []);
-const dispatch = useDispatch()
-// const facilities = useSelector((state) => state.combinHotel.facilities)
-const fa = hotel.facility.split(',')
-useEffect(() => {
-    console.log(fa);
-    // dispatch(getFacilities(hotel.id))
-  }, [dispatch]);
-   
-    const list = fa.map((item) => ( {icon: "check", text: item }))
-                
-    
+    //   useEffect(() => {
+    //     const fetchData = async () => {
+    //       try {
+    //         const response = await fetch(`http://127.0.0.1:8000/hotel/allFacilites/${hotel}`);
+    //         const jsonData = await response.json();
+    //         setFacility(jsonData);
+    //         console.log(jsonData);
+    //       } catch (error) {
+    //         setError(error.message);
+    //       }
+    //     };
+
+    //     fetchData();
+    //   }, []);
+    const dispatch = useDispatch()
+    // const facilities = useSelector((state) => state.combinHotel.facilities)
+    const fa = hotel.facility.split(',')
+    useEffect(() => {
+        console.log(fa);
+        // dispatch(getFacilities(hotel.id))
+    }, [dispatch]);
+
+    const list = fa.map((item) => ({ icon: "check", text: item }))
+
+
     return (
         <>
             <div className="row text-dark my-3" style={{ textAlign: "start" }}>
@@ -88,11 +88,11 @@ useEffect(() => {
 
                 <div className="col-md-9 ">
                     <p>
-                   { hotel.description}
+                        {hotel.description}
                     </p>
                     <h4 className="py-3">Hotel facilities</h4>
                     <p>
-                       { hotel.facility_desc}
+                        {hotel.facility_desc}
                     </p>
                     <ItemList columns={2} itemlist={list} />
                 </div>
@@ -130,12 +130,12 @@ function Icons(props) {
     const list = props.iconlist.map((el) => {
         const isChecked = hotel[el.field];
         if (isChecked) {
-        return (
-            <div className={`d-flex flex-column`}>
-                <i className={`fa-solid fa-${el.iconsrc} size-i text-muted`}></i>
-                <span className="text-muted">{el.icontext}</span>
-            </div>
-        );
+            return (
+                <div className={`d-flex flex-column`}>
+                    <i className={`fa-solid fa-${el.iconsrc} size-i text-muted`}></i>
+                    <span className="text-muted">{el.icontext}</span>
+                </div>
+            );
         }
     });
     return <>{list}</>;
@@ -263,12 +263,12 @@ function Reviews(props) {
     // console.log(reviews);
     let register = useFormik({
         initialValues: {
-            hotel:hotel.id,
+            hotel: hotel.id,
             name: "",
             rating: "",
             description: "",
-            user:user? user.id : '',
-            image:user?user.image :null
+            user: user ? user.id : '',
+            image: user ? user.image : null
         },
         onSubmit: (values) => {
             dispatch(postHotelReviews(values));
@@ -411,56 +411,56 @@ function Reviews(props) {
     );
 }
 
-export default function HotelDetailBody({data}) {
+export default function HotelDetailBody({ data }) {
     const hotelId = useParams();
-    const [error, setError] = useState("") 
+    const [error, setError] = useState("")
 
     const hotels = useSelector((state) => state.combinHotel.hotels)
-    console.log(hotels.find((hotel) => hotel.id == hotelId.id).is_tv); 
-// console.log(posts);
+    console.log(hotels.find((hotel) => hotel.id == hotelId.id).is_tv);
+    // console.log(posts);
     console.log(hotelId.id);
     const hotel = hotels.find((hotel) => hotel.id == hotelId.id)
     // console.log(hotel["name"])
     const [show, setShow] = useState(false);
     // console.log(data)
     const handleClose = () => setShow(false);
-    const handleShow = () =>{
+    const handleShow = () => {
         if (!user) {
             setError('You must login first');
             setShow(false); // Set show to false to prevent showing the modal
-            
+
             // alert('You must login first'); // Display an alert instead
-          } else {
+        } else {
             setShow(true); // Show the modal if the user is true
-          }
-    } 
-     // Hide the alert after a certain delay
-//   setTimeout(() => {
-//     setShowAlert(false);
-//   }, 3000); // Adjust the delay as needed
-const images = [
-    {
-        original:  hotel.image,
-        thumbnail:  hotel.image ,
-    },
-    // {
-    //     original: "https://picsum.photos/id/1015/1000/600/",
-    //     thumbnail: "https://picsum.photos/id/1015/250/150/",
-    // },
-    // {
-    //     original: "https://picsum.photos/id/1019/1000/600/",
-    //     thumbnail: "https://picsum.photos/id/1019/250/150/",
-    // },
-];
+        }
+    }
+    // Hide the alert after a certain delay
+    //   setTimeout(() => {
+    //     setShowAlert(false);
+    //   }, 3000); // Adjust the delay as needed
+    const images = [
+        {
+            original: hotel.image,
+            thumbnail: hotel.image,
+        },
+        // {
+        //     original: "https://picsum.photos/id/1015/1000/600/",
+        //     thumbnail: "https://picsum.photos/id/1015/250/150/",
+        // },
+        // {
+        //     original: "https://picsum.photos/id/1019/1000/600/",
+        //     thumbnail: "https://picsum.photos/id/1019/250/150/",
+        // },
+    ];
     return (
         <>
             <div className="container mt-5 ">
-                    {error && (
-                    <Alert key="danger" variant="danger"  
+                {error && (
+                    <Alert key="danger" variant="danger"
                     >
                         {error}
                     </Alert>
-                    )}
+                )}
                 <div className="row">
                     {/* first col icons , carousel , rooms , reviews */}
                     <div className="col-md-8">
@@ -476,26 +476,26 @@ const images = [
         
         desc
         */}
-        <Description />
-        {/* <RoomTypes /> */}
-        <Appointment />
-        <Reviews />
-                
+                        <Description />
+                        {/* <RoomTypes /> */}
+                        <Appointment />
+                        <Reviews />
 
-                       
+
+
                     </div>
                     {/* details */}
-                    <div className="col-md-4  cc ">
+                    <div className="col-md-4  cc  ">
                         <i class="fa-solid fa-phone fs-2 mt-4 mb-3 icon-d"></i>
-                        <p className="fs-4 icon-d">
+                        <p className="fs-4 icon-d m-0">
                             {" "}
-                            <span className="sp-d">Book</span> {hotel.name}
+                            <span className="sp-d ">Book</span> {hotel.name}
                         </p>
-                        <p className="fs-5 phone-icon-d ">
+                        <p className="fs-3 phone-icon-d m-0">
                             +456<span> </span>789<span> </span>0097
                         </p>
-                        <p className="fs-6 text-muted">Monday to Friday 9.00am - 7.30pm</p>
-                        
+                        <p className="fs-6 text-muted m-2">Monday to Friday 9.00am - 7.30pm</p>
+
                         <Button variant="primary" onClick={handleShow}>
                             Book Your Room
                         </Button>
@@ -503,16 +503,16 @@ const images = [
                 </div>
             </div>
             {hotel.map_location &&
-             <iframe
-                src={hotel.map_location}
-                width="90%"
-                height="450"
-                frameborder="0"
-                style={{ border: 0 }}
-                allowfullscreen=""
-                aria-hidden="false"
-                tabindex="0"
-            />
+                <iframe
+                    src={hotel.map_location}
+                    width="90%"
+                    height="450"
+                    frameborder="0"
+                    style={{ border: 0 }}
+                    allowfullscreen=""
+                    aria-hidden="false"
+                    tabindex="0"
+                />
             }
             <BookingModal handleClose={handleClose} showModal={show} hotel={hotel} />
         </>

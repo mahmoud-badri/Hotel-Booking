@@ -8,12 +8,12 @@ const AddHotelForm = () => {
     var user = localStorage.getItem("user")
     user = JSON.parse(user)
 
-   
+
     const [formData, setFormData] = useState({
-        user:user.id,
+        user: user.id,
         name: '',
         address: '',
-        prices:0,
+        prices: 0,
         description: '',
         rate: 5,
         prices: 0,
@@ -21,18 +21,17 @@ const AddHotelForm = () => {
         governorate: '',
         image: null,
         suite: 0,
-        single_room:'',
-        family_room:'',
+        single_room: '',
+        family_room: '',
         facility_desc: '',
-        facility:'',
-        map_location:'',
-        is_tv:false,
-        is_wifi:false,
-        is_poll:false,
-        is_BreakFast:false,
-        is_Pet:false,
-        is_Accessibiliy:false,
-        is_Parking:false,
+        facility: '',
+        is_tv: false,
+        is_wifi: false,
+        is_poll: false,
+        is_BreakFast: false,
+        is_Pet: false,
+        is_Accessibiliy: false,
+        is_Parking: false,
     });
 
     const dispatch = useDispatch(); // No longer needed in this component
@@ -54,13 +53,13 @@ const AddHotelForm = () => {
         await addHotel(formData); // Assuming addHotel is an asynchronous action
         //console.log(user)
         history.push('/'); // Redirect to home component
-   
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log(formData); 
-    //     addHotel(formData); 
-    //     console.log(user)
-        
+
+        // const handleSubmit = (e) => {
+        //     e.preventDefault();
+        //     console.log(formData); 
+        //     addHotel(formData); 
+        //     console.log(user)
+
 
     };
     return (
@@ -132,7 +131,7 @@ const AddHotelForm = () => {
                     </select>
                 </label>
                 <br />
-               
+
                 <label>
                     Image:
                     <input
@@ -142,8 +141,8 @@ const AddHotelForm = () => {
                     />
                 </label>
                 <label>
-                Facility Description:
-                <textarea name="facility_desc" value={formData.facility_desc} onChange={handleInputChange} />
+                    Facility Description:
+                    <textarea name="facility_desc" value={formData.facility_desc} onChange={handleInputChange} />
                 </label>
                 <label>
                     Facilities(comma separator):
@@ -190,53 +189,42 @@ const AddHotelForm = () => {
                     />
                 </label>
                 <br />
-                <label>
-                    Map Location:
-                    <input
-                        type='text'
-                        name='map_location'
-                        value={formData.map_location}
-                        onChange={handleInputChange}
-                        min={0}
-                        step={0.01}
-                    />
-                </label>
-             <div className='d-flex justify-content-between'>  
-        <label>
-          TV:
-          <input type="checkbox" name="is_tv" checked={formData.is_tv} onChange={handleInputChange} />
-        </label>
-       
-        <label>
-          WiFi:
-          <input type="checkbox" name="is_wifi" checked={formData.is_wifi} onChange={handleInputChange} />
-        </label>
-       
-        <label>
-          Pool:
-          <input type="checkbox" name="is_poll" checked={formData.is_poll} onChange={handleInputChange} />
-        </label>
-       
-        <label>
-          Breakfast:
-          <input type="checkbox" name="is_BreakFast" checked={formData.is_BreakFast} onChange={handleInputChange} />
-        </label>
-       
-       <label>
-          Pet-friendly:
-          <input type="checkbox" name="is_Pet" checked={formData.is_Pet} onChange={handleInputChange} />
-        </label>
-       
-        <label>
-          Accessibility:
-          <input type="checkbox" name="is_Accessibility" checked={formData.is_Accessibility} onChange={handleInputChange} />
-        </label>
-       
-        <label>
-          Parking:
-          <input type="checkbox" name="is_Parking" checked={formData.is_Parking} onChange={handleInputChange} />
-        </label>
-        </div> 
+                <div className='d-flex justify-content-between'>
+                    <label>
+                        TV:
+                        <input type="checkbox" name="is_tv" checked={formData.is_tv} onChange={handleInputChange} />
+                    </label>
+
+                    <label>
+                        WiFi:
+                        <input type="checkbox" name="is_wifi" checked={formData.is_wifi} onChange={handleInputChange} />
+                    </label>
+
+                    <label>
+                        Pool:
+                        <input type="checkbox" name="is_poll" checked={formData.is_poll} onChange={handleInputChange} />
+                    </label>
+
+                    <label>
+                        Breakfast:
+                        <input type="checkbox" name="is_BreakFast" checked={formData.is_BreakFast} onChange={handleInputChange} />
+                    </label>
+
+                    <label>
+                        Pet-friendly:
+                        <input type="checkbox" name="is_Pet" checked={formData.is_Pet} onChange={handleInputChange} />
+                    </label>
+
+                    <label>
+                        Accessibility:
+                        <input type="checkbox" name="is_Accessibility" checked={formData.is_Accessibility} onChange={handleInputChange} />
+                    </label>
+
+                    <label>
+                        Parking:
+                        <input type="checkbox" name="is_Parking" checked={formData.is_Parking} onChange={handleInputChange} />
+                    </label>
+                </div>
                 <button
                     className='btn btn-danger w-50 fw-bold'
                     type='submit'

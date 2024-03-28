@@ -7,11 +7,10 @@ function GetBooking() {
 
     const [bookings, setBookings] = useState([]);
     const current_user = JSON.parse(localStorage.getItem('user'));
-    const {getBookings,bookingsCont} = useContext(AuthContext);
+    const { getBookings, bookingsCont } = useContext(AuthContext);
     const [res, setRes] = useState(false);
 
     useEffect(() => {
-
         fetch(`http://127.0.0.1:8000/hotel/booking_by_hotel_owner/${current_user.id}`)
             .then(response => {
                 if (response.ok) {
@@ -41,20 +40,11 @@ function GetBooking() {
             const updatedBookings = [...bookings];
             updatedBookings[index].status = 'confirmed';
             setBookings(updatedBookings);
-
-            // if (response.ok) {
-            //     console.log(`Booking confirmed /${bookingId}/`);
-            //     // Remove the confirmed booking from the state
-            //     const updatedBookings = [...bookings];
-            //     updatedBookings.splice(index, 1);
-            //     setBookings(updatedBookings);
-            // } else {
-            //     throw new Error('Error confirming booking');
-            // }
         } catch (error) {
             console.error('Error:', error);
         }
     };
+
     const handleReject = async (bookingId, index) => {
         try {
             const response = await fetch(`http://127.0.0.1:8000/hotel/reject_booking/${bookingId}`, {
@@ -67,22 +57,11 @@ function GetBooking() {
             const updatedBookings = [...bookings];
             updatedBookings[index].status = 'cancelled';
             setBookings(updatedBookings);
-            // if (response.ok) {
-            //     console.log(`Booking rejected /${bookingId}/`);
-            //     // Remove the rejected booking from the state
-            //     const updatedBookings = [...bookings];
-            //     updatedBookings.splice(index, 1);
-            //     setBookings(updatedBookings);
-            // } else {
-            //     throw new Error('Error rejecting booking');
-            // }
         } catch (error) {
             console.error('Error:', error);
         }
     };
-    if (!Array.isArray(bookings)) {
-        return <div>Loading...</div>;
-    }
+
     return (
         <Table striped bordered hover variant="dark">
             <thead>
@@ -108,33 +87,15 @@ function GetBooking() {
                         <td>{booking.end_date}</td>
                         <td>{booking.guest}</td>
                         <td>
-
- {booking.status !== 'confirmed' && (
-
- <>
-
- <Button variant="success" onClick={() => handleConfirm(booking.id, index)}>Confirm</Button>{' '}
-
- <Button variant="danger" onClick={() => handleReject(booking.id, index)}>Cancel</Button>
-
- </>
-
- )}
-
- {booking.status === 'confirmed' && (
-
- <Button variant="secondary" disabled>Confirmed</Button>
-
- )}
-
- {booking.status === 'cancelled' && (
-
- <Button variant="secondary" disabled>Cancelled</Button>
-
- )}
-
- </td>
-
+                            {(booking.status === 'confirmed' || booking.status === 'cancelled') ? (
+                                <Button variant="secondary" disabled>{booking.status === 'confirmed' ? 'Confirmed' : 'Cancelled'}</Button>
+                            ) : (
+                                <Button variant="success" onClick={() => handleConfirm(booking.id, index)} disabled={booking.status === 'confirming'}>Confirm</Button>
+                            )}
+                            {(booking.status === 'confirmed' || booking.status === 'cancelled') ? null : (
+                                <Button variant="danger" onClick={() => handleReject(booking.id, index)} disabled={booking.status === 'cancelling'}>Cancel</Button>
+                            )}
+                        </td>
                     </tr>
                 ))}
             </tbody>

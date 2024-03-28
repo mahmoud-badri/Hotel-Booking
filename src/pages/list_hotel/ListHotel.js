@@ -43,7 +43,6 @@ const ListHotel = () => {
         //     setHotels(res);
         // });
     // }, []);
-console.log(hotels,"jhjh");
     return (
         <>
         

@@ -1,9 +1,14 @@
-.size-i{
+.size-i {
     font-size: 30px;
 
 }
-.img-d-body{
+
+.img-d-body {
     width: 100px;
     height: 100px;
     border-radius: 50%;
+}
+
+.cc {
+    height: 230px;
 }

@@ -139,22 +139,22 @@ const HotelDashboard = () => {
   };
   const user = JSON.parse(localStorage.getItem('user'));
 
-  const {getBookings,bookingsCont} = useContext(AuthContext);
+  const { getBookings, bookingsCont } = useContext(AuthContext);
   const [bookings, setBookings] = useState(bookingsCont);
   useEffect(() => {
 
     fetch(`http://127.0.0.1:8000/hotel/booking_by_hotel_owner/${user.id}`)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Error fetching bookings');
-            }
-        })
-        .then(data => setBookings(data))
-        .catch(error => console.error('Error:', error));
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Error fetching bookings');
+        }
+      })
+      .then(data => setBookings(data))
+      .catch(error => console.error('Error:', error));
 
-}, []);
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="lg">
@@ -164,7 +164,7 @@ const HotelDashboard = () => {
 
         <Grid container spacing={3}>
           <Grid container item xs={12} spacing={3}>
-            <Grid item xs={3}>
+            <Grid item xs={6}>
               <StyledCard
                 elevation={3}
                 sx={{ borderRadius: 2, textAlign: "center" }}
@@ -178,11 +178,11 @@ const HotelDashboard = () => {
               </StyledCard>
             </Grid>
 
-            <Grid item xs={3}>
+            <Grid item xs={6}>
               <StyledCard
                 elevation={3}
-                sx={{ borderRadius: 2, textAlign: "center",cursor:"pointer" }}
-                data-bs-toggle="modal" data-bs-target="#exampleModal" 
+                sx={{ borderRadius: 2, textAlign: "center", cursor: "pointer" }}
+                data-bs-toggle="modal" data-bs-target="#exampleModal"
               >
                 <CardHeader
                   title={
@@ -200,7 +200,7 @@ const HotelDashboard = () => {
               </StyledCard>
             </Grid>
 
-            <Grid item xs={3}>
+            <Grid item xs={6}>
               <StyledCard
                 elevation={3}
                 sx={{ borderRadius: 2, textAlign: "center" }}
@@ -214,7 +214,7 @@ const HotelDashboard = () => {
               </StyledCard>
             </Grid>
 
-            <Grid item xs={3}>
+            <Grid item xs={6}>
               <StyledCard
                 elevation={3}
                 sx={{ borderRadius: 2, textAlign: "center" }}
@@ -229,7 +229,7 @@ const HotelDashboard = () => {
             </Grid>
           </Grid>
 
-          <Grid item xs={9} sx={{ textAlign: "center" }}>
+          <Grid item xs={12} sx={{ textAlign: "center" }}>
             <StyledCard elevation={3} sx={{ borderRadius: 2 }}>
               <CardHeader title="Monthly Revenue Chart" />
               <CardContent>
@@ -259,37 +259,37 @@ const HotelDashboard = () => {
         </Grid>
         {/* Modal */}
 
- <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-<div className="modal-dialog" style={{display:"flex",justifyContent:'center',flexDirection:'column',alignItems:'center'}}>
+          <div className="modal-dialog" style={{ display: "flex", justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
 
-<div className="modal-content" style={{ width: "85vw" }}>
+            <div className="modal-content" style={{ width: "85vw" }}>
 
-<div className="modal-header">
+              <div className="modal-header">
 
-<h1 className="modal-title fs-5" id="exampleModalLabel">Booking Requests</h1>
+                <h1 className="modal-title fs-5" id="exampleModalLabel">Booking Requests</h1>
 
-<button className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                <button className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
 
-</div>
+              </div>
 
-<div className="modal-body">
+              <div className="modal-body">
 
-<GetBooking/>
+                <GetBooking />
 
-</div>
+              </div>
 
-</div>
+            </div>
 
-</div>
+          </div>
 
-</div>
+        </div>
 
-</Container>
+      </Container>
 
-</ThemeProvider>
+    </ThemeProvider>
 
-);
+  );
 
 };
 

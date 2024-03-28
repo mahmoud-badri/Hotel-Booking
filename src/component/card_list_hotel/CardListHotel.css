@@ -1,11 +1,17 @@
 .hotel-card {
     border-radius: 10px;
-    width: 70% !important; 
+    width: 70% !important;
     box-shadow: 0px 4px 8px 0px #ba8a8a;
     margin-top: 2px;
     margin-bottom: 2px;
 }
-.title,.details,.address,.suite,.price,.taxes{
+
+.title,
+.details,
+.address,
+.suite,
+.price,
+.taxes {
     text-align: left;
 
 
@@ -26,6 +32,7 @@
 }
 
 .rating {
+    position: relative;
     background-color: #3D5AFE;
     color: #fff;
     border-top-left-radius: 5px;
@@ -44,8 +51,9 @@
     height: 1px;
     background-color: #E0E0E0;
 }
-.btn-regis{
-    position: relative;
+
+.btn-regis {
+    /* position: relative; */
     right: -110px;
     width: 150px;
     font-weight: bold;
@@ -53,9 +61,11 @@
 }
 
 
-.btn-icon{
+.btn-icon {
     position: absolute;
-    transform: translate(210px,30px);
+    left: 30%;
+    top: 4%;
+    /* transform: translate(210px,30px); */
     background: #ffffff;
     border-radius: 50%;
     height: 40px;
@@ -65,17 +75,25 @@
 
 }
 
-.btn-icon:hover{
+@media screen and (max-width: 575px) {
+    .btn-icon {
+        left: 0;
+        top: 33%;
+    }
+}
+
+.btn-icon:hover {
     height: 45px;
     width: 45px;
 }
+
 .red-heart {
-    color: red; 
+    color: red;
 }
 
 @media screen and (max-width: 575px) {
     .image {
-        height: auto;
+        height: 165px;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 0px;
         border-top-right-radius: 10px;
