@@ -40,6 +40,8 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
                 ...state,
                 wishlist: state.wishlist.filter((item) => item.id !== action.payload),
             };
+        
+        
         case 'GET_HOTEL_REVIEWS':
             return {
                 ...state,

@@ -69,6 +69,10 @@ const ListHotel = () => {
                             description={hotel.descripen}
                             governorate={hotel.governorate}
                             price={hotel.prices}
+                            user_id = {hotel.user}
+                            single_room = {hotel.single_room}
+                            suite = {hotel.suite}
+                            family_room = {hotel.family_room}
                             
                         />
                     </div>

@@ -8,12 +8,12 @@ export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 
 export const getHotel = () => (dispatch) => {
     return axios.get("http://127.0.0.1:8000/hotel/")
-    .then ((res) => dispatch({
-        type: "GET_HOTELS_LIST",
-        payload: res.data
-    }))
-    .catch((err) => console.log(err))
-    
+        .then((res) => dispatch({
+            type: "GET_HOTELS_LIST",
+            payload: res.data
+        }))
+        .catch((err) => console.log(err))
+
 }
 
 
@@ -22,17 +22,19 @@ export const getHotel = () => (dispatch) => {
 
 
 export const addHotel = async (hotelData, userId) => {
-  try {
-      const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
-          headers: {
-              'Content-Type': 'multipart/form-data'
-          }
-      });
-      return res.data;
-  } catch (error) {
-      console.log(error);
-  }
+    try {
+        const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
 };
+
+
 
 // export const getFacilities = (id) => (dispatch) => {
 //     console.log(`Fetching hotel data for hotel: ${id}`);
