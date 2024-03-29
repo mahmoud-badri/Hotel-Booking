@@ -144,6 +144,11 @@ function MyNavbar() {
                         Dashboard
                       </Link>
                     </div>
+                    <div className="nav-item">
+                      <Link to="/EditHotel" className="nav-link">
+                        Edit hotel
+                      </Link>
+                    </div>
                   </>) : (
                   <li className="nav-item">
                     <Link className="nav-link active" to="/Wishlist">

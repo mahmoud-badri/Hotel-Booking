@@ -30,6 +30,11 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
                 ...state,
                 currentHotel: action.payload,
             };
+        // case GET_HOTEL_BY_ID:
+        //         return {
+        //             ...state,
+        //             currentHotel: action.payload,
+        //         };    
         case ADD_TO_WISHLIST:
             return {
                 ...state,
@@ -55,8 +60,20 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
         case 'PUT_HOTEL_REVIEWS':
             return {
                 ...state,
-                
+                currentHotel: action.payload,
+
             };
+            case 'PUT_HOTEL':
+                const updatedhotel = action.payload;
+                const updatedHotelsList = state.hotels.map((hotel)=>
+                  hotel.id === updatedhotel.id ? updatedhotel : hotel
+                );
+                console.log(updatedhotel);
+
+                return {
+                  ...state,
+                  hotels: updatedHotelsList
+                };
         case 'DELETE_HOTEL_REVIEWS':
             return {
                 ...state,

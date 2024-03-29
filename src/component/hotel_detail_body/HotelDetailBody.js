@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -20,9 +20,11 @@ import BookingModal from "../../pages/hotel-details/bookingModal";
 import axios from "axios";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import Alert from 'react-bootstrap/Alert';
+import EditHotel from "../../pages/EditHotel/EditHotel";
 
 var user = localStorage.getItem("user")
 user = JSON.parse(user)
+
 const images = [
     {
         original: "https://picsum.photos/id/1018/1000/600/",
@@ -414,7 +416,6 @@ function Reviews(props) {
 export default function HotelDetailBody({ data }) {
     const hotelId = useParams();
     const [error, setError] = useState("")
-
     const hotels = useSelector((state) => state.combinHotel.hotels)
     console.log(hotels.find((hotel) => hotel.id == hotelId.id).is_tv);
     // console.log(posts);
@@ -452,6 +453,7 @@ export default function HotelDetailBody({ data }) {
         //     thumbnail: "https://picsum.photos/id/1019/250/150/",
         // },
     ];
+
     return (
         <>
             <div className="container mt-5 ">
@@ -479,7 +481,9 @@ export default function HotelDetailBody({ data }) {
                         <Description />
                         {/* <RoomTypes /> */}
                         <Appointment />
-                        <Reviews />
+                       <Reviews />
+                                
+
 
 
 
@@ -515,6 +519,12 @@ export default function HotelDetailBody({ data }) {
                 />
             }
             <BookingModal handleClose={handleClose} showModal={show} hotel={hotel} />
+            {user&& user.type==='hotel'&&(
+                
+                    <EditHotel hotelId={hotel.id}></EditHotel>
+
+                
+            )}
         </>
     );
 }
