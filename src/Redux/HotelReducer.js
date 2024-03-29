@@ -10,13 +10,13 @@ const INITIAL_VALUES = {
     wishlist: [],
     hotelReviews: [],
     currentHotel: null,
-    facilities:[]
+    facilities: []
 };
 
 const hotelReducer = (state = INITIAL_VALUES, action) => {
     switch (action.type) {
         case 'GET_HOTELS_LIST':
-            return{
+            return {
                 ...state,
                 hotels: action.payload
             }
@@ -45,8 +45,8 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
                 ...state,
                 wishlist: state.wishlist.filter((item) => item.id !== action.payload),
             };
-        
-        
+
+
         case 'GET_HOTEL_REVIEWS':
             return {
                 ...state,
@@ -55,7 +55,7 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
         case 'POST_HOTEL_REVIEWS':
             return {
                 ...state,
-                
+
             };
         case 'PUT_HOTEL_REVIEWS':
             return {
@@ -63,27 +63,27 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
                 currentHotel: action.payload,
 
             };
-            case 'PUT_HOTEL':
-                const updatedhotel = action.payload;
-                const updatedHotelsList = state.hotels.map((hotel)=>
-                  hotel.id === updatedhotel.id ? updatedhotel : hotel
-                );
-                console.log(updatedhotel);
+        case 'PUT_HOTEL':
+            const updatedhotel = action.payload;
+            const updatedHotelsList = state.hotels.map((hotel) =>
+                hotel.id === updatedhotel.id ? updatedhotel : hotel
+            );
 
-                return {
-                  ...state,
-                  hotels: updatedHotelsList
-                };
+
+            return {
+                ...state,
+                hotels: updatedHotelsList
+            };
         case 'DELETE_HOTEL_REVIEWS':
             return {
                 ...state,
-                
+
             };
         case 'GET_FACILITIES':
-            return{
+            return {
                 ...state,
                 facilities: action.payload
-            }    
+            }
         default:
             return state;
     }
@@ -101,7 +101,7 @@ export default hotelReducer;
 //                 ...state,
 //                 hotels: action.payload
 //             }
-//         default: 
+//         default:
 //            return state
 //     }
 // }

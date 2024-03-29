@@ -20,7 +20,7 @@ import AddHotelForm from "./component/add_hotel_form/AddHotelForm.js";
 import ListHotel from "./pages/list_hotel/ListHotel.js";
 import GetBooking from "./component/get_booking/Get_Booking.js";
 
-import AddRoomForm from "./component/add_room_form /AddRoomForm.js";
+// import AddRoomForm from "./component/add_room_form/AddRoomForm.js";
 import GuardedRoute from './GuardedRoute';
 import Search from "./pages/Search.js";
 import ActivationPage from "./component/ActivationPage.js";
@@ -37,7 +37,8 @@ function App() {
       <BrowserRouter>
       <AuthProvider>
         <MyNavbar />
-        <ParticlesComponent id="particles" />
+        {/* <ParticlesComponent id="particles" />*/}
+        
         <Switch>        
 
           <Route exact path={"/"} component={Home} />
@@ -51,7 +52,7 @@ function App() {
           <Route exact path={"/Dashboard"} component={HotelDashboard} />
           <Route exact path={"/Appointment"} component={Appointment} />
           <Route exact path={"/AddHotelForm"} component={AddHotelForm} />
-          <Route exact path={"/AddRoomForm"} component={AddRoomForm} />
+          {/* <Route exact path={"/AddRoomForm"} component={AddRoomForm} /> */}
           <Route exact path={"/Search"} component={Search} />
           <Route exact path={"/activate/:token"} component={ActivationPage} />
           <Route exact path={"/EditHotel"} component={EditHotel} />

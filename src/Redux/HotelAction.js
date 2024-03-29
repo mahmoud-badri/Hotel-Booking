@@ -50,11 +50,11 @@ export const addHotel = async (hotelData) => {
 
 
   export const editHotel = (hotelData) => (dispatch) => {
-    console.log(`Updating hotel data for ID:`, hotelData.id);
+    //console.log(`Updating hotel data for ID:`, hotelData.id);
 
     return axios({ method: 'PATCH', url: `http://127.0.0.1:8000/hotel/edit_by_owner/${hotelData.id}`, headers: { "Content-Type": "application/json" }, data: hotelData })
         .then((res) => {
-            console.log("Data received:", res);
+            //console.log("Data received:", res);
             dispatch({
                 type: 'PUT_HOTEL',
                 payload: res.data,
@@ -78,11 +78,11 @@ export const addHotel = async (hotelData) => {
 // };
 
 export const getHotelById = (id) => (dispatch) => {
-    console.log(`Fetching hotel data for ID: ${id}`);
+    //console.log(`Fetching hotel data for ID: ${id}`);
     return axios
         .get(`https://retoolapi.dev/Ffu2bp/data/${id}`)
         .then((res) => {
-            console.log("Data received:", res.data);
+            //console.log("Data received:", res.data);
             dispatch({
                 type: GET_HOTEL_BY_ID,
                 payload: res.data,
@@ -154,7 +154,7 @@ export const postHotelReviews = (review) => (dispatch) => {
 
     return axios({ method: 'POST', url: `http://127.0.0.1:8000/api_review/create-rate/`, headers: { "Content-Type": "application/json" }, data: review })
         .then((res) => {
-            console.log("Data received:", res.data);
+            //console.log("Data received:", res.data);
             dispatch({
                 type: 'POST_HOTEL_REVIEWS',
                 payload: res.data,
@@ -165,7 +165,7 @@ export const postHotelReviews = (review) => (dispatch) => {
 };
 
 export const putHotelReviews = (id, review) => (dispatch) => {
-    console.log(`Updating hotel data for ID:`, id);
+    //console.log(`Updating hotel data for ID:`, id);
 
     return axios({ method: 'PUT', url: `https://api-generator.retool.com/qCCCiu/data/${id}`, headers: { "Content-Type": "application/json" }, data: review })
         .then((res) => {
@@ -180,7 +180,7 @@ export const putHotelReviews = (id, review) => (dispatch) => {
 };
 
 export const deleteHotelReviews = (id) => (dispatch) => {
-    console.log(`Deleting hotel data for ID:`, id);
+    //console.log(`Deleting hotel data for ID:`, id);
 
     return axios({ method: 'DELETE', url: `https://api-generator.retool.com/qCCCiu/data/${id}` })
         .then((res) => {

@@ -1,19 +1,9 @@
-// BookingPopup.js
 import React from "react";
 import Modal from "react-modal";
-
 import axios from "axios";
-import { differenceInDays } from "date-fns";
+import EditHotel from "../../pages/EditHotel/EditHotel";
 
-const BookingPopup = ({
-    isOpen,
-    closeModal,
-    handleSubmit,
-    handleInputChange,
-    formData,
-    hotel,
-    current_user,
-}) => {
+const Edit_Hotel = ({ isOpen, closeModal, handleInputChange, formData, hotel }) => {
     const customStyles = {
         content: {
             top: "50%",
@@ -22,127 +12,188 @@ const BookingPopup = ({
             bottom: "auto",
             marginRight: "-50%",
             transform: "translate(-50%, -50%)",
-            backgroundColor: "#fff",
+            backgroundColor: "#f2f2f2",
             padding: "35px",
             border: "1px solid #ccc",
             borderRadius: "5px",
-            width: "550px",
+            width: "50vw",
+            height: "60vh",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "space-between",
         },
     };
 
-    function send_post_request(formData, current_user, hotel) {
-        var total_days = differenceInDays(formData.end_date, formData.start_date)
-
-        axios
-            .post(" http://127.0.0.1:8000/hotel/booking_customer", {
-                user: current_user.id,
-                hotel: hotel.id,
-                room_type: formData.room_type,
-                start_date: formData.start_date,
-                end_date: formData.end_date,
-                guest: formData.guest,
-
-            })
-
-            .then(
-
-                (response) => {
-                    console.log(response);
-                },
-                (error) => {
-                    console.log(error);
-                    console.log(formData);
-                }
-
-            );
-        formData.room_type === "Single" ? formData.total_price = hotel.single_room * total_days
-            : formData.room_type === "Suite" ? formData.total_price = hotel.suite * total_days
-                : formData.room_type === "Family" ? formData.total_price = hotel.family_room * total_days
-                    : console.log("invalid");
-
-    }
-
-    const myHAndelSbmit = (e) => {
+    const myHandleSubmit = async (e) => {
         e.preventDefault();
-        send_post_request(formData, current_user, hotel);
-        closeModal();
+        try {
+            const response = await axios.put(`http://127.0.0.1:8000/hotel/edit/${hotel.id}/`, formData);
+            console.log(response);
+            closeModal();
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
         <Modal isOpen={isOpen} style={customStyles} onRequestClose={closeModal}>
-            <h2 className="text-primary mb-4">Booking Details</h2>
-            <form>
-                <div className="form-group">
-                    <select
-                        className="form-control"
-                        name="room_type"
-                        value={formData.room_type}
-                        onChange={handleInputChange}
-                        required
-                    >
-                        <option value="" disabled>
-                            Select Room Type
-                        </option>
-                        <option value="Single">Single Room</option>
-                        <option value="Family">Family Room</option>
-                        <option value="Suite">Suite</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="start_date">Start Date:</label>
-                    <input
-                        type="date"
-                        className="form-control"
-                        id="start_date"
-                        name="start_date"
-                        value={formData.start_date}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="end_date">End Date:</label>
-                    <input
-                        type="date"
-                        className="form-control"
-                        id="end_date"
-                        name="end_date"
-                        value={formData.end_date}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="guest">Number of Guests:</label>
-                    <input
-                        type="number"
-                        className="form-control"
-                        id="guest"
-                        name="guest"
-                        value={formData.guest}
-                        onChange={handleInputChange}
-                        min="1"
-                        required
-                    />
-                </div>
-                <button
-                    type="submit"
-                    value="submit"
-                    className="btn btn-success btn-regis me-2"
-                    onClick={myHAndelSbmit}
-                >
-                    Confirm
-                </button>
-                <button
-                    type="button"
-                    className="btn btn-danger btn-regis"
-                    onClick={closeModal}
-                >
-                    Cancel
-                </button>
+            <h2 className="text-primary mb-4">Edit Hotel</h2>
+            <EditHotel hotelId={hotel.id} />
+            <form onSubmit={myHandleSubmit}>
+                <label htmlFor="name">Name:</label>
+                <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="address">Address:</label>
+                <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="prices">Prices:</label>
+                <input
+                    type="text"
+                    name="prices"
+                    value={formData.prices}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="description">Description:</label>
+                <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="rating">Rating:</label>
+                <input
+                    type="number"
+                    name="rating"
+                    value={formData.rating}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="governorate">Governorate:</label>
+                <input
+                    type="text"
+                    name="governorate"
+                    value={formData.governorate}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="image">Image:</label>
+                <input
+                    type="file"
+                    name="image"
+                    //onChange={handleImageChange}
+                />
+
+                <label htmlFor="suite">Suite:</label>
+                <input
+                    type="number"
+                    name="suite"
+                    value={formData.suite}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="single_room">Single Room:</label>
+                <input
+                    type="number"
+                    name="single_room"
+                    value={formData.single_room}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="family_room">Family Room:</label>
+                <input
+                    type="number"
+                    name="family_room"
+                    value={formData.family_room}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="facility_desc">Facility Description:</label>
+                <textarea
+                    name="facility_desc"
+                    value={formData.facility_desc}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="facility">Facilities:</label>
+                <input
+                type="text"
+                name="facility"
+                value={formData.facility}
+                onChange={handleInputChange}
+        />
+
+                <label htmlFor="is_tv">Is TV:</label>
+                <input
+                    type="checkbox"
+                    name="is_tv"
+                    checked={formData.is_tv}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="is_wifi">Is Wifi:</label>
+                <input
+                    type="checkbox"
+                    name="is_wifi"
+                    checked={formData.is_wifi}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="is_poll">Is Pool:</label>
+                <input
+                    type="checkbox"
+                    name="is_poll"
+                    checked={formData.is_poll}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="is_BreakFast">Is BreakFast:</label>
+                <input
+                    type="checkbox"
+                    name="is_BreakFast"
+                    checked={formData.is_BreakFast}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="is_Pet">Is Pet:</label>
+                <input
+                    type="checkbox"
+                    name="is_Pet"
+                    checked={formData.is_Pet}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="is_Accessibiliy">Is Accessibiliy:</label>
+                <input
+                    type="checkbox"
+                    name="is_Accessibiliy"
+                    checked={formData.is_Accessibiliy}
+                    onChange={handleInputChange}
+                />
+
+                <label htmlFor="is_Parking">Is Parking:</label>
+                <input
+                    type="checkbox"
+                    name="is_Parking"
+                    checked={formData.is_Parking}
+                    onChange={handleInputChange}
+                />
+
+                <button type="submit">Submit</button>
             </form>
         </Modal>
     );
 };
 
-export default BookingPopup;
+export default Edit_Hotel;

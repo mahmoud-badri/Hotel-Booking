@@ -13,12 +13,11 @@ import { Link } from "react-router-dom";
 
 import BookingPopup from "./BookingPopup";
 import Swal from "sweetalert2";
-
+import EditHotel from "./EditHotel";
 const CardListHotel = (props) => {
   const dispatch = useDispatch();
-  // console.log("==============")
-  // console.log(props.user_id)
-  // console.log("==============")
+
+
   const wishlistItems = useSelector((state) => state.combinHotel.wishlist);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -37,6 +36,28 @@ const CardListHotel = (props) => {
 
   const current_user = JSON.parse(localStorage.getItem("user"));
 
+
+  //=========================================================
+
+
+
+  const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+
+  const handleEditClick = () => {
+    setFormData({
+      name: props.name,
+      address: props.address,
+      rate: props.rate,
+      description: props.description,
+      prices: props.prices,
+      governorate: props.governorate,
+      single_room: props.single_room,
+      suite: props.suite,
+      family_room: props.family_room
+    });
+    setEditModalIsOpen(true);
+  };
+  //=========================================================
   // Check if the current hotel is in the wishlist
 
   const isAlreadyInWishlist = wishlistItems.some(
@@ -136,9 +157,8 @@ const CardListHotel = (props) => {
             <div className="col-sm-4 px-0">
               <button className="btn-icon" onClick={handleHeartIconClick}>
                 <i
-                  className={`fa-solid fa-heart fa-lg ${
-                    isAlreadyInWishlist ? "red-heart" : ""
-                  }`}
+                  className={`fa-solid fa-heart fa-lg ${isAlreadyInWishlist ? "red-heart" : ""
+                    }`}
                   style={{ color: isAlreadyInWishlist ? "#dc0909" : "" }}
                 ></i>
               </button>
@@ -206,11 +226,11 @@ const CardListHotel = (props) => {
               </div>
 
               <Link to={`/HotelDetails/${props.id}`}>
-                <button className="btn btn-success btn-regis me-2">
+                <button className="btn btn-success btn-regis me-2 bot">
                   Details
                 </button>
               </Link>
-              {current_user!==null && current_user.type === "user" ? (
+              {current_user !== null && current_user.type === "user" ? (
                 <button
                   className="btn btn-danger btn-regis"
                   onClick={openModal}
@@ -218,11 +238,11 @@ const CardListHotel = (props) => {
                   BOOK NOW
                 </button>
               ) : null}
-                
-                {current_user!==null && current_user.id === props.user_id ? (
-                
-                  <button className="btn btn-warning btn-regis">Edit</button>
-                
+
+              {current_user !== null && current_user.id === props.user_id ? (
+
+                <button className="btn btn-warning btn-regis" onClick={handleEditClick}>Edit</button>
+
               ) : null}
               {/* Render BookingPopup component conditionally */}
 
@@ -233,10 +253,21 @@ const CardListHotel = (props) => {
                 handleInputChange={handleInputChange}
                 formData={formData}
                 current_user={current_user}
-                hotel = {props}
+                hotel={props}
                 single_room={props.single_room}
                 suite={props.suite}
                 family_room={props.family_room}
+              />
+
+
+              <EditHotel
+                isOpen={editModalIsOpen}
+                closeModal={() => setEditModalIsOpen(false)}
+                handleSubmit={handleSubmit}
+                handleInputChange={handleInputChange}
+                formData={formData}
+                current_user={current_user}
+                hotel={props}
               />
             </div>
           </div>

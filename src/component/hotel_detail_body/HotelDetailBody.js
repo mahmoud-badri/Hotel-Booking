@@ -80,6 +80,7 @@ function Description(props) {
 
     const list = fa.map((item) => ({ icon: "check", text: item }))
 
+    
 
     return (
         <>
@@ -417,9 +418,9 @@ export default function HotelDetailBody({ data }) {
     const hotelId = useParams();
     const [error, setError] = useState("")
     const hotels = useSelector((state) => state.combinHotel.hotels)
-    console.log(hotels.find((hotel) => hotel.id == hotelId.id).is_tv);
+    //console.log(hotels.find((hotel) => hotel.id == hotelId.id).is_tv);
     // console.log(posts);
-    console.log(hotelId.id);
+    //console.log(hotelId.id);
     const hotel = hotels.find((hotel) => hotel.id == hotelId.id)
     // console.log(hotel["name"])
     const [show, setShow] = useState(false);
@@ -496,10 +497,6 @@ export default function HotelDetailBody({ data }) {
                         {booking && (<Reviews />)}
                        
                                 
-
-
-
-
                     </div>
                     {/* details */}
                     <div className="col-md-4  cc  ">
@@ -532,7 +529,7 @@ export default function HotelDetailBody({ data }) {
                 />
             }
             <BookingModal handleClose={handleClose} showModal={show} hotel={hotel} />
-            {user&& user.type==='hotel'&&(
+            {user&& user.type==='hotel'&& hotel.user == user.id &&(
                 
                     <EditHotel hotelId={hotel.id}></EditHotel>
 
