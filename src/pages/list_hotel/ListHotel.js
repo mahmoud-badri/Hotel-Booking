@@ -66,8 +66,9 @@ const ListHotel = () => {
                             image={hotel.image}
                             status={hotel.status}
                             name={hotel.name}
-                            description={hotel.descripen}
+                            description={hotel.description}
                             governorate={hotel.governorate}
+                            address = {hotel.address}
                             price={hotel.prices}
                             user_id = {hotel.user}
                             single_room = {hotel.single_room}

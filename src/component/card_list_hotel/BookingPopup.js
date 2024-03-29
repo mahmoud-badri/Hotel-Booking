@@ -37,8 +37,7 @@ const BookingPopup = ({
 
   function send_post_request(formData, current_user, hotel) {
     var total_days = differenceInDays(formData.end_date, formData.start_date);
-    console.log("***************");
-    console.log(total_days);
+
     axios
       .post(" http://127.0.0.1:8000/hotel/booking_customer", {
         user: current_user.id,
@@ -93,10 +92,10 @@ const BookingPopup = ({
   };
 
   useEffect(() => {
-    console.log(hotel);
+    
     if (room === "Single") {
       setPrice(Number(hotel.single_room) * diffDays);
-      console.log(typeof price);
+      
     } else if (room === "Family") {
       setPrice(Number(hotel.family_room) * diffDays);
     } else if (room === "Suite") {
@@ -112,7 +111,7 @@ const BookingPopup = ({
 
   return (
     <Modal isOpen={isOpen} style={customStyles} onRequestClose={closeModal}>
-      <h2 className="text-primary mb-4">Total Price: {price}</h2>
+      <h2 className="text-primary mb-4">Total Price: {price}$</h2>
       <form>
         <div className="form-group">
           <label htmlFor="start_date">Start Date:</label>

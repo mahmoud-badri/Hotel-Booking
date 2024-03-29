@@ -57,7 +57,6 @@ const CardListHotel = (props) => {
     });
     setEditModalIsOpen(true);
   };
-
   //=========================================================
   // Check if the current hotel is in the wishlist
 
@@ -227,7 +226,7 @@ const CardListHotel = (props) => {
               </div>
 
               <Link to={`/HotelDetails/${props.id}`}>
-                <button className="btn btn-success btn-regis me-2">
+                <button className="btn btn-success btn-regis me-2 bot">
                   Details
                 </button>
               </Link>
