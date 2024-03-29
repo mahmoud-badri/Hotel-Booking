@@ -484,10 +484,6 @@ export default function HotelDetailBody({ data }) {
                         <Appointment />
                        <Reviews />
                                 
-
-
-
-
                     </div>
                     {/* details */}
                     <div className="col-md-4  cc  ">
