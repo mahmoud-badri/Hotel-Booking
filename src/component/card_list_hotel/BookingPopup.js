@@ -112,7 +112,7 @@ const BookingPopup = ({
 
   return (
     <Modal isOpen={isOpen} style={customStyles} onRequestClose={closeModal}>
-      <h2 className="text-primary mb-4">Booking for {price}</h2>
+      <h2 className="text-primary mb-4">Total Price: {price}</h2>
       <form>
         <div className="form-group">
           <label htmlFor="start_date">Start Date:</label>

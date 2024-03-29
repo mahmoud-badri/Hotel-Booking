@@ -36,7 +36,8 @@ function App() {
       <BrowserRouter>
       <AuthProvider>
         <MyNavbar />
-        <ParticlesComponent id="particles" />
+        {/* <ParticlesComponent id="particles" />*/}
+        
         <Switch>        
 
           <Route exact path={"/"} component={Home} />
