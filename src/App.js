@@ -20,7 +20,7 @@ import AddHotelForm from "./component/add_hotel_form/AddHotelForm.js";
 import ListHotel from "./pages/list_hotel/ListHotel.js";
 import GetBooking from "./component/get_booking/Get_Booking.js";
 
-import AddRoomForm from "./component/add_room_form /AddRoomForm.js";
+import AddRoomForm from "./component/add_room_form/AddRoomForm.js";
 import GuardedRoute from './GuardedRoute';
 import Search from "./pages/Search.js";
 import ActivationPage from "./component/ActivationPage.js";
