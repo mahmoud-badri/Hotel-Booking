@@ -21,7 +21,7 @@ export const getHotel = () => (dispatch) => {
 
 
 
-export const addHotel = async (hotelData, userId) => {
+export const addHotel = async (hotelData) => {
     try {
         const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
             headers: {
@@ -34,8 +34,35 @@ export const addHotel = async (hotelData, userId) => {
     }
 };
 
+// export const editHotel = async (hotelId, hotelData) => {
+//     try {
+//       const res = await axios.put(`http://127.0.0.1:8000/hotel/edit_by_owner/${hotelId}`, hotelData, {
+//         headers: {
+//           'Content-Type': 'multipart/form-data'
+//         }
+//       });
+//       console.log(res);
+//       return res.data;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
 
 
+  export const editHotel = (hotelData) => (dispatch) => {
+    console.log(`Updating hotel data for ID:`, hotelData.id);
+
+    return axios({ method: 'PATCH', url: `http://127.0.0.1:8000/hotel/edit_by_owner/${hotelData.id}`, headers: { "Content-Type": "application/json" }, data: hotelData })
+        .then((res) => {
+            console.log("Data received:", res);
+            dispatch({
+                type: 'PUT_HOTEL',
+                payload: res.data,
+            });
+        })
+        .catch((err) => console.log("Error fetching data:", err));
+
+};
 // export const getFacilities = (id) => (dispatch) => {
 //     console.log(`Fetching hotel data for hotel: ${id}`);
 //     return axios
