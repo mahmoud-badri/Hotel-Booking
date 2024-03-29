@@ -24,6 +24,7 @@ import AddRoomForm from "./component/add_room_form /AddRoomForm.js";
 import GuardedRoute from './GuardedRoute';
 import Search from "./pages/Search.js";
 import ActivationPage from "./component/ActivationPage.js";
+import EditHotel from "./pages/EditHotel/EditHotel.js";
 
 function App() {
   const isAuthenticated = true; // Replace with actual authentication check
@@ -54,6 +55,7 @@ function App() {
           <Route exact path={"/AddRoomForm"} component={AddRoomForm} />
           <Route exact path={"/Search"} component={Search} />
           <Route exact path={"/activate/:token"} component={ActivationPage} />
+          <Route exact path={"/EditHotel"} component={EditHotel} />
 
           <PrivateRoute exact path="/Wishlist" component={Wishlist} isAuthenticated={isAuthenticated} />
 
