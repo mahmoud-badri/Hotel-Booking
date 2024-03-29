@@ -453,7 +453,22 @@ export default function HotelDetailBody({ data }) {
         //     thumbnail: "https://picsum.photos/id/1019/250/150/",
         // },
     ];
+    const [bookings, setBookings] = useState([]);
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/hotel/bookingList`)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error fetching bookings');
+                }
+            })
+            .then(data => setBookings(data))
+            .catch(error => console.error('Error:', error));
 
+    }, []);
+    const booking = bookings.find((booking) => booking.user == user.id && booking.hotel==hotel.id && booking.is_accepted==true)
+    
     return (
         <>
             <div className="container mt-5 ">
@@ -474,14 +489,12 @@ export default function HotelDetailBody({ data }) {
                             <ImageGallery items={images} />
                         </div>
 
-                        {/* 
-        
-        desc
-        */}
+                        
                         <Description />
                         {/* <RoomTypes /> */}
                         <Appointment />
-                       <Reviews />
+                        {booking && (<Reviews />)}
+                       
                                 
 
 
