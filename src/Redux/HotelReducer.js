@@ -57,12 +57,7 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
                 ...state,
 
             };
-        case 'PUT_HOTEL_REVIEWS':
-            return {
-                ...state,
-                currentHotel: action.payload,
 
-            };
         case 'PUT_HOTEL':
             const updatedhotel = action.payload;
             const updatedHotelsList = state.hotels.map((hotel) =>
@@ -74,11 +69,7 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
                 ...state,
                 hotels: updatedHotelsList
             };
-        case 'DELETE_HOTEL_REVIEWS':
-            return {
-                ...state,
 
-            };
         case 'GET_FACILITIES':
             return {
                 ...state,

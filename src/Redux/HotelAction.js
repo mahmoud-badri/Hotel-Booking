@@ -34,19 +34,7 @@ export const addHotel = async (hotelData) => {
     }
 };
 
-// export const editHotel = async (hotelId, hotelData) => {
-//     try {
-//       const res = await axios.put(`http://127.0.0.1:8000/hotel/edit_by_owner/${hotelId}`, hotelData, {
-//         headers: {
-//           'Content-Type': 'multipart/form-data'
-//         }
-//       });
-//       console.log(res);
-//       return res.data;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+
 
 
   export const editHotel = (hotelData) => (dispatch) => {
@@ -63,19 +51,7 @@ export const addHotel = async (hotelData) => {
         .catch((err) => console.log("Error fetching data:", err));
 
 };
-// export const getFacilities = (id) => (dispatch) => {
-//     console.log(`Fetching hotel data for hotel: ${id}`);
-//     return axios
-//         .get(`http://127.0.0.1:8000/hotel/allFacilites/${id}`)
-//         .then((res) => {
-//             console.log("Data received:", res.data);
-//             dispatch({
-//                 type: 'GET_FACILITIES',
-//                 payload: res.data,
-//             });
-//         })
-//         .catch((err) => console.log("Error fetching data:", err));
-// };
+
 
 export const getHotelById = (id) => (dispatch) => {
     //console.log(`Fetching hotel data for ID: ${id}`);
@@ -134,20 +110,6 @@ export const getHotelReviews = (hotel_id) => (dispatch) => {
         .catch((err) => console.log("Error fetching data:", err));
 };
 
-// export const getHotelReviews = () => (dispatch) => {
-//     console.log(`Fetching hotel data `);
-
-//     return axios.get(`https://api-generator.retool.com/qCCCiu/data`)
-//         .then((res) => {
-//             console.log("Data received:", res.data);
-//             dispatch({
-//                 type: 'GET_HOTEL_REVIEWS',
-//                 payload: res.data,
-//             });
-//         })
-//         .catch((err) => console.log("Error fetching data:", err));
-// };
-
 
 export const postHotelReviews = (review) => (dispatch) => {
     console.log(`Fetching hotel data for ID:`, review);
@@ -164,32 +126,4 @@ export const postHotelReviews = (review) => (dispatch) => {
 
 };
 
-export const putHotelReviews = (id, review) => (dispatch) => {
-    //console.log(`Updating hotel data for ID:`, id);
 
-    return axios({ method: 'PUT', url: `https://api-generator.retool.com/qCCCiu/data/${id}`, headers: { "Content-Type": "application/json" }, data: review })
-        .then((res) => {
-            console.log("Data received:", res.data);
-            dispatch({
-                type: 'PUT_HOTEL_REVIEWS',
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log("Error fetching data:", err));
-
-};
-
-export const deleteHotelReviews = (id) => (dispatch) => {
-    //console.log(`Deleting hotel data for ID:`, id);
-
-    return axios({ method: 'DELETE', url: `https://api-generator.retool.com/qCCCiu/data/${id}` })
-        .then((res) => {
-            console.log("Data received:", res.data);
-            dispatch({
-                type: 'DELETE_HOTEL_REVIEWS',
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log("Error fetching data:", err));
-
-};

@@ -6,6 +6,7 @@ import { gethotel } from "../../Redux/HotelAction";
 import axios from "axios";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
+import HeroSection from './heroSection';
 function Home() {
   const [hotels, setHotels] = useState([]);
 
@@ -21,6 +22,7 @@ function Home() {
         
   return (
     <>
+    <HeroSection/>
       {hotels?.length >0 ?<Cards list={hotels} /> : <h2>No Data</h2>}
     </>
   );

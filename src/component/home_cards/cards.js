@@ -76,7 +76,7 @@ function CarD({ card }) {
           to={{ pathname: `/HotelDetails/${card.id}`, state: card }}
         >
           <Button className="btn btn-warning text-white font-weight-bold  px-4 ml-0">
-            Select
+            Details
           </Button>
         </Link>
         </div>
