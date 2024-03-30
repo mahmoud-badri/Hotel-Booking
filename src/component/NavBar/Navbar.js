@@ -150,11 +150,18 @@ function MyNavbar() {
                       </Link>
                     </div>
                   </>) : (
+                    <>
                   <li className="nav-item">
                     <Link className="nav-link active" to="/Wishlist">
                       WishList
                     </Link>
                   </li>
+                   <li className="nav-item">
+                   <Link className="nav-link active" to="/contact_us">
+                     contact us
+                   </Link>
+                 </li>
+                 </>
                 )
                 }
 

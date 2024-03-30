@@ -263,6 +263,7 @@ function Reviews(props) {
 
     const dispatch = useDispatch();
     const reviews = useSelector((state) => state.combinHotel.hotelReviews);
+    const [state,setState] = useState(reviews)
     // console.log(reviews);
     let register = useFormik({
         initialValues: {
@@ -275,24 +276,33 @@ function Reviews(props) {
         },
         onSubmit: (values) => {
             dispatch(postHotelReviews(values));
+            dispatch(getHotelReviews(hotel.id));
+            handleCloseModal()
             // console.log(values);
         },
     });
-    useEffect(() => {
-        dispatch(getHotelReviews(hotel.id));
-    });
-    // const Revs=reviews.map((el)=> <Review name={el.name} img={el.images} description={el.descripen} rate={el.rate} />)
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(5); // Set the number of reviews per page
-    // Calculate the index of the first and last reviews to display based on pagination
     const indexOfLastReview = currentPage * pageSize;
     const indexOfFirstReview = indexOfLastReview - pageSize;
     const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
 
-    // Function to handle page changes
-    const onPageChange = (pageNumber) => {
+     // Function to handle page changes
+     const onPageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     }
+    useEffect(() => {
+    },[dispatch,state]);
+    // const Revs=reviews.map((el)=> <Review name={el.name} img={el.images} description={el.descripen} rate={el.rate} />)
+    
+    // Calculate the index of the first and last reviews to display based on pagination
+    const handleCloseModal = () => {
+        const modal = document.getElementById('staticBackdrop');
+        const backdrop = document.getElementsByClassName('modal-backdrop')[0];
+        modal.classList.remove('show');
+        backdrop.parentNode.removeChild(backdrop);
+    };
+   
     return (
         <>
             <div className="row text-dark ">
@@ -367,7 +377,9 @@ function Reviews(props) {
                                         <div className="modal-footer">
                                             <button
                                                 type="submit"
-                                                className="btn bg-success text-white">
+                                                className="btn bg-success text-white"
+                                                aria-label="Close"
+                                                >
                                                 Add
                                             </button>
                                         </div>

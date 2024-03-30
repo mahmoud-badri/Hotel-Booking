@@ -63,6 +63,7 @@ function BookingModal({ showModal, handleClose ,hotel }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     send_post_request(formData, user, hotel);
+    handleClose()
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
 
