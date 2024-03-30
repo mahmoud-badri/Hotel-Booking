@@ -260,7 +260,12 @@ function Reviews(props) {
 
     const hotel = hotels.find((hotel) => hotel.id == hotelId.id)
 
-
+    const handleCloseModal = () => {
+        const modal = document.getElementById('staticBackdrop');
+        const backdrop = document.getElementsByClassName('modal-backdrop')[0];
+        modal.classList.remove('show');
+        backdrop.parentNode.removeChild(backdrop);
+    };
     const dispatch = useDispatch();
     const reviews = useSelector((state) => state.combinHotel.hotelReviews);
     const [state,setState] = useState(reviews)
@@ -276,8 +281,9 @@ function Reviews(props) {
         },
         onSubmit: (values) => {
             dispatch(postHotelReviews(values));
-            dispatch(getHotelReviews(hotel.id));
-            handleCloseModal()
+            dispatch(getHotelReviews(hotel.id))
+                    // handleCloseModal()
+
             // console.log(values);
         },
     });
@@ -292,23 +298,35 @@ function Reviews(props) {
         setCurrentPage(pageNumber);
     }
     useEffect(() => {
-    },[dispatch,state]);
+        dispatch(getHotelReviews(hotel.id));
+
+    },[]);
     // const Revs=reviews.map((el)=> <Review name={el.name} img={el.images} description={el.descripen} rate={el.rate} />)
     
     // Calculate the index of the first and last reviews to display based on pagination
-    const handleCloseModal = () => {
-        const modal = document.getElementById('staticBackdrop');
-        const backdrop = document.getElementsByClassName('modal-backdrop')[0];
-        modal.classList.remove('show');
-        backdrop.parentNode.removeChild(backdrop);
-    };
-   
+    
+    const [bookings, setBookings] = useState([]);
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/hotel/bookingList`)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error fetching bookings');
+                }
+            })
+            .then(data => setBookings(data))
+            .catch(error => console.error('Error:', error));
+
+    }, []);
+    const booking = bookings.find((booking) => booking.user == user.id && booking.hotel==hotel.id && booking.is_accepted==true)
+    
     return (
         <>
             <div className="row text-dark ">
                 <div className="col-md-3 d-flex flex-column">
                     <h3>Reviews</h3>
-
+                {booking && (
                     <button
                         type="button"
                         className="btn btn-success"
@@ -316,7 +334,7 @@ function Reviews(props) {
                         data-bs-target="#staticBackdrop">
                         Leave a Review
                     </button>
-
+                )}
                     <div
                         className="modal fade "
                         id="staticBackdrop"
@@ -403,7 +421,7 @@ function Reviews(props) {
                     ))}
                 </div> */}
                 <div className="col-md-9 text-start py-4 ">
-                    {currentReviews.map((el) => (
+                    {currentReviews?(currentReviews.map((el) => (
                         <div key={el.id}>
                             <Review
                                 name={el.name}
@@ -413,7 +431,10 @@ function Reviews(props) {
                                 date={el.createAt}
                             />
                         </div>
-                    ))}
+                    ))):(
+
+                        <div>There is no Reviews</div>
+                    )}
                     {/* Pagination component */}
                     <Pagination
                         currentPage={currentPage}
@@ -466,21 +487,6 @@ export default function HotelDetailBody({ data }) {
         //     thumbnail: "https://picsum.photos/id/1019/250/150/",
         // },
     ];
-    const [bookings, setBookings] = useState([]);
-    useEffect(() => {
-        fetch(`http://127.0.0.1:8000/hotel/bookingList`)
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Error fetching bookings');
-                }
-            })
-            .then(data => setBookings(data))
-            .catch(error => console.error('Error:', error));
-
-    }, []);
-    const booking = bookings.find((booking) => booking.user == user.id && booking.hotel==hotel.id && booking.is_accepted==true)
     
     return (
         <>
@@ -506,7 +512,7 @@ export default function HotelDetailBody({ data }) {
                         <Description />
                         {/* <RoomTypes /> */}
                         <Appointment />
-                        {booking && (<Reviews />)}
+                        <Reviews />
                        
                                 
                     </div>
