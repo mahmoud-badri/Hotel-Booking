@@ -95,6 +95,19 @@ const EditHotel = ({ hotelId }) => {
         dispatch(editHotel(updatedHotel));
     }, [dispatch, hotelId, formData]);
 
+    const handleDelete = () => {
+        // Make DELETE request to delete the hotel
+        fetch(`http://127.0.0.1:8000/hotel/delete/${hotelId}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (response.ok) {
+                history.push('/'); // Redirect to home after successful deletion
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    };
+
     return (
         <div>
             <h2>Edit Hotel Data</h2>
@@ -268,6 +281,13 @@ const EditHotel = ({ hotelId }) => {
                         onMouseOut={(e) => e.target.classList.remove('btn-hover')}
                     >
                         Update the Hotel
+                    </button>
+                    <button
+                        className='btn btn-danger w-50 fw-bold'
+                        onClick={handleDelete}
+                        style={{ transition: 'background-color 0.3s, color 0.3s' }}
+                    >
+                        Delete the Hotel
                     </button>
                 </div>
             </form>
