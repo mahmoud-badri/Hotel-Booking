@@ -23,8 +23,7 @@ import {
   Form,
   FormControl,
 } from "react-bootstrap";
-import Navbar from 'react-bootstrap/Navbar';
-
+import Navbar from "react-bootstrap/Navbar";
 
 function MyNavbar() {
   // const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
@@ -43,8 +42,8 @@ function MyNavbar() {
   //   authContext.logout();
   // };
 
-  var user = localStorage.getItem("user")
-  user = JSON.parse(user)
+  var user = localStorage.getItem("user");
+  user = JSON.parse(user);
   const { contextLoggedIn, setContextLoggenIn } = useContext(LoggedInContext);
   // const history = useHistory();
 
@@ -58,15 +57,13 @@ function MyNavbar() {
     authContext.logout();
   };
 
-
-
-
   return (
     <Navbar
-      collapseOnSelect expand="md sm " className="bg-body-tertiary"
+      collapseOnSelect
+      expand="md sm "
+      className="bg-body-tertiary"
       sticky="top"
     >
-
       <div className="container-fluid">
         <Navbar.Brand class="remove">
           <Link to="/" className="navbar-brand">
@@ -90,7 +87,8 @@ function MyNavbar() {
           data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -99,18 +97,15 @@ function MyNavbar() {
               <Link
                 className="nav-link active"
                 aria-current="page"
-                to="/HotelsFilter">
-
-
+                to="/HotelsFilter"
+              >
                 List Hotels
               </Link>
             </li>
 
-
             {user && (
               <>
-
-                {user.type == 'hotel' ? (
+                {user.type == "hotel" ? (
                   <>
                     <li className="nav-item">
                       <Link
@@ -144,24 +139,22 @@ function MyNavbar() {
                         Dashboard
                       </Link>
                     </div>
-                    <div className="nav-item">
+                    {/* <div className="nav-item">
                       <Link to="/EditHotel" className="nav-link">
                         Edit hotel
                       </Link>
-                    </div>
-                  </>) : (
+                    </div> */}
+                  </>
+                ) : (
                   <li className="nav-item">
                     <Link className="nav-link active" to="/Wishlist">
                       WishList
                     </Link>
                   </li>
-                )
-                }
-
-              </>)}
+                )}
+              </>
+            )}
           </ul>
-
-
 
           {!user ? (
             <>
@@ -185,7 +178,6 @@ function MyNavbar() {
                 >
                   Register
                 </Link>
-
               </div>
             </>
           ) : (
@@ -194,7 +186,7 @@ function MyNavbar() {
                 <h5 className="text-primary"> {` ${user.name}`} </h5>
               </div>
               <div className="d-flex m-2">
-                <Link to='/userprofile'>
+                <Link to="/">
                   <AccountCircleIcon fontSize="large"></AccountCircleIcon>
                 </Link>
               </div>
@@ -208,14 +200,11 @@ function MyNavbar() {
                   log out
                 </Link>
               </div>
-
-            </>)}
+            </>
+          )}
         </div>
       </div>
-
-
-
     </Navbar>
-  )
+  );
 }
 export default MyNavbar;

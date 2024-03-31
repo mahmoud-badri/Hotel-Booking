@@ -17,7 +17,6 @@ import EditHotel from "./EditHotel";
 const CardListHotel = (props) => {
   const dispatch = useDispatch();
 
-
   const wishlistItems = useSelector((state) => state.combinHotel.wishlist);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -36,10 +35,7 @@ const CardListHotel = (props) => {
 
   const current_user = JSON.parse(localStorage.getItem("user"));
 
-
   //=========================================================
-
-
 
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
 
@@ -53,7 +49,7 @@ const CardListHotel = (props) => {
       governorate: props.governorate,
       single_room: props.single_room,
       suite: props.suite,
-      family_room: props.family_room
+      family_room: props.family_room,
     });
     setEditModalIsOpen(true);
   };
@@ -157,8 +153,9 @@ const CardListHotel = (props) => {
             <div className="col-sm-4 px-0">
               <button className="btn-icon" onClick={handleHeartIconClick}>
                 <i
-                  className={`fa-solid fa-heart fa-lg ${isAlreadyInWishlist ? "red-heart" : ""
-                    }`}
+                  className={`fa-solid fa-heart fa-lg ${
+                    isAlreadyInWishlist ? "red-heart" : ""
+                  }`}
                   style={{ color: isAlreadyInWishlist ? "#dc0909" : "" }}
                 ></i>
               </button>
@@ -216,7 +213,7 @@ const CardListHotel = (props) => {
               </div>
 
               <div className="row px-3 mb-3">
-                <p className="text-muted mb-0 taxes">+ $14 taxes and charges</p>
+                <p className="text-muted mb-0 taxes">+ 26% taxes and charges</p>
               </div>
 
               <Link to={`/HotelDetails/${props.id}`}>
@@ -234,9 +231,12 @@ const CardListHotel = (props) => {
               ) : null}
 
               {current_user !== null && current_user.id === props.user_id ? (
-
-                <button className="btn btn-warning btn-regis" onClick={handleEditClick}>Edit</button>
-
+                <button
+                  className="btn btn-warning btn-regis"
+                  onClick={handleEditClick}
+                >
+                  Edit
+                </button>
               ) : null}
               {/* Render BookingPopup component conditionally */}
 
@@ -252,7 +252,6 @@ const CardListHotel = (props) => {
                 suite={props.suite}
                 family_room={props.family_room}
               />
-
 
               <EditHotel
                 isOpen={editModalIsOpen}

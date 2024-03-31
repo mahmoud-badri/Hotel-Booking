@@ -28,7 +28,7 @@ const BookingPopup = ({
       width: "550px",
     },
   };
-  
+
   const [room, setRoom] = useState("Single");
   const [price, setPrice] = useState(0);
   const [start_date, setStart_date] = useState("");
@@ -42,7 +42,7 @@ const BookingPopup = ({
       .post(" http://127.0.0.1:8000/hotel/booking_customer", {
         user: current_user.id,
         hotel: hotel.id,
-        room_type: room ,
+        room_type: room,
         start_date: start_date,
         end_date: end_date,
         guest: formData.guest,
@@ -66,7 +66,6 @@ const BookingPopup = ({
       : console.log("invalid");
   }
   // from here
-  
 
   function calculateDaysDiff() {
     const days = differenceInDays(formData.end_date, formData.start_date);
@@ -92,10 +91,8 @@ const BookingPopup = ({
   };
 
   useEffect(() => {
-    
     if (room === "Single") {
       setPrice(Number(hotel.single_room) * diffDays);
-      
     } else if (room === "Family") {
       setPrice(Number(hotel.family_room) * diffDays);
     } else if (room === "Suite") {
@@ -111,7 +108,7 @@ const BookingPopup = ({
 
   return (
     <Modal isOpen={isOpen} style={customStyles} onRequestClose={closeModal}>
-      <h2 className="text-primary mb-4">Total Price: {price}$</h2>
+      <h2 className="text-primary mb-4">Total Price: {price}EGP</h2>
       <form>
         <div className="form-group">
           <label htmlFor="start_date">Start Date:</label>

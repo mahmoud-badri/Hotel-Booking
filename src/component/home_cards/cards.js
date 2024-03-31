@@ -47,43 +47,51 @@ function CarD({ card }) {
     //     </p>
     //   </div>
     // </Link>
-<div style={{ display:"inline-block" }} className="card-box " >
-    <Card style={{ width: "20rem" }} className="m-1">
-      <Card.Header >
-        <Card.Title className="text-center" >{card?.name}</Card.Title>
-        {/* <button className="btn btn-success" style={{borderRadius:"50%"}}>{avatar}</button> */}
-      </Card.Header>
+    <div style={{ display: "inline-block" }} className="card-box ">
+      <Card style={{ width: "20rem" }} className="m-1">
+        <Card.Header>
+          <Card.Title className="text-center">{card?.name}</Card.Title>
+          {/* <button className="btn btn-success" style={{borderRadius:"50%"}}>{avatar}</button> */}
+        </Card.Header>
 
-      <Card.Img variant="top" src={card?.image} style={{width:"286px",height:"192px", margin:"5px auto 0"}} />
-      <Card.Body>
-        <Card.Text>Governorate: {card.governorate}</Card.Text>
-      </Card.Body>
+        <Card.Img
+          variant="top"
+          src={card?.image}
+          style={{ width: "286px", height: "192px", margin: "5px auto 0" }}
+        />
+        <Card.Body>
+          <Card.Text>Governorate: {card.governorate}</Card.Text>
+        </Card.Body>
 
-      <Card.Body>
-        {/* <StarRateRoundedIcon /> */}
-        {card?.rating}
-      </Card.Body>
-      <Card.Footer className="d-flex justify-content-between align-items-center">
-        <div style={{width:"40%"}} className="d-flex justify-content-start align-items-center">
-        <h4 style={{ fontWeight: "700"}}>Price: </h4>{" "}
-        <h5 className="ml-1">
-          <span className="badge bg-danger rounded-pill"> {card?.prices} $</span>
-        </h5>
-        </div>
-        <div style={{width:"30%"}}>
-        <Link
-          style={{ fontWeight: "800"}}
-          to={{ pathname: `/HotelDetails/${card.id}`, state: card }}
-        >
-          <Button className="btn btn-warning text-white font-weight-bold  px-4 ml-0">
-            Details
-          </Button>
-        </Link>
-        </div>
-      
-        
-      </Card.Footer>
-    </Card>
+        <Card.Body>
+          {/* <StarRateRoundedIcon /> */}
+          {card?.rating}
+        </Card.Body>
+        <Card.Footer className="d-flex justify-content-between align-items-center">
+          <div
+            style={{ width: "40%" }}
+            className="d-flex justify-content-start align-items-center"
+          >
+            <h4 style={{ fontWeight: "700" }}>Price: </h4>{" "}
+            <h5 className="ml-1">
+              <span className="badge bg-danger rounded-pill">
+                {" "}
+                {card?.prices} EGP
+              </span>
+            </h5>
+          </div>
+          <div style={{ width: "30%" }}>
+            <Link
+              style={{ fontWeight: "800" }}
+              to={{ pathname: `/HotelDetails/${card.id}`, state: card }}
+            >
+              <Button className="btn btn-warning text-white font-weight-bold  px-4 ml-0">
+                Details
+              </Button>
+            </Link>
+          </div>
+        </Card.Footer>
+      </Card>
     </div>
   );
 }
