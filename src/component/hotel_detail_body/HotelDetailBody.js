@@ -15,6 +15,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import Alert from "react-bootstrap/Alert";
 import EditHotel from "../../pages/EditHotel/EditHotel";
+import Swal from "sweetalert2";
 
 var user = localStorage.getItem("user");
 user = JSON.parse(user);
@@ -108,17 +109,14 @@ function Icons(props) {
 function Review(props) {
   const fullDate = new Date(props.date);
   const date = fullDate.toDateString();
+
+ 
   return (
     <div className="border-bottom border-1 border-dark py-2">
       <div className="row d-flex justify-content-between">
         <div className="col-md-6 d-flex align-items-center justify-content-start">
           <div className="">
-            <img
-              src={props.img}
-              style={{ width: "4vw", height: "4vw" }}
-              className="rounded-circle"
-              alt=""
-            />
+            
           </div>
           <span className="ms-3 fs-5">{props.name}</span>
         </div>
@@ -127,9 +125,16 @@ function Review(props) {
         </div>
       </div>
       <div>Rate:{props.rate}</div>
-
-      <p className="my-4 ">{props.description}</p>
-
+      <div className="row">
+      <p className="my-4 col-6">{props.description}</p>
+      {props.user== user.id&&(
+      <div className="my-4 col-6 d-flex justify-content-end">
+        <a  onClick={() => props.handleEdit(props)} style={{ textDecoration: 'none', color:'blue',cursor: 'pointer'}}>Edit</a>
+        <a  className=" mx-2 " onClick={()=>props.handleDelete(props.id)} style={{ textDecoration: 'none',color: 'red' ,cursor: 'pointer'}}>Delete</a>
+      </div>
+      )}
+      </div>
+     
       <Rating
         star={props.rate}
         icon={"star"}
@@ -169,7 +174,7 @@ function Reviews(props) {
     onSubmit: (values) => {
       dispatch(postHotelReviews(values));
       dispatch(getHotelReviews(hotel.id));
-      // handleCloseModal()
+      handleCloseModal()
 
       // console.log(values);
     },
@@ -186,12 +191,15 @@ function Reviews(props) {
   };
   useEffect(() => {
     dispatch(getHotelReviews(hotel.id));
+    
   }, []);
   // const Revs=reviews.map((el)=> <Review name={el.name} img={el.images} description={el.descripen} rate={el.rate} />)
 
   // Calculate the index of the first and last reviews to display based on pagination
 
   const [bookings, setBookings] = useState([]);
+  const [editReview, setEditReview] = useState(null);
+  
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/hotel/bookingList`)
       .then((response) => {
@@ -210,7 +218,88 @@ function Reviews(props) {
       booking.hotel == hotel.id &&
       booking.is_accepted == true
   );
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Make DELETE request to delete the hotel
+        fetch(`http://127.0.0.1:8000/api_review/delete-rate/${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => {
+            if (response.ok) {
+              Swal.fire("Deleted!", "Your review has been deleted.", "success");
+              dispatch(getHotelReviews(hotel.id));
 
+              // history.push("/"); // Redirect to home after successful deletion
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            Swal.fire("Error", "An error occurred while deleting your review.", "error");
+          });
+      }
+    });
+  
+  };
+  const handleEdit = (review) => {
+    setEditReview(review);
+  
+    Swal.fire({
+      title: 'Edit Review',
+      html: `
+      <lable>name</lable>
+        <input id="name" type="text" class="swal2-input" value="${review.name}">
+      <lable>rate</lable>
+        <input id="rating" type="number" class="swal2-input" value="${review.rate}">
+      <lable>description</lable><br>
+        <textarea id="description" class="swal2-input">${review.description}</textarea>
+      `,
+      confirmButtonText: 'Update',
+      preConfirm: () => {
+        const name = Swal.getPopup().querySelector('#name').value;
+        const rating = Swal.getPopup().querySelector('#rating').value;
+        const description = Swal.getPopup().querySelector('#description').value;
+  
+        const updatedReview = {
+          ...review,
+          name,
+          rating,
+          description,
+        };
+  
+        fetch(`http://127.0.0.1:8000/api_review/update-rate/${review.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedReview),
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Error updating review.');
+            }
+          })
+          .then((data) => {
+            dispatch(getHotelReviews(hotel.id));
+            Swal.fire('Success', 'Review updated successfully.', 'success');
+          })
+          .catch((error) => {
+            Swal.fire('Error', error.message, 'error');
+          });
+      },
+    });
+  };
+  
   return (
     <>
       <div className="row text-dark ">
@@ -318,11 +407,15 @@ rate={el.rate}
             currentReviews.map((el) => (
               <div key={el.id}>
                 <Review
+                id={el.id}
                   name={el.name}
                   img={el.image}
                   description={el.description}
                   rate={el.rating}
                   date={el.createAt}
+                  handleDelete={handleDelete}
+                  user={el.user}
+                  handleEdit={handleEdit}
                 />
               </div>
             ))
