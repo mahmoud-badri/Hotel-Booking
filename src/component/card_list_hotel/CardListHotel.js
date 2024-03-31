@@ -189,13 +189,7 @@ const CardListHotel = (props) => {
 
               <div className="row px-3 mb-2 mt-2">
                 <div className="d-flex align-items-center">
-                  <span className="fa fa-star text-warning mr-1"></span>
-
-                  <span className="fa fa-star text-warning mr-1"></span>
-
-                  <span className="fa fa-star text-warning mr-1"></span>
-
-                  <span className="fa fa-star text-warning mr-1"></span>
+                  <span className="">{props.rating}</span>
                 </div>
               </div>
 
