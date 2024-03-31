@@ -427,9 +427,18 @@ return (
 </p>
 <p className="fs-6 text-muted m-2">Monday to Friday 9.00am - 7.30pm</p>
 
-<Button variant="primary" onClick={handleShow}>
-Book Your Room
-</Button>
+
+
+
+{user !== null && user  .type === "user" ? (
+    <button
+      className="btn btn-danger btn-regis"
+      onClick={handleShow}
+    >
+    Book Your Room
+    </button>
+  ) : null}
+
 </div>
 </div>
 </div>

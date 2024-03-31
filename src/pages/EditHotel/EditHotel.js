@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { addHotel, editHotel } from '../../Redux/HotelAction';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useDispatch } from 'react-redux';
-
+import Swal from 'sweetalert2';
+import './Edite.css'
 const EditHotel = ({ hotelId }) => {
     var user = localStorage.getItem("user")
     user = JSON.parse(user)
@@ -96,17 +97,34 @@ const EditHotel = ({ hotelId }) => {
     }, [dispatch, hotelId, formData]);
 
     const handleDelete = () => {
-        // Make DELETE request to delete the hotel
-        fetch(`http://127.0.0.1:8000/hotel/delete/${hotelId}`, {
-            method: 'DELETE',
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Make DELETE request to delete the hotel
+      fetch(`http://127.0.0.1:8000/hotel/delete/${hotelId}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (response.ok) {
+            Swal.fire("Deleted!", "Your hotel has been deleted.", "success");
+            history.push("/"); // Redirect to home after successful deletion
+          }
         })
-        .then(response => {
-            if (response.ok) {
-                history.push('/'); // Redirect to home after successful deletion
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    };
+        .catch((error) => {
+          console.error("Error:", error);
+          Swal.fire("Error", "An error occurred while deleting the hotel.", "error");
+        });
+    }
+  });
+
+};
 
     return (
         <div>
@@ -274,7 +292,7 @@ const EditHotel = ({ hotelId }) => {
                         </label>
                     </div>
                     <button
-                        className='btn btn-danger w-50 fw-bold'
+                        className='btn btn-success w-45 fw-bold'
                         type='submit'
                         style={{ transition: 'background-color 0.3s, color 0.3s' }}
                         onMouseOver={(e) => e.target.classList.add('btn-hover')}
@@ -283,7 +301,7 @@ const EditHotel = ({ hotelId }) => {
                         Update the Hotel
                     </button>
                     <button
-                        className='btn btn-danger w-50 fw-bold'
+                        className='del btn btn-danger w-45 fw-bold'
                         onClick={handleDelete}
                         style={{ transition: 'background-color 0.3s, color 0.3s' }}
                     >

@@ -13,7 +13,6 @@ function Home() {
         const fetchHotels = async () => {
             const result = await axios.get('http://127.0.0.1:8000/hotel/');
     
-            console.log(result.data)
             setHotels(result.data)
         }
         useEffect(() => {
