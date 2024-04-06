@@ -110,14 +110,11 @@ function Review(props) {
   const fullDate = new Date(props.date);
   const date = fullDate.toDateString();
 
- 
   return (
     <div className="border-bottom border-1 border-dark py-2">
       <div className="row d-flex justify-content-between">
         <div className="col-md-6 d-flex align-items-center justify-content-start">
-          <div className="">
-            
-          </div>
+          <div className=""></div>
           <span className="ms-3 fs-5">{props.name}</span>
         </div>
         <div className="col-md-6 d-flex align-items-center justify-content-end">
@@ -126,15 +123,34 @@ function Review(props) {
       </div>
       <div>Rate:{props.rate}</div>
       <div className="row">
-      <p className="my-4 col-6">{props.description}</p>
-      {props.user== user.id&&(
-      <div className="my-4 col-6 d-flex justify-content-end">
-        <a  onClick={() => props.handleEdit(props)} style={{ textDecoration: 'none', color:'blue',cursor: 'pointer'}}>Edit</a>
-        <a  className=" mx-2 " onClick={()=>props.handleDelete(props.id)} style={{ textDecoration: 'none',color: 'red' ,cursor: 'pointer'}}>Delete</a>
+        <p className="my-4 col-6">{props.description}</p>
+        {props.user == user.id && (
+          <div className="my-4 col-6 d-flex justify-content-end">
+            <a
+              onClick={() => props.handleEdit(props)}
+              style={{
+                textDecoration: "none",
+                color: "blue",
+                cursor: "pointer",
+              }}
+            >
+              Edit
+            </a>
+            <a
+              className=" mx-2 "
+              onClick={() => props.handleDelete(props.id)}
+              style={{
+                textDecoration: "none",
+                color: "red",
+                cursor: "pointer",
+              }}
+            >
+              Delete
+            </a>
+          </div>
+        )}
       </div>
-      )}
-      </div>
-     
+
       <Rating
         star={props.rate}
         icon={"star"}
@@ -174,7 +190,7 @@ function Reviews(props) {
     onSubmit: (values) => {
       dispatch(postHotelReviews(values));
       dispatch(getHotelReviews(hotel.id));
-      handleCloseModal()
+      handleCloseModal();
 
       // console.log(values);
     },
@@ -191,7 +207,6 @@ function Reviews(props) {
   };
   useEffect(() => {
     dispatch(getHotelReviews(hotel.id));
-    
   }, []);
   // const Revs=reviews.map((el)=> <Review name={el.name} img={el.images} description={el.descripen} rate={el.rate} />)
 
@@ -199,7 +214,7 @@ function Reviews(props) {
 
   const [bookings, setBookings] = useState([]);
   const [editReview, setEditReview] = useState(null);
-  
+
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/hotel/bookingList`)
       .then((response) => {
@@ -243,17 +258,20 @@ function Reviews(props) {
           })
           .catch((error) => {
             console.error("Error:", error);
-            Swal.fire("Error", "An error occurred while deleting your review.", "error");
+            Swal.fire(
+              "Error",
+              "An error occurred while deleting your review.",
+              "error"
+            );
           });
       }
     });
-  
   };
   const handleEdit = (review) => {
     setEditReview(review);
-  
+
     Swal.fire({
-      title: 'Edit Review',
+      title: "Edit Review",
       html: `
       <lable>name</lable>
         <input id="name" type="text" class="swal2-input" value="${review.name}">
@@ -262,23 +280,23 @@ function Reviews(props) {
       <lable>description</lable><br>
         <textarea id="description" class="swal2-input">${review.description}</textarea>
       `,
-      confirmButtonText: 'Update',
+      confirmButtonText: "Update",
       preConfirm: () => {
-        const name = Swal.getPopup().querySelector('#name').value;
-        const rating = Swal.getPopup().querySelector('#rating').value;
-        const description = Swal.getPopup().querySelector('#description').value;
-  
+        const name = Swal.getPopup().querySelector("#name").value;
+        const rating = Swal.getPopup().querySelector("#rating").value;
+        const description = Swal.getPopup().querySelector("#description").value;
+
         const updatedReview = {
           ...review,
           name,
           rating,
           description,
         };
-  
+
         fetch(`http://127.0.0.1:8000/api_review/update-rate/${review.id}`, {
-          method: 'PUT',
+          method: "PUT",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(updatedReview),
         })
@@ -286,20 +304,20 @@ function Reviews(props) {
             if (response.ok) {
               return response.json();
             } else {
-              throw new Error('Error updating review.');
+              throw new Error("Error updating review.");
             }
           })
           .then((data) => {
             dispatch(getHotelReviews(hotel.id));
-            Swal.fire('Success', 'Review updated successfully.', 'success');
+            Swal.fire("Success", "Review updated successfully.", "success");
           })
           .catch((error) => {
-            Swal.fire('Error', error.message, 'error');
+            Swal.fire("Error", error.message, "error");
           });
       },
     });
   };
-  
+
   return (
     <>
       <div className="row text-dark ">
@@ -407,7 +425,7 @@ rate={el.rate}
             currentReviews.map((el) => (
               <div key={el.id}>
                 <Review
-                id={el.id}
+                  id={el.id}
                   name={el.name}
                   img={el.image}
                   description={el.description}
@@ -504,7 +522,6 @@ export default function HotelDetailBody({ data }) {
             <p className="fs-6 text-muted m-2">
               Saturday to Thursday 9.00am - 7.30pm
             </p>
-
             {user !== null && user.type === "user" ? (
               <button className="btn btn-danger btn-regis" onClick={handleShow}>
                 Book Your Room

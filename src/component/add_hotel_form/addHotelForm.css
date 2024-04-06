@@ -52,3 +52,16 @@
         transform: translateY(0px);
     }
 }
+@media screen and (max-width: 420px) {
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap; /* Allow flex items to wrap onto the next line */
+    }
+    
+    .checkbox-group label {
+      flex: 0 0 1; /* Each label takes up 50% of the container width */
+      margin-bottom: 2px; /* Add some spacing between checkboxes */
+    }
+  
+  }
