@@ -17,14 +17,16 @@ const Carousel = () => {
             <div className="carousel-inner  shadow-4-strong">
                 {/* Single item */}
                 <div className="carousel-item active">
-                    <img src={pic1} className="d-block w-100" alt="Sunset Over the City" />
-                </div>
-
-                {/* Single item */}
-                <div className="carousel-item">
                     <img src={pic2} className="d-block w-100" alt="Canyon at Night" />
 
                 </div>
+
+                {/* Single item */}
+                <div className="carousel-item ">
+                    <img src={pic1} className="d-block w-100" alt="Sunset Over the City" />
+                </div>
+
+
                 {/* Single item */}
                 <div className="carousel-item">
                     <img src={pic3} className="d-block w-100" alt="Cliff Above a Stormy Sea" />

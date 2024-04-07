@@ -1,0 +1,27 @@
+
+.del{
+  margin-left: 10px;
+}
+.hotel-form {
+  max-width: 600px; /* Example: Set maximum width for better readability on larger screens */
+  margin: 0 auto; /* Center the form horizontally */
+  padding: 20px;
+}
+
+/* Adjust styles for smaller screens */
+@media screen and (max-width: 420px) {
+  .hotel-form {
+      max-width: 100%; /* Full width on smaller screens */
+      font-size: 10px;
+  }
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow flex items to wrap onto the next line */
+  }
+  
+  .checkbox-group label {
+    flex: 0 0 1; /* Each label takes up 50% of the container width */
+    margin-bottom: 2px; /* Add some spacing between checkboxes */
+  }
+
+}

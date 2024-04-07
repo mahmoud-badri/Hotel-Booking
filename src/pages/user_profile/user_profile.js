@@ -7,19 +7,23 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import XIcon from "@mui/icons-material/X";
 import "./profil.css";
 import "./form.css";
+import BookinBasedHotel from "./BookingBasedHotel";
 
 import { AuthContext } from "../../Context/AuthContext";
 
 function UserProfilePage() {
-  const authContext = useContext(AuthContext);
+  var currentUser = localStorage.getItem("user")
+  currentUser = JSON.parse(currentUser)
+
+  // const authContext = useContext(AuthContext);
   // const isLoggedIn = authContext.isLoggedIn;
-  const currentUser = authContext.currentUser;
+  // const currentUser = authContext.currentUser;
 
   const [userData, setUserData] = useState({
     name: "",
-    address: "",
-    image: null,
-    phone: "",
+    email: "",
+    // image: null,
+    // phone: "",
   });
   // const [isSubmitted, setIsSubmitted] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -44,9 +48,9 @@ function UserProfilePage() {
     try {
       const formData = new FormData();
       formData.append("name", userData.name);
-      formData.append("address", userData.address);
-      formData.append("image", userData.image);
-      formData.append("phone", userData.phone);
+      formData.append("address", userData.email);
+      // formData.append("image", userData.image);
+      // formData.append("phone", userData.phone);
 
       await axios.post(
         "https://api-generator.retool.com/4tQuPx/data",
@@ -73,6 +77,7 @@ function UserProfilePage() {
 
   return (
     <div className="mb-3 container text-dark">
+       <BookinBasedHotel />
       <h2 className="text-center mb-4"> Profile </h2>
       {showForm && (
         <div className="container mt-5 mb-5 d-flex justify-content-center body2">
@@ -165,6 +170,8 @@ function UserProfilePage() {
                   Save
                 </button>
               </form>
+     
+
             </div>
           </div>
         </div>
@@ -173,7 +180,7 @@ function UserProfilePage() {
       {!showForm && (
         <div className="container d-flex justify-content-center body">
           <div className="card_profile p-3 py-4">
-            <div className="text-center">
+            <div >
               {userData.image && (
                 <img
                   src={URL.createObjectURL(userData.image)}
@@ -183,32 +190,34 @@ function UserProfilePage() {
                 />
               )}
 
-              <h3 style={{ color: "white" }} className="mt-2">
-                {currentUser.name}
-              </h3>
+              <h5 style={{ color: "white" }} className="mt-2">
+              User Name :  {currentUser.name}
+              </h5>
               <span style={{ color: "white" }} className="mt-1 clearfix">
-                -- -- -- -- -- --
+              <hr style={{ color: "white" }} className="line" />
               </span>
               <div className="row mt-3 mb-3">
-                <div className="col-md-4 ms-5">
-                  <h5 style={{ color: "white" }}>Address</h5>
-                  <span className="num">{userData.address}</span>
+                <div className="col-md- ms-">
+                  <h5 style={{ color: "white" }}>Address : {userData.address} </h5>
+                  <span className="num"></span>
                 </div>
+                <span style={{ color: "white" }} className="mt-1 clearfix">
+                <hr style={{ color: "white" }} className="line" />
+              </span>
                 {/* <div className="col-md-4">
           <h5>Projects</h5>
           <span className="num">10</span>
         </div> */}
-                <div className="col-md-4 ms-5">
-                  <h5 style={{ color: "white" }}>Email</h5>
-                  <span className="num">{currentUser.email}</span>
+                <div className="col-md- ms-">
+                  <h5 style={{ color: "white" }}>Email : {currentUser.email}</h5>
                 </div>
               </div>
 
               <hr style={{ color: "white" }} className="line" />
-              <small style={{ color: "white" }} className="mt-4">
+              {/* <small style={{ color: "white" }} className="mt-4">
                 I am an android developer working at google Inc at
                 california,USA
-              </small>
+              </small> */}
 
               <div className="social-buttons mt-5">
                 <button className="neo-button">
@@ -235,6 +244,7 @@ function UserProfilePage() {
                 <button className="profile_button px-5" onClick={toggleForm}>
                   Edit profile
                 </button>
+
               </div>
             </div>
           </div>

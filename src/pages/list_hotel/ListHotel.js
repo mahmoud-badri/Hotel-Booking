@@ -1,59 +1,117 @@
-import React, { useEffect } from 'react';
-import './ListHotel.css';
-import CardListHotel from '../../component/card_list_hotel/CardListHotel';
-import { useSelector, useDispatch } from 'react-redux';
-import { gethotel } from '../../Redux/HotelAction';
-import { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import "./ListHotel.css";
+import CardListHotel from "../../component/card_list_hotel/CardListHotel";
+import { useSelector, useDispatch } from "react-redux";
+import { getHotel } from "../../Redux/HotelAction";
+import { Link } from "react-router-dom";
+import Pagination from "../../component/Pagination/Pagintaion";
 
 const ListHotel = () => {
-    const [hotels, setHotels] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
+  const dispatch = useDispatch();
+  const hotels = useSelector((state) => state.combinHotel.hotels);
 
-    useEffect(() => {
-        gethotel()?.then((res) => {
-            console.log(res)
-            setHotels(res);
-        });
-    }, []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(6);
+  const [selectedRating, setSelectedRating] = useState(null);
 
-    const handleSearch = (e) => {
-        setSearchQuery(e.target.value);
-    };
+  // useEffect(() => {
+  //     gethotel()?.then((res) => {
+  //         console.log(res)
+  //         setHotels(res);
+  //     });
+  // }, []);
+  useEffect(() => {
+    dispatch(getHotel());
+  }, [dispatch]);
 
-    const filteredHotels = hotels.filter((hotel) =>
-        hotel.governorate.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+  // Calculate the index of the first and last hotels to display based on pagination
+  const indexOfLastHotel = currentPage * pageSize;
+  const indexOfFirstHotel = indexOfLastHotel - pageSize;
+  const currentHotels = hotels.slice(indexOfFirstHotel, indexOfLastHotel);
 
-    return (
-        <div className='container'>
-            <div className='search-container'>
-                <input
-                    type="text"
-                    placeholder="Search By Governorate..."
-                    value={searchQuery}
-                    onChange={handleSearch}
-                    className="my-4 d-block m-auto form-control w-50"
-                />
-            </div>
-            {filteredHotels.map((hotel) => (
-                <div key={hotel?.id}>
-                    <CardListHotel
-                        id={hotel.id}
-                        image={hotel.image}
-                        rate={hotel.rate}
-                        status={hotel.status}
-                        review={hotel.review}
-                        name={hotel.name}
-                        //description={hotel.description}
-                        governorate={hotel.governorate}
-                        address={hotel.address}
-                        price={hotel.prices}
-                        hotel={hotel}
-                    />
-                </div>
-            ))}
+  // Filter hotels based on the selected rating
+  const filteredHotels = selectedRating
+    ? currentHotels.filter((hotel) => hotel.rating === selectedRating)
+    : currentHotels;
+
+  // Function to handle page changes
+  const onPageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleRatingSelect = (rating) => {
+    setSelectedRating(rating);
+    setCurrentPage(1);
+  };
+
+  const [query, setQuery] = useState("");
+
+  // Get hotels based on search query
+  const filteredQueryHotels = filteredHotels.filter((hotel) =>
+    hotel.name.toLowerCase().includes(query.toLowerCase())
+  );
+
+  return (
+    <>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-3">
+            <select
+              className="form-select"
+              value={selectedRating || ""}
+              onChange={(e) => handleRatingSelect(e.target.value)}
+            >
+              <option value="">All ratings</option>
+              <option value="⭐️">1 Star</option>
+              <option value="⭐️⭐️">2 Stars</option>
+              <option value="⭐️⭐️⭐️">3 Stars</option>
+              <option value="⭐️⭐️⭐️⭐️">4 Stars</option>
+              <option value="⭐️⭐️⭐️⭐️⭐️">5 Stars</option>
+            </select>
+          </div>
+          <div className="col-md-6"></div>
+          <div className="col-md-3">
+            <input
+              placeholder="Search"
+              className="form-control me-2"
+              aria-label="Search"
+              type="search"
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
         </div>
-    );
+
+        <div className="row">
+          {filteredQueryHotels.map((hotel) => (
+            <div key={hotel?.id}>
+              <CardListHotel
+                id={hotel.id}
+                image={hotel.image}
+                status={hotel.status}
+                name={hotel.name}
+                rating = {hotel.rating}
+                governorate={hotel.governorate}
+                address={hotel.address}
+                price={hotel.prices}
+                user_id={hotel.user}
+                single_room={hotel.single_room}
+                suite={hotel.suite}
+                family_room={hotel.family_room}
+              />
+</div>
+          ))}
+        </div>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(hotels.length / pageSize)}
+          onPageChange={onPageChange}
+          color="blue"
+          width="40px"
+        />
+      </div>
+    </>
+  );
 };
 
 export default ListHotel;

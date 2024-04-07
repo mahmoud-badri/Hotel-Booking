@@ -6,25 +6,22 @@ export const GET_HOTEL_BY_ID = 'GET_HOTEL_BY_ID';
 export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
 export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST';
 
-export const gethotel = async (hotelData) => {
-    try {
-        const res = await axios.get('http://127.0.0.1:8000/hotel/', hotelData, {
+export const getHotel = () => (dispatch) => {
+    return axios.get("http://127.0.0.1:8000/hotel/")
+        .then((res) => dispatch({
+            type: "GET_HOTELS_LIST",
+            payload: res.data
+        }))
+        .catch((err) => console.log(err))
 
-            headers: {
-                'Content-Type': 'multipart/form-data'
-
-            }
-
-        });
-        return res.data
-        // dispatch({ type: ADD_HOTEL_SUCCESS, payload: res.data });
-    } catch (error) {
-        console.log(error);
-    }
-};
+}
 
 
-export const addHotel = async (hotelData, userId) => {
+
+
+
+
+export const addHotel = async (hotelData) => {
     try {
         const res = await axios.post('http://127.0.0.1:8000/hotel/add/', hotelData, {
             headers: {
@@ -38,12 +35,30 @@ export const addHotel = async (hotelData, userId) => {
 };
 
 
+
+
+  export const editHotel = (hotelData) => (dispatch) => {
+    //console.log(`Updating hotel data for ID:`, hotelData.id);
+
+    return axios({ method: 'PATCH', url: `http://127.0.0.1:8000/hotel/edit_by_owner/${hotelData.id}`, headers: { "Content-Type": "application/json" }, data: hotelData })
+        .then((res) => {
+            //console.log("Data received:", res);
+            dispatch({
+                type: 'PUT_HOTEL',
+                payload: res.data,
+            });
+        })
+        .catch((err) => console.log("Error fetching data:", err));
+
+};
+
+
 export const getHotelById = (id) => (dispatch) => {
-    console.log(`Fetching hotel data for ID: ${id}`);
+    //console.log(`Fetching hotel data for ID: ${id}`);
     return axios
         .get(`https://retoolapi.dev/Ffu2bp/data/${id}`)
         .then((res) => {
-            console.log("Data received:", res.data);
+            //console.log("Data received:", res.data);
             dispatch({
                 type: GET_HOTEL_BY_ID,
                 payload: res.data,
@@ -80,27 +95,28 @@ export const removeFromWishlist = (hotel) => (dispatch) => {
 
 
 
-// export const getHotelReviews = () => (dispatch) => {
-//     console.log(`Fetching hotel data `);
 
-//     return axios.get(`https://api-generator.retool.com/qCCCiu/data`)
-//         .then((res) => {
-//             console.log("Data received:", res.data);
-//             dispatch({
-//                 type: 'GET_HOTEL_REVIEWS',
-//                 payload: res.data,
-//             });
-//         })
-//         .catch((err) => console.log("Error fetching data:", err));
-// };
+export const getHotelReviews = (hotel_id) => (dispatch) => {
+    // console.log(`Fetching hotel data `);
+
+    return axios.get(`http://127.0.0.1:8000/api_review/get-all-rates/${hotel_id}`)
+        .then((res) => {
+            // console.log("Data received:", res.data);
+            dispatch({
+                type: 'GET_HOTEL_REVIEWS',
+                payload: res.data.data,
+            });
+        })
+        .catch((err) => console.log("Error fetching data:", err));
+};
 
 
 export const postHotelReviews = (review) => (dispatch) => {
     console.log(`Fetching hotel data for ID:`, review);
 
-    return axios({ method: 'POST', url: `https://api-generator.retool.com/qCCCiu/data`, headers: { "Content-Type": "application/json" }, data: review })
+    return axios({ method: 'POST', url: `http://127.0.0.1:8000/api_review/create-rate/`, headers: { "Content-Type": "application/json" }, data: review })
         .then((res) => {
-            console.log("Data received:", res.data);
+            //console.log("Data received:", res.data);
             dispatch({
                 type: 'POST_HOTEL_REVIEWS',
                 payload: res.data,
@@ -110,32 +126,4 @@ export const postHotelReviews = (review) => (dispatch) => {
 
 };
 
-export const putHotelReviews = (id, review) => (dispatch) => {
-    console.log(`Updating hotel data for ID:`, id);
 
-    return axios({ method: 'PUT', url: `https://api-generator.retool.com/qCCCiu/data/${id}`, headers: { "Content-Type": "application/json" }, data: review })
-        .then((res) => {
-            console.log("Data received:", res.data);
-            dispatch({
-                type: 'PUT_HOTEL_REVIEWS',
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log("Error fetching data:", err));
-
-};
-
-export const deleteHotelReviews = (id) => (dispatch) => {
-    console.log(`Deleting hotel data for ID:`, id);
-
-    return axios({ method: 'DELETE', url: `https://api-generator.retool.com/qCCCiu/data/${id}` })
-        .then((res) => {
-            console.log("Data received:", res.data);
-            dispatch({
-                type: 'DELETE_HOTEL_REVIEWS',
-                payload: res.data,
-            });
-        })
-        .catch((err) => console.log("Error fetching data:", err));
-
-};

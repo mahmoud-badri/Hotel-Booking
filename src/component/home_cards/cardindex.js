@@ -25,7 +25,7 @@ function Cards({ list }) {
         className="my-4 d-block m-auto form-control w-50"
       />
 
-      <div className="cards-flex">
+      <div className="card-box">
         {filterdList.length > 0 &&
           filterdList?.map((card, i) => <CarD card={card} key={i} />)}
         {filterdList.length === 0 &&

@@ -8,6 +8,7 @@ const HotelsFilter = () => {
 
         <> <Carousel />
             <div className="d-flex justify-content-evenly">
+                {/* <AllInfoFilter /> */}
                 <ListHotel />
             </div>
         </>

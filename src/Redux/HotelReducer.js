@@ -10,12 +10,13 @@ const INITIAL_VALUES = {
     wishlist: [],
     hotelReviews: [],
     currentHotel: null,
+    facilities: []
 };
 
 const hotelReducer = (state = INITIAL_VALUES, action) => {
     switch (action.type) {
         case 'GET_HOTELS_LIST':
-            return{
+            return {
                 ...state,
                 hotels: action.payload
             }
@@ -29,6 +30,11 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
                 ...state,
                 currentHotel: action.payload,
             };
+        // case GET_HOTEL_BY_ID:
+        //         return {
+        //             ...state,
+        //             currentHotel: action.payload,
+        //         };    
         case ADD_TO_WISHLIST:
             return {
                 ...state,
@@ -39,6 +45,8 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
                 ...state,
                 wishlist: state.wishlist.filter((item) => item.id !== action.payload),
             };
+
+
         case 'GET_HOTEL_REVIEWS':
             return {
                 ...state,
@@ -47,18 +55,26 @@ const hotelReducer = (state = INITIAL_VALUES, action) => {
         case 'POST_HOTEL_REVIEWS':
             return {
                 ...state,
-                
+
             };
-        case 'PUT_HOTEL_REVIEWS':
+
+        case 'PUT_HOTEL':
+            const updatedhotel = action.payload;
+            const updatedHotelsList = state.hotels.map((hotel) =>
+                hotel.id === updatedhotel.id ? updatedhotel : hotel
+            );
+
+
             return {
                 ...state,
-                
+                hotels: updatedHotelsList
             };
-        case 'DELETE_HOTEL_REVIEWS':
+
+        case 'GET_FACILITIES':
             return {
                 ...state,
-                
-            };
+                facilities: action.payload
+            }
         default:
             return state;
     }
@@ -76,7 +92,7 @@ export default hotelReducer;
 //                 ...state,
 //                 hotels: action.payload
 //             }
-//         default: 
+//         default:
 //            return state
 //     }
 // }
